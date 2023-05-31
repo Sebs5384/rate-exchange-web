@@ -1,0 +1,19 @@
+{
+  "name": "currency-exchange-web",
+  "version": "1.0.0",
+  "description": "This is a small web that make requests to exchangeratesapi.io to bring back information about currency rates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sebs5384/currency-exchange-web.git"
+  },
+  "author": "5384",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sebs5384/currency-exchange-web/issues"
+  },
+  "homepage": "https://github.com/Sebs5384/currency-exchange-web#readme"
+}
