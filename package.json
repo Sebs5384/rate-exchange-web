@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Sebs5384/currency-exchange-web/issues"
   },
-  "homepage": "https://github.com/Sebs5384/currency-exchange-web#readme"
+  "homepage": "https://github.com/Sebs5384/currency-exchange-web#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "cypress": "^12.13.0"
+  }
 }
