@@ -20,14 +20,18 @@
       <div class="card" style="width: 60rem">
         <div class="card-body">
           <form id="form">
-            <div class="mb-3">
+            <div class="mb-5 text-center">
               <label class="form-label">Your currency</label>
-              <input type="number" class="form-control" style="width: 20rem" />
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
+                <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
+              </div>
             </div>
           </form>
         </div>
       </div>
     </div>
   </body>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script src="exchange-currency.js"></script>
 </html>
