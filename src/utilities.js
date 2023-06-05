@@ -1,4 +1,4 @@
-let currenciesName = [
+const currenciesName = [
   "(United Arab Emirates Dirham)",
   "(Afghan Afghani)",
   "(Albanian Lek)",

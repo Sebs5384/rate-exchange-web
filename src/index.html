@@ -20,11 +20,17 @@
       <div class="card" style="width: 60rem">
         <div class="card-body">
           <form id="form">
-            <div class="mb-5 text-center">
+            <div class="mb-4 text-center">
               <label class="form-label">Your currency</label>
               <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
                 <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-3 mb-3">
+                <input class="form-control text-center" type="text" placeholder="Insert your currency" />
               </div>
             </div>
 
@@ -34,26 +40,26 @@
           </form>
         </div>
       </div>
+    </div>
 
+    <div class="row justify-content-center">
       <div class="card gy-4" style="width: 60rem">
         <div class="card-body">
           <table class="table">
-            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Currency</th>
+              <th scope="col">Name</th>
+              <th scope="col">Currency Value</th>
+            </tr>
+            <tbody>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Currency</th>
-                <th scope="col">Name</th>
-                <th scope="col">Currency value</th>
+                <th scope="row">1</th>
+                <td>USD</td>
+                <td>United States Dollar</td>
+                <td>240,41</td>
               </tr>
-              <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>USD</td>
-                    <td>United States Dollar</td>
-                    <td>240,41</td>
-                </tr>
-              </tbody>
-            </thead>
+            </tbody>
           </table>
         </div>
       </div>
