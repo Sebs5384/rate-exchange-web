@@ -169,3 +169,5 @@ const currenciesName = [
   "(Zambian Kwacha)",
   "(Zimbabwean Dollar)",
 ];
+
+let $clickedCurrency;
