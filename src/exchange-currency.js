@@ -12,3 +12,8 @@ function handleClickList(click) {
     console.log(currency);
   }
 }
+
+function assignValue(selector, property, value) {
+  const $element = (document.querySelector(selector)[property] = value);
+  return $element;
+}
