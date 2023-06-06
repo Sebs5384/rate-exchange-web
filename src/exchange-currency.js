@@ -21,6 +21,43 @@ function handleClickList(click) {
   }
 }
 
+function convertCurrency(currency) {
+  let URL = `https://api.exchangerate.host/latest?base=${currency}`;
+  console.log(URL);
+
+  fetch(URL)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      console.log(data.rates);
+      const $currencyTable = document.querySelector("#currency-rates");
+
+      const rates = Object.keys(data.rates);
+      rates.forEach((rate, index) => {
+        const $tr = document.createElement("tr");
+        const $number = document.createElement("th");
+        const $currency = document.createElement("th");
+        const $currencyName = document.createElement("th");
+        const $rate = document.createElement("th");
+
+        $number.innerText = `${index + 1}`;
+        $currency.innerText = `${rate}`;
+        $currencyName.innerText = `${currenciesName[index]}`;
+        $rate.innerText = `${data.rates[rate]}`;
+        $tr.appendChild($number);
+        $tr.appendChild($currency);
+        $tr.appendChild($currencyName);
+        $tr.appendChild($rate);
+        $currencyTable.appendChild($tr);
+      });
+    })
+    .catch((error) => {
+      console.log("Error", error);
+    });
+}
+
 function assignValue(selector, property, value) {
   const $element = (document.querySelector(selector)[property] = value);
 
