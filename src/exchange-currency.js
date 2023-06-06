@@ -2,19 +2,28 @@ const URL = "https://api.exchangerate.host/latest";
 
 document.querySelector("#currency-list").onclick = (event) => {
   const $click = event.target;
-  handleClickList($click);
+  $clickedCurrency = handleClickList($click);
+
+  event.preventDefault();
+};
+
+document.querySelector("#convert-button").onclick = (event) => {
+  console.log($clickedCurrency);
+  convertCurrency($clickedCurrency);
+  event.preventDefault();
 };
 
 function handleClickList(click) {
   if (click) {
     const currency = click.innerText.substring(0, 3);
-    const selectedCurrency = assignValue("#");
-    console.log(currency);
+    const selectedCurrency = assignValue("#selected-currency", "value", `${currency}`);
+    return selectedCurrency;
   }
 }
 
 function assignValue(selector, property, value) {
   const $element = (document.querySelector(selector)[property] = value);
+
   return $element;
 }
 
