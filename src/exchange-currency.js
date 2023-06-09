@@ -8,7 +8,6 @@ document.querySelector("#currency-list").onclick = (event) => {
 };
 
 document.querySelector("#convert-button").onclick = (event) => {
-  console.log($clickedCurrency);
   convertCurrency($clickedCurrency);
   event.preventDefault();
 };
@@ -23,39 +22,40 @@ function handleClickList(click) {
 
 function convertCurrency(currency) {
   let URL = `https://api.exchangerate.host/latest?base=${currency}`;
-  console.log(URL);
 
   fetch(URL)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(data.rates);
-      const $currencyTable = document.querySelector("#currency-rates");
-
       const rates = Object.keys(data.rates);
-      rates.forEach((rate, index) => {
-        const $tr = document.createElement("tr");
-        const $number = document.createElement("th");
-        const $currency = document.createElement("th");
-        const $currencyName = document.createElement("th");
-        const $rate = document.createElement("th");
-
-        $number.innerText = `${index + 1}`;
-        $currency.innerText = `${rate}`;
-        $currencyName.innerText = `${currenciesName[index]}`;
-        $rate.innerText = `${data.rates[rate]}`;
-        $tr.appendChild($number);
-        $tr.appendChild($currency);
-        $tr.appendChild($currencyName);
-        $tr.appendChild($rate);
-        $currencyTable.appendChild($tr);
-      });
+      setElementVisibility("#currency-table-card", "card gy-4");
+      createCurrencyElements(rates, data);
     })
     .catch((error) => {
       console.log("Error", error);
     });
+}
+
+function createCurrencyElements(rates, data) {
+  const $currencyTable = document.querySelector("#currency-rates");
+  rates.forEach((rate, index) => {
+    const $tr = document.createElement("tr");
+    const $currencyNumber = document.createElement("th");
+    const $currency = document.createElement("th");
+    const $currencyFullName = document.createElement("th");
+    const $rate = document.createElement("th");
+
+    $currencyNumber.innerText = `${index + 1}`;
+    $currency.innerText = `${rate}`;
+    $currencyFullName.innerText = `${currenciesName[index]}`;
+    $rate.innerText = `${data.rates[rate]}`;
+    $tr.appendChild($currencyNumber);
+    $tr.appendChild($currency);
+    $tr.appendChild($currencyFullName);
+    $tr.appendChild($rate);
+    $currencyTable.appendChild($tr);
+  });
 }
 
 function assignValue(selector, property, value) {
