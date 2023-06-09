@@ -170,4 +170,8 @@ const currenciesName = [
   "(Zimbabwean Dollar)",
 ];
 
+function setElementVisibility(selector, value) {
+  document.querySelector(selector).className = value;
+}
+
 let $clickedCurrency;
