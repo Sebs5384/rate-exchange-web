@@ -170,6 +170,18 @@ const currenciesName = [
   "(Zimbabwean Dollar)",
 ];
 
+function parseCurrencyName(click) {
+  const currency = click.innerText.substring(0, 3);
+
+  return currency;
+}
+
+function assignValue(selector, property, value) {
+  const $element = (document.querySelector(selector)[property] = value);
+
+  return $element;
+}
+
 function setElementVisibility(selector, value) {
   document.querySelector(selector).className = value;
 }

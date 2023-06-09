@@ -14,8 +14,8 @@ document.querySelector("#convert-button").onclick = (event) => {
 
 function handleClickList(click) {
   if (click) {
-    const currency = click.innerText.substring(0, 3);
-    const selectedCurrency = assignValue("#selected-currency", "value", `${currency}`);
+    const currencyName = parseCurrencyName(click);
+    const selectedCurrency = assignValue("#selected-currency", "value", `${currencyName}`);
     return selectedCurrency;
   }
 }
@@ -56,12 +56,6 @@ function createCurrencyElements(rates, data) {
     $tr.appendChild($rate);
     $currencyTable.appendChild($tr);
   });
-}
-
-function assignValue(selector, property, value) {
-  const $element = (document.querySelector(selector)[property] = value);
-
-  return $element;
 }
 
 fetch(URL)
