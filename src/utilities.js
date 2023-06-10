@@ -176,6 +176,10 @@ function parseCurrencyName(click) {
   return currency;
 }
 
+function clearFields(selector) {
+  document.querySelector(selector).innerHTML = "";
+}
+
 function assignValue(selector, property, value) {
   const $element = (document.querySelector(selector)[property] = value);
 

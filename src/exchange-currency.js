@@ -39,6 +39,7 @@ function convertCurrency(currency) {
 
 function createCurrencyElements(rates, data) {
   const $currencyTable = document.querySelector("#currency-rates");
+  clearFields("#currency-rates");
   rates.forEach((rate, index) => {
     const $tr = document.createElement("tr");
     const $currencyNumber = document.createElement("th");
