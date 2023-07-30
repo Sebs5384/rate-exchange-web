@@ -6,3 +6,11 @@
 .hidden {
   display: none;
 }
+
+#currency-table-card {
+  width: 40rem;
+}
+
+#currency-form-card {
+  width: 35rem;
+}
