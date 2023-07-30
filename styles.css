@@ -1,6 +1,7 @@
 .menu-scroll {
   overflow-y: scroll;
-  max-height: 200px;
+  max-height: 250px;
+  max-width: 350px;
 }
 
 .hidden {

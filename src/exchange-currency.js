@@ -1,45 +1,26 @@
 const URL = "https://api.exchangerate.host/latest";
 
-document.querySelector("#currency-list").onclick = (event) => {
-  const $click = event.target;
-  $clickedCurrency = handleClickList($click);
-
-  event.preventDefault();
-};
-
-document.querySelector("#convert-button").onclick = (event) => {
-  convertCurrency($clickedCurrency);
-  event.preventDefault();
-};
-
-function handleClickList(click) {
-  if (click) {
-    const currencyName = parseCurrencyName(click);
-    const selectedCurrency = assignValue("#selected-currency", "value", `${currencyName}`);
-    return selectedCurrency;
-  }
-}
-
 function convertCurrency(currency) {
-  let URL = `https://api.exchangerate.host/latest?base=${currency}`;
+  const base = `${URL}?base=${currency}`;
 
-  fetch(URL)
+  fetch(base)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
       const rates = Object.keys(data.rates);
       setElementVisibility("#currency-table-card", "card gy-4");
-      createCurrencyElements(rates, data);
+      createCurrencyTable(rates, data);
     })
     .catch((error) => {
-      console.log("Error", error);
+      console.error("Error", error);
     });
 }
 
-function createCurrencyElements(rates, data) {
+function createCurrencyTable(rates, data) {
   const $currencyTable = document.querySelector("#currency-rates");
-  clearFields("#currency-rates");
+  clearCurrenciesField("#currency-rates");
+
   rates.forEach((rate, index) => {
     const $tr = document.createElement("tr");
     const $currencyNumber = document.createElement("th");
