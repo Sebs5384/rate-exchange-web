@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Exchange-rate-web</title>
+  </head>
+  <body>
+    <div class="row justify-content-center">
+      <div class="col-6 alert alert-primary gy-4 text-center">
+        <h1 class="display-6">Exchange-X</h1>
+        <h6>Currency converter and exchange rate lookup.</h6>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <div class="card" id="currency-form-card">
+          <div class="card-body">
+            <form id="form">
+              <div class="text-center mb-4">
+                <label class="form-label">Select your currency here</label>
+                <div class="dropdown">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
+                  <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
+                </div>
+              </div>
+
+              <div class="row justify-content-start">
+                <div class="col-5">
+                  <input class="form-control text-center" type="text" placeholder="Insert your currency" id="currency-input" value="" />
+                </div>
+                <div class="col-4">
+                  <input type="date" class="form-control text-center" id="currency-date" />
+                </div>
+                <div class="col-2">
+                  <div class="btn btn-primary" id="convert-button">Convert</div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="card gy-4 hidden" id="currency-table-card">
+          <div class="card-body">
+            <table class="table">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Name</th>
+                <th scope="col">Currency Value</th>
+              </tr>
+              <tbody id="currency-rates"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="src/currencies-name.js"></script>
+  <script src="src/ui.js"></script>
+  <script src="src/utilities.js"></script>
+  <script src="src/exchange-currency.js"></script>
+</html>
