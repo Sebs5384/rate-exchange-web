@@ -1,23 +1,21 @@
-const URL = "https://api.exchangerate.host/latest";
+const BASE_URL = "https://api.exchangerate.host";
 
-function convertCurrency(currency) {
-  const base = `${URL}?base=${currency}`;
+function convertCurrency(currency = "EUR", date = "latest") {
+  const base = `${BASE_URL}/${date}?base=${currency}`;
 
   fetch(base)
     .then((response) => {
       return response.json();
     })
-    .then((data) => {
-      const rates = Object.keys(data.rates);
-      setElementVisibility("#currency-table-card", "card gy-4");
-      createCurrencyTable(rates, data);
+    .then((currencies) => {
+      createCurrencyTable(currencies);
     })
     .catch((error) => {
       console.error("Error", error);
     });
 }
 
-function createCurrencyTable(rates, data) {
+function createCurrencyTable(currencies) {
   const $currencyTable = document.querySelector("#currency-rates");
   clearCurrenciesField("#currency-rates");
 
@@ -31,7 +29,7 @@ function createCurrencyTable(rates, data) {
     $currencyNumber.innerText = `${index + 1}`;
     $currency.innerText = `${rate}`;
     $currencyFullName.innerText = `${currenciesName[index]}`;
-    $rate.innerText = `${data.rates[rate]}`;
+    $rate.innerText = `${rates[rate]}`;
     $tr.appendChild($currencyNumber);
     $tr.appendChild($currency);
     $tr.appendChild($currencyFullName);
@@ -40,29 +38,34 @@ function createCurrencyTable(rates, data) {
   });
 }
 
-fetch(URL)
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    const $currencyList = document.querySelector("#currency-list");
-    console.log(data);
+function createCurrencyList() {
+  fetch(`${BASE_URL}/latest`)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      const $currencyList = document.querySelector("#currency-list");
+      /*console.log(data);
     console.log(data.date);
-    console.log(data.rates);
+    console.log(data.rates);*/
 
-    let currencies = Object.keys(data.rates);
-    console.log(currencies);
-    currencies.forEach((currency, index) => {
-      const $li = document.createElement("li");
-      const $a = document.createElement("a");
-      $a.className = "dropdown-item";
-      $a.href = "#";
-      $a.innerText = `${currency} ${currenciesName[index]}`;
+      let currencies = Object.keys(data.rates);
+      console.log(currencies);
+      currencies.forEach((currency, index) => {
+        const $li = document.createElement("li");
+        const $a = document.createElement("a");
+        $a.className = "dropdown-item";
+        $a.href = "#";
+        $a.innerText = `${currency} ${currenciesName[index]}`;
 
-      $li.appendChild($a);
-      $currencyList.appendChild($li);
+        $li.appendChild($a);
+        $currencyList.appendChild($li);
+      });
+    })
+    .catch((error) => {
+      console.log("Error", error);
     });
-  })
-  .catch((error) => {
-    console.log("Error", error);
-  });
+}
+
+convertCurrency();
+createCurrencyList();
