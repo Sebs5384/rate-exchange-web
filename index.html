@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="row justify-content-center">
-      <div class="col-5 alert alert-primary gy-4 text-center">
+      <div class="col-5 alert alert-primary gy-4 text-center" id="exchange-title">
         <h1 class="display-6">Exchange-X</h1>
         <h6>Currency converter and exchange rate lookup.</h6>
       </div>
@@ -19,7 +19,7 @@
         <div class="card" id="exchange-info-card">
           <div class="card-body">
             <div class="gy-5 text-center">
-              <h3 id="exchange-title">Currently displaying EURO</h3>
+              <h3 id="current-exchange">Currently displaying EURO</h3>
               <h3 id="exchange-date">Exchange date: 22/22/22</h3>
             </div>
           </div>
@@ -41,14 +41,11 @@
               </div>
 
               <div class="row justify-content-start">
-                <div class="col-5">
+                <div class="col-6">
                   <input class="form-control text-center" type="text" placeholder="Insert your currency" id="currency-input" value="" />
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                   <input type="date" class="form-control text-center" id="currency-date" />
-                </div>
-                <div class="col-2">
-                  <div class="btn btn-primary" id="convert-button">Convert</div>
                 </div>
               </div>
             </form>
