@@ -11,29 +11,34 @@ function getExchangeRates(currency = "EUR", date = "latest") {
       return exchange.rates;
     })
     .catch((error) => {
-      console.error("Error", error);
+      console.error("Error while getting exchange rates", error);
+      throw error;
     });
 }
 
-function fetchExchangeRates(currencyCode = null, date = null) {
-  const exchanges = getExchangeRates(currencyCode, date);
-  exchanges.then((exchange) => {
-    createExchangeTable(exchange);
-    createCurrencyList(exchange);
-  });
+function displayExchangeUI(currencyCode = null, date = null) {
+  return getExchangeRates(currencyCode, date)
+    .then((exchange) => {
+      createExchangeTable(exchange);
+      createCurrencyList(exchange);
+    })
+    .catch((error) => {
+      console.error("Error", error);
+      throw error;
+    });
 }
 
-function handleCurrency() {
+function updateCurrency() {
   $currencyList.onclick = (event) => {
     const $clickedCurrency = event.target;
     const selectedCurrency = handleCurrencyList($clickedCurrency);
-    fetchExchangeRates(selectedCurrency);
+    displayExchangeUI(selectedCurrency);
   };
 }
 
 function initialize() {
-  fetchExchangeRates();
-  handleCurrency();
+  displayExchangeUI();
+  updateCurrency();
 }
 
 initialize();
