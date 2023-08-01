@@ -3,11 +3,11 @@ function obtainCurrencyCode(currency) {
   return currencyCode;
 }
 
-function clearCurrenciesField(selector) {
-  document.querySelector(selector).innerHTML = "";
+function clearCurrenciesField() {
+  document.querySelector("#currency-rates").innerHTML = "";
 }
 
-function handleCurrencyList(click) {
+function handleCurrencyListClick(click) {
   if (click) {
     const currencyName = obtainCurrencyCode(click);
     const selectedCurrency = (document.querySelector("#currency-input").value = currencyName);

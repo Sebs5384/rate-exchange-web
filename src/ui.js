@@ -1,13 +1,6 @@
-const $currencyList = document.querySelector("#currency-list");
-const $convertButton = document.querySelector("#convert-button");
-const $currency = document.querySelector("#currency-input").value;
-let $clickedCurrency;
-
 function createExchangeTable(rates) {
   const $currencyTable = document.querySelector("#currency-rates");
   const $rates = Object.keys(rates);
-  clearCurrenciesField("#currency-rates");
-
   $rates.forEach((rate, index) => {
     const $tr = document.createElement("tr");
     const $currencyNumber = document.createElement("th");
@@ -18,7 +11,7 @@ function createExchangeTable(rates) {
     $currencyNumber.innerText = `${index + 1}`;
     $currency.innerText = `${rate}`;
     $currencyFullName.innerText = `${currenciesName[index]}`;
-    $rate.innerText = `${rates[rate]}`;
+    $rate.innerText = `$${rates[rate].toFixed(2)}`;
     $tr.appendChild($currencyNumber);
     $tr.appendChild($currency);
     $tr.appendChild($currencyFullName);
