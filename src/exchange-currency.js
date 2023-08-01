@@ -18,22 +18,34 @@ function getExchangeRates(currency = "EUR", date = "latest") {
 
 function displayExchangeUI(currencyCode = null, date = null) {
   return getExchangeRates(currencyCode, date)
-    .then((exchange) => {
-      createExchangeTable(exchange);
-      createCurrencyList(exchange);
+    .then((rates) => {
+      clearCurrenciesField();
+      createExchangeTable(rates);
+      createCurrencyList(rates);
     })
     .catch((error) => {
-      console.error("Error", error);
+      console.error("Error while attempting to display exchange rates", error);
       throw error;
     });
 }
 
 function updateCurrency() {
+  const $selectedDate = document.querySelector("#currency-date").value;
+  const $currencyList = document.querySelector("#currency-list");
   $currencyList.onclick = (event) => {
     const $clickedCurrency = event.target;
-    const selectedCurrency = handleCurrencyList($clickedCurrency);
-    displayExchangeUI(selectedCurrency);
+    const selectedCurrency = handleCurrencyListClick($clickedCurrency);
+    displayExchangeUI(selectedCurrency, selectedDate || null);
   };
+
+  const handleInputChange = () => {
+    const selectedCurrency = document.querySelector("#currency-input").value;
+    const selectedDate = document.querySelector("#currency-date").value;
+    displayExchangeUI(selectedCurrency, selectedDate || null);
+  };
+
+  document.querySelector("#currency-input").addEventListener("input", handleInputChange);
+  document.querySelector("#currency-date").addEventListener("input", handleInputChange);
 }
 
 function initialize() {
