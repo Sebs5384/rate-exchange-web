@@ -13,12 +13,3 @@
 .hidden {
   display: none;
 }
-
-#exchange-info-card,
-#currency-table-card {
-  width: 40rem;
-}
-
-#currency-form-card {
-  width: 35rem;
-}
