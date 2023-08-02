@@ -21,6 +21,16 @@ function handleInputChange(currency, date) {
   displayExchangeUI(selectedCurrency, selectedDate || null);
 }
 
+function handleInputDate($selectedCurrency, $selectedDate) {
+  let timeout;
+  return () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      handleInputChange($selectedCurrency, $selectedDate);
+    }, 500);
+  };
+}
+
 function handleListChange(event, $selectedDate) {
   const $clickedCurrency = event.target;
   const selectedCurrency = handleCurrencyListClick($clickedCurrency);
