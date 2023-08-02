@@ -14,3 +14,15 @@ function handleCurrencyListClick(click) {
     return selectedCurrency;
   }
 }
+
+function handleInputChange(currency, date) {
+  const selectedCurrency = currency.value;
+  const selectedDate = date.value;
+  displayExchangeUI(selectedCurrency, selectedDate || null);
+}
+
+function handleListChange(event, $selectedDate) {
+  const $clickedCurrency = event.target;
+  const selectedCurrency = handleCurrencyListClick($clickedCurrency);
+  displayExchangeUI(selectedCurrency, $selectedDate || null);
+}

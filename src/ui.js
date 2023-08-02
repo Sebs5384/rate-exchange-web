@@ -11,7 +11,7 @@ function createExchangeTable(rates) {
     $currencyNumber.innerText = `${index + 1}`;
     $currency.innerText = `${rate}`;
     $currencyFullName.innerText = `${currenciesName[index]}`;
-    $rate.innerText = `$${rates[rate].toFixed(2)}`;
+    $rate.innerText = `$${rates[rate].toFixed(3)}`;
     $tr.appendChild($currencyNumber);
     $tr.appendChild($currency);
     $tr.appendChild($currencyFullName);
