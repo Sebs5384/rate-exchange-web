@@ -43,7 +43,7 @@ function createCurrencyList(rates) {
 function displayExchangeUI(currencyCode = null, date = null) {
   return getExchangeRates(currencyCode, date)
     .then((rates) => {
-      clearCurrenciesField();
+      clearCurrencyRates();
       createExchangeTable(rates);
       createCurrencyList(rates);
     })
@@ -57,4 +57,43 @@ function updateCurrencyUI(currency, date, list) {
   list.onclick = (event) => handleListChange(event, date);
   currency.oninput = () => handleInputChange(currency, date);
   date.oninput = handleInputDate(currency, date);
+}
+
+function getCurrencyCode(currency) {
+  const currencyCode = currency.innerText.substring(0, 3);
+  return currencyCode;
+}
+
+function handleCurrencyListClick(click) {
+  if (click) {
+    const currencyName = getCurrencyCode(click);
+    const selectedCurrency = ($currencyCode.value = currencyName);
+    return selectedCurrency;
+  }
+}
+
+function handleInputChange(currency, date) {
+  const selectedCurrency = currency.value;
+  const selectedDate = date.value;
+  displayExchangeUI(selectedCurrency, selectedDate || null);
+}
+
+function handleInputDate($selectedCurrency, $selectedDate) {
+  let timeout;
+  return () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      handleInputChange($selectedCurrency, $selectedDate);
+    }, 500);
+  };
+}
+
+function handleListChange(event, date) {
+  const $clickedCurrency = event.target;
+  const selectedCurrency = handleCurrencyListClick($clickedCurrency);
+  displayExchangeUI(selectedCurrency, $selectedDate || null);
+}
+
+function clearCurrencyRates() {
+  document.querySelector("#currency-rates").innerHTML = "";
 }
