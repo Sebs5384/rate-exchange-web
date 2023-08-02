@@ -1,4 +1,4 @@
-const currenciesName = [
+export const currenciesName = [
   "(United Arab Emirates Dirham)",
   "(Afghan Afghani)",
   "(Albanian Lek)",

@@ -1,8 +1,11 @@
-const $currencyCode = document.querySelector("#currency-input");
-const $currencyDate = document.querySelector("#currency-date");
-const $currencyList = document.querySelector("#currency-list");
+import { getExchangeRates } from "../api/exchange.js";
+import { currenciesName } from "../utils/currency-name.js";
 
-function createExchangeTable(rates) {
+export const $currencyCode = document.querySelector("#currency-input");
+export const $currencyDate = document.querySelector("#currency-date");
+export const $currencyList = document.querySelector("#currency-list");
+
+function createCurrencyTable(rates) {
   const $currencyTable = document.querySelector("#currency-rates");
   const $rates = Object.keys(rates);
   $rates.forEach((rate, index) => {
@@ -40,11 +43,11 @@ function createCurrencyList(rates) {
   });
 }
 
-function displayExchangeUI(currencyCode = null, date = null) {
+export function displayCurrencyUI(currencyCode = null, date = null) {
   return getExchangeRates(currencyCode, date)
     .then((rates) => {
       clearCurrencyRates();
-      createExchangeTable(rates);
+      createCurrencyTable(rates);
       createCurrencyList(rates);
     })
     .catch((error) => {
@@ -53,7 +56,7 @@ function displayExchangeUI(currencyCode = null, date = null) {
     });
 }
 
-function updateCurrencyUI(currency, date, list) {
+export function updateCurrencyUI(currency, date, list) {
   list.onclick = (event) => handleListChange(event, date);
   currency.oninput = () => handleInputChange(currency, date);
   date.oninput = handleInputDate(currency, date);
@@ -78,12 +81,12 @@ function handleInputChange(currency, date) {
   displayExchangeUI(selectedCurrency, selectedDate || null);
 }
 
-function handleInputDate($selectedCurrency, $selectedDate) {
+function handleInputDate(currency, date) {
   let timeout;
   return () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      handleInputChange($selectedCurrency, $selectedDate);
+      handleInputChange(currency, date);
     }, 500);
   };
 }
@@ -91,7 +94,7 @@ function handleInputDate($selectedCurrency, $selectedDate) {
 function handleListChange(event, date) {
   const $clickedCurrency = event.target;
   const selectedCurrency = handleCurrencyListClick($clickedCurrency);
-  displayExchangeUI(selectedCurrency, $selectedDate || null);
+  displayCurrencyUI(selectedCurrency, date || null);
 }
 
 function clearCurrencyRates() {

@@ -1,9 +1,9 @@
 const BASE_URL = "https://api.exchangerate.host";
 
-function getExchangeRates(currency = "EUR", date = "latest") {
-  const base = `${BASE_URL}/${date}?base=${currency}`;
+export function getExchangeRates(currency = "EUR", date = "latest") {
+  const URL = `${BASE_URL}/${date}?base=${currency}`;
 
-  return fetch(base)
+  return fetch(URL)
     .then((response) => {
       return response.json();
     })
@@ -15,10 +15,3 @@ function getExchangeRates(currency = "EUR", date = "latest") {
       throw error;
     });
 }
-
-function initialize() {
-  displayExchangeUI();
-  updateCurrencyUI($currencyCode, $currencyDate, $currencyList);
-}
-
-initialize();
