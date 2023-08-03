@@ -1,26 +1,19 @@
 import { getCurrencyCode } from "./utils.js";
-import { displayExchangeUI } from "./exchange.js";
 
-export function handleInputChange(currency, date) {
+export function handleInputCurrency(currency) {
   const selectedCurrency = currency.value;
-  const selectedDate = date.value;
-  displayExchangeUI(selectedCurrency, selectedDate || null);
+  return selectedCurrency;
 }
 
-export function handleListChange(event, date) {
-  const $clickedCurrency = event.target;
+export function handleListChange(list) {
+  const $clickedCurrency = list.target;
   const selectedCurrency = handleCurrencyListClick($clickedCurrency);
-  displayExchangeUI(selectedCurrency, date || null);
+  return selectedCurrency;
 }
 
-export function handleInputDate(currency, date) {
-  let timeout;
-  return () => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-      handleInputChange(currency, date);
-    }, 500);
-  };
+export function handleInputDate(date) {
+  const selectedDate = date.value;
+  return selectedDate;
 }
 
 function handleCurrencyListClick(click) {

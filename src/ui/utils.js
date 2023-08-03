@@ -1,6 +1,6 @@
 import { currenciesName } from "../utils/currency-name.js";
-function createExchangeTable(rates) {
-  const $exchangeTable = document.querySelector("#exchange-rates");
+export function createExchangeTable(rates) {
+  const $exchangeTable = document.querySelector("#exchange-rates-table");
   const $rates = Object.keys(rates);
 
   $rates.forEach((rate, index) => {
@@ -22,7 +22,7 @@ function createExchangeTable(rates) {
   });
 }
 
-function createCurrencyList(rates) {
+export function createCurrencyList(rates) {
   const $currencyList = document.querySelector("#currency-list");
   const currencies = Object.keys(rates);
 
@@ -38,13 +38,11 @@ function createCurrencyList(rates) {
   });
 }
 
-function clearExchangeTable() {
-  document.querySelector("#exchange-rates").innerHTML = "";
+export function clearExchangeTable() {
+  document.querySelector("#exchange-rates-table").innerHTML = "";
 }
 
-function getCurrencyCode(currency) {
+export function getCurrencyCode(currency) {
   const currencyCode = currency.innerText.substring(0, 3);
   return currencyCode;
 }
-
-export { createExchangeTable, createCurrencyList, clearExchangeTable, getCurrencyCode };
