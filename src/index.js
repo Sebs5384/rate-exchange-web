@@ -1,8 +1,7 @@
-import { displayCurrencyUI, updateCurrencyUI, $currencyCode, $currencyDate, $currencyList } from "./ui/ui.js";
-
+import { displayExchangeUI, updateExchangeUI } from "./ui/exchange.js";
 function initialize() {
-  displayCurrencyUI();
-  updateCurrencyUI($currencyCode, $currencyDate, $currencyList);
+  displayExchangeUI();
+  updateExchangeUI();
 }
 
 initialize();
