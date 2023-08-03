@@ -5,8 +5,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="src/styles.css" />
+    <link rel="stylesheet" href="/src/styles.css" />
     <link rel="icon" href="." />
     <title>Exchange-rate-web</title>
   </head>
@@ -18,7 +19,7 @@
       </div>
 
       <div class="col-6 gy-4">
-        <div class="card" id="exchange-info-card">
+        <div class="card alert alert-primary" id="exchange-info-card">
           <div class="card-body">
             <div class="gy-5 text-center">
               <h3 id="current-exchange">Currently displaying EURO</h3>
@@ -31,32 +32,30 @@
 
     <div class="row justify-content-center">
       <div class="col-5">
-        <div class="card" id="currency-form-card">
+        <div class="card" id="currency-card">
           <div class="card-body">
-            <form id="form">
-              <div class="text-center mb-4">
-                <label class="form-label">Select your currency here</label>
-                <div class="dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
-                  <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
-                </div>
+            <div class="text-center mb-4">
+              <label class="form-label">Select your currency here</label>
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
+                <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
               </div>
+            </div>
 
-              <div class="row justify-content-start">
-                <div class="col-6">
-                  <input class="form-control text-center" type="text" placeholder="Insert your currency" id="currency-input" value="" />
-                </div>
-                <div class="col-6">
-                  <input type="date" class="form-control text-center" id="currency-date" />
-                </div>
+            <div class="row justify-content-start">
+              <div class="col-6">
+                <input class="form-control text-center" type="text" placeholder="Insert your currency" id="currency-input" value="" />
               </div>
-            </form>
+              <div class="col-6">
+                <input type="date" class="form-control text-center" id="currency-date" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="col-6">
-        <div class="card gy-4" id="currency-table-card">
+        <div class="card gy-4" id="exchange-table-card">
           <div class="card-body">
             <table class="table list-scroll">
               <tr class="text-center">
@@ -65,7 +64,7 @@
                 <th scope="col">Full-Name</th>
                 <th scope="col">Currency-Exchange</th>
               </tr>
-              <tbody id="currency-rates" class="text-center"></tbody>
+              <tbody id="exchange-rates" class="text-center"></tbody>
             </table>
           </div>
         </div>
