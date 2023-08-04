@@ -4,7 +4,7 @@ export function createExchangeTable(rates) {
   const $rates = Object.keys(rates);
 
   $rates.forEach((rate, index) => {
-    const $tr = document.createElement("tr");
+    const $row = document.createElement("tr");
     const $currencyNumber = document.createElement("th");
     const $currencyCode = document.createElement("th");
     const $currencyFullName = document.createElement("th");
@@ -13,12 +13,12 @@ export function createExchangeTable(rates) {
     $currencyNumber.innerText = `${index + 1}`;
     $currencyCode.innerText = `${rate}`;
     $currencyFullName.innerText = `${currenciesName[index]}`;
-    $rate.innerText = `$${rates[rate].toFixed(3)}`;
-    $tr.appendChild($currencyNumber);
-    $tr.appendChild($currencyCode);
-    $tr.appendChild($currencyFullName);
-    $tr.appendChild($rate);
-    $exchangeTable.appendChild($tr);
+    $rate.innerText = `$${rates[rate]}`;
+    $row.appendChild($currencyNumber);
+    $row.appendChild($currencyCode);
+    $row.appendChild($currencyFullName);
+    $row.appendChild($rate);
+    $exchangeTable.appendChild($row);
   });
 }
 
@@ -27,14 +27,14 @@ export function createCurrencyList(rates) {
   const currencies = Object.keys(rates);
 
   currencies.forEach((currency, index) => {
-    const $li = document.createElement("li");
-    const $a = document.createElement("a");
-    $a.className = "dropdown-item";
-    $a.href = "#";
-    $a.innerText = `${currency} ${currenciesName[index]}`;
+    const $list = document.createElement("li");
+    const $item = document.createElement("a");
+    $item.className = "dropdown-item text-start";
+    $item.href = "#";
+    $item.innerText = `${currency} - ${currenciesName[index]}`;
 
-    $li.appendChild($a);
-    $currencyList.appendChild($li);
+    $list.appendChild($item);
+    $currencyList.appendChild($list);
   });
 }
 
