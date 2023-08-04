@@ -1,6 +1,6 @@
 import { currenciesName } from "../utils/currency-name.js";
 export function createExchangeTable(rates) {
-  const $exchangeTable = document.querySelector("#exchange-rates-table");
+  const $exchangeTable = document.querySelector("#exchange-table-body");
   const $rates = Object.keys(rates);
 
   $rates.forEach((rate, index) => {
@@ -39,7 +39,7 @@ export function createCurrencyList(rates) {
 }
 
 export function clearExchangeTable() {
-  document.querySelector("#exchange-rates-table").innerHTML = "";
+  document.querySelector("#exchange-table-body").innerHTML = "";
 }
 
 export function getCurrencyCode(currency) {

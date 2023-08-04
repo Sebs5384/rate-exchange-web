@@ -12,7 +12,7 @@
     <title>Exchange-rate-web</title>
   </head>
   <body>
-    <div class="row justify-content-center">
+    <header class="row justify-content-center">
       <div class="col-5 alert alert-primary gy-4 text-center" id="exchange-title">
         <h1 class="display-6">Exchange-X</h1>
         <h6>Currency converter and exchange rate lookup.</h6>
@@ -28,33 +28,35 @@
           </div>
         </div>
       </div>
-    </div>
+    </header>
 
-    <div class="row justify-content-center">
-      <div class="col-5">
+    <main class="row justify-content-center">
+      <section class="col-5">
         <div class="card" id="currency-card">
           <div class="card-body">
             <div class="text-center mb-4">
-              <label class="form-label">Select your currency here</label>
+              <label class="form-label">Browse through our list of currencies</label>
               <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of currencies</button>
+                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of Currencies</button>
                 <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
               </div>
             </div>
 
-            <div class="row justify-content-start">
+            <div class="row text-center">
               <div class="col-6">
-                <input class="form-control text-center" type="text" placeholder="Insert your currency" id="currency-input" value="" />
+                <label for="currency-input"><small>Insert your currency code in here</small></label>
+                <input class="form-control text-center" type="text" placeholder="E.g ARS" id="currency-input" value="" />
               </div>
               <div class="col-6">
+                <label for="currency-date"><small>Insert your date</small></label>
                 <input type="date" class="form-control text-center" id="currency-date" />
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="col-6">
+      <section class="col-6" id="exchange-table">
         <div class="card gy-4" id="exchange-table-card">
           <div class="card-body">
             <table class="table list-scroll">
@@ -64,12 +66,12 @@
                 <th scope="col" class="w-50">Name</th>
                 <th scope="col">Exchange</th>
               </tr>
-              <tbody id="exchange-rates-table" class="text-center"></tbody>
+              <tbody id="exchange-table-body" class="text-center"></tbody>
             </table>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   </body>
   <script src="src/index.js" type="module"></script>
 </html>
