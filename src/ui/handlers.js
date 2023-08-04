@@ -8,11 +8,14 @@ export function handleInputCurrency(currency) {
 export function handleListChange(list) {
   const $clickedCurrency = list.target;
   const selectedCurrency = handleCurrencyListClick($clickedCurrency);
+  console.log(selectedCurrency);
   return selectedCurrency;
 }
 
 export function handleInputDate(date) {
   const selectedDate = date.value;
+  if (!selectedDate) return "latest";
+
   return selectedDate;
 }
 

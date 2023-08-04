@@ -1,9 +1,9 @@
-import { getExchangeRates } from "../api/exchange.js";
-import { clearExchangeTable, createExchangeTable, createCurrencyList } from "./utils.js";
+import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/exchange.js";
+import { clearExchangeTable, createExchangeTable, createCurrencyList, updateExchangeHeader } from "./utils.js";
 import { handleListChange, handleInputCurrency, handleInputDate } from "./handlers.js";
 
-export function displayExchangeUI(currencyCode = null, date = null) {
-  return getExchangeRates(currencyCode, date).then((rates) => {
+export function displayExchangeUI(currency, date) {
+  getExchangeRates(currency, date).then((rates) => {
     clearExchangeTable();
     createExchangeTable(rates);
     createCurrencyList(rates);
