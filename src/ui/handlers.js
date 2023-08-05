@@ -8,7 +8,6 @@ export function handleInputCurrency(currency) {
 export function handleListChange(list) {
   const $clickedCurrency = list.target;
   const selectedCurrency = handleCurrencyListClick($clickedCurrency);
-  console.log(selectedCurrency);
   return selectedCurrency;
 }
 

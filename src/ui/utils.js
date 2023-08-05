@@ -46,3 +46,23 @@ export function getCurrencyCode(currency) {
   const currencyCode = currency.innerText.substring(0, 3);
   return currencyCode;
 }
+
+export function updateCurrencyTitle(base, currency) {
+  const baseCurrency = base;
+  const currentInputValue = currency;
+  const currentTitle = document.querySelector("#current-currency");
+
+  if (currentInputValue && currentInputValue.length === 3) {
+    return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
+  }
+  return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
+}
+
+export function updateDateTitle(present, date) {
+  const presentDate = present;
+  const currentInputDate = date;
+  const currentDateTitle = document.querySelector("#current-date");
+
+  if (currentInputDate && currentInputDate !== "latest") return (currentDateTitle.innerText = ` ${currentInputDate}`);
+  return (currentDateTitle.innerText = `${presentDate}`);
+}
