@@ -47,7 +47,7 @@ export function getCurrencyCode(currency) {
   return currencyCode;
 }
 
-export function updateCurrencyTitle(base, currency) {
+export function setCurrencyTitle(base, currency) {
   const baseCurrency = base;
   const currentInputValue = currency;
   const currentTitle = document.querySelector("#current-currency");
@@ -58,11 +58,11 @@ export function updateCurrencyTitle(base, currency) {
   return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
 }
 
-export function updateDateTitle(present, date) {
+export function setDateTitle(present, date) {
   const presentDate = present;
   const currentInputDate = date;
   const currentDateTitle = document.querySelector("#current-date");
 
-  if (currentInputDate && currentInputDate !== "latest") return (currentDateTitle.innerText = ` ${currentInputDate}`);
-  return (currentDateTitle.innerText = `${presentDate}`);
+  if (currentInputDate && currentInputDate !== "latest") return (currentDateTitle.innerText = `At ${currentInputDate} as date of exchange`);
+  return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
