@@ -18,10 +18,10 @@ export function handleInputDate(date) {
   return selectedDate;
 }
 
-function handleCurrencyListClick(click) {
-  if (click) {
+function handleCurrencyListClick(clickedCurrency) {
+  if (clickedCurrency) {
     const $currencyInput = document.querySelector("#currency-input");
-    const currencyCode = getCurrencyCode(click);
+    const currencyCode = getCurrencyCode(clickedCurrency);
     const selectedCurrency = ($currencyInput.value = currencyCode);
     return selectedCurrency;
   }

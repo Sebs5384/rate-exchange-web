@@ -1,5 +1,5 @@
 import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/exchange.js";
-import { clearExchangeTable, createExchangeTable, createCurrencyList, updateCurrencyTitle, updateDateTitle } from "./utils.js";
+import { clearExchangeTable, createExchangeTable, createCurrencyList, setCurrencyTitle, setDateTitle } from "./utils.js";
 import { handleListChange, handleInputCurrency, handleInputDate } from "./handlers.js";
 
 export function displayExchangeUI(currency, date) {
@@ -10,11 +10,11 @@ export function displayExchangeUI(currency, date) {
   });
 
   getExchangeBase().then((base) => {
-    updateCurrencyTitle(base, currency);
+    setCurrencyTitle(base, currency);
   });
 
   getExchangeDate().then((present) => {
-    updateDateTitle(present, date);
+    setDateTitle(present, date);
   });
 }
 
@@ -23,16 +23,32 @@ export function updateExchangeUI() {
   const $currency = document.querySelector("#currency-input");
   const $date = document.querySelector("#currency-date");
 
-  $list.onclick = (list) => {
-    displayExchangeUI(handleListChange(list), handleInputDate($date));
-  };
-  $currency.oninput = () => {
-    displayExchangeUI(handleInputCurrency($currency));
-  };
+  setupListChanges($list, $date);
+  setupCurrencyChanges($currency);
+  setupDateChanges($date, $currency);
+}
 
-  $date.oninput = () => {
+function setupListChanges(list, date) {
+  list.onclick = (currency) => {
+    const clickedCurrency = handleListChange(currency);
+    const selectedDate = handleInputDate(date);
+    displayExchangeUI(clickedCurrency, selectedDate);
+  };
+}
+
+function setupCurrencyChanges(currency) {
+  currency.oninput = () => {
+    const selectedCurrency = handleInputCurrency(currency);
+    displayExchangeUI(selectedCurrency);
+  };
+}
+
+function setupDateChanges(date, currency) {
+  date.oninput = () => {
     setTimeout(() => {
-      displayExchangeUI(handleInputCurrency($currency), handleInputDate($date));
+      const selectedCurrency = handleInputCurrency(currency);
+      const selectedDate = handleInputDate(date);
+      displayExchangeUI(selectedCurrency, selectedDate);
     }, 1000);
   };
 }
