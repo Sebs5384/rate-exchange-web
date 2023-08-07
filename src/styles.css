@@ -4,6 +4,10 @@
   max-width: 350px;
 }
 
+.loading {
+  border-radius: 10px;
+}
+
 .list-scroll {
   max-height: 380px;
   overflow-y: scroll;

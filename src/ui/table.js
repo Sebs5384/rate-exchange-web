@@ -15,6 +15,7 @@ export function createExchangeTable(rates) {
     $currencyCode.innerText = `${rate}`;
     $currencyFullName.innerText = `${currenciesName[index]}`;
     $rate.innerText = `$${rates[rate]}`;
+
     $row.appendChild($currencyNumber);
     $row.appendChild($currencyCode);
     $row.appendChild($currencyFullName);
@@ -32,22 +33,22 @@ export function displayLoadingTable() {
 
     const $loadingCurrencyNumber = document.createElement("th");
     const $loadingNumberPlaceholder = document.createElement("span");
-    $loadingNumberPlaceholder.className = "placeholder col-12 bg-primary";
+    $loadingNumberPlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingCurrencyNumber.appendChild($loadingNumberPlaceholder);
 
     const $loadingCurrencyCode = document.createElement("th");
     const $loadingCodePlaceholder = document.createElement("span");
-    $loadingCodePlaceholder.className = "placeholder col-12 bg-primary";
+    $loadingCodePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingCurrencyCode.appendChild($loadingCodePlaceholder);
 
     const $loadingFullName = document.createElement("th");
     const $loadingFullNamePlaceholder = document.createElement("span");
-    $loadingFullNamePlaceholder.className = "placeholder col-12 bg-primary";
+    $loadingFullNamePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingFullName.appendChild($loadingFullNamePlaceholder);
 
     const $loadingRate = document.createElement("th");
     const $loadingRatePlaceholder = document.createElement("span");
-    $loadingRatePlaceholder.className = "placeholder col-12 bg-primary";
+    $loadingRatePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingRate.appendChild($loadingRatePlaceholder);
 
     $row.appendChild($loadingCurrencyNumber);
