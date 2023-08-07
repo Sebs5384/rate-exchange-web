@@ -1,6 +1,7 @@
 import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/exchange.js";
-import { clearExchangeTable, createExchangeTable, createCurrencyList, setCurrencyTitle, setDateTitle } from "./utils.js";
-import { handleListChange, handleInputCurrency, handleInputDate } from "./handlers.js";
+import { setupCurrencyChanges, setupDateChanges, setupListChanges, setCurrencyTitle, setDateTitle } from "./utils.js";
+import { createCurrencyList } from "./list.js";
+import { createExchangeTable, clearExchangeTable } from "./table.js";
 
 export function displayExchangeUI(currency, date) {
   getExchangeRates(currency, date).then((rates) => {
@@ -26,29 +27,4 @@ export function updateExchangeUI() {
   setupListChanges($list, $date);
   setupCurrencyChanges($currency);
   setupDateChanges($date, $currency);
-}
-
-function setupListChanges(list, date) {
-  list.onclick = (currency) => {
-    const clickedCurrency = handleListChange(currency);
-    const selectedDate = handleInputDate(date);
-    displayExchangeUI(clickedCurrency, selectedDate);
-  };
-}
-
-function setupCurrencyChanges(currency) {
-  currency.oninput = () => {
-    const selectedCurrency = handleInputCurrency(currency);
-    displayExchangeUI(selectedCurrency);
-  };
-}
-
-function setupDateChanges(date, currency) {
-  date.oninput = () => {
-    setTimeout(() => {
-      const selectedCurrency = handleInputCurrency(currency);
-      const selectedDate = handleInputDate(date);
-      displayExchangeUI(selectedCurrency, selectedDate);
-    }, 1000);
-  };
 }
