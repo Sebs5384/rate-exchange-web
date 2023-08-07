@@ -1,7 +1,7 @@
 import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/exchange.js";
 import { setupCurrencyChanges, setupDateChanges, setupListChanges, setCurrencyTitle, setDateTitle } from "./utils.js";
-import { createCurrencyList } from "./list.js";
 import { createExchangeTable, clearExchangeTable } from "./table.js";
+import { createCurrencyList } from "./list.js";
 
 export function displayExchangeUI(currency, date) {
   getExchangeRates(currency, date).then((rates) => {

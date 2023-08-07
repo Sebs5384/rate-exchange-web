@@ -1,10 +1,14 @@
 import { handleInputCurrency, handleInputDate, handleListChange } from "./handlers.js";
+import { displayLoadingTable, clearExchangeTable } from "./table.js";
 import { displayExchangeUI } from "./exchange.js";
 
 export function setupListChanges(list, date) {
   list.onclick = (currency) => {
     const clickedCurrency = handleListChange(currency);
     const selectedDate = handleInputDate(date);
+
+    clearExchangeTable();
+    displayLoadingTable();
     displayExchangeUI(clickedCurrency, selectedDate);
   };
 }
@@ -12,12 +16,18 @@ export function setupListChanges(list, date) {
 export function setupCurrencyChanges(currency) {
   currency.oninput = () => {
     const selectedCurrency = handleInputCurrency(currency);
+
+    clearExchangeTable();
+    displayLoadingTable();
     displayExchangeUI(selectedCurrency);
   };
 }
 
 export function setupDateChanges(date, currency) {
   date.oninput = () => {
+    clearExchangeTable();
+    displayLoadingTable();
+
     setTimeout(() => {
       const selectedCurrency = handleInputCurrency(currency);
       const selectedDate = handleInputDate(date);
