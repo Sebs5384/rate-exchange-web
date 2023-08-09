@@ -1,14 +1,16 @@
-import { currenciesName } from "../utils/currency-name.js";
-export function createCurrencyList(rates) {
+import { getExistingCurrencies } from "../utils/general.js";
+export function createCurrencyList(currency) {
   const $currencyList = document.querySelector("#currency-list");
-  const currencies = Object.keys(rates);
+  const list = Object.keys(currency);
+  const existingCurrencies = getExistingCurrencies(list);
 
-  currencies.forEach((currency, index) => {
+  $currencyList.innerText = "";
+  list.forEach((currency, index) => {
     const $list = document.createElement("li");
     const $item = document.createElement("a");
     $item.className = "dropdown-item text-start";
     $item.href = "#";
-    $item.innerText = `${currency} - ${currenciesName[index]}`;
+    $item.innerText = `${currency} - ${existingCurrencies[index]}`;
 
     $list.appendChild($item);
     $currencyList.appendChild($list);
