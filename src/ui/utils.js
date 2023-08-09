@@ -40,9 +40,12 @@ export function setCurrencyTitle(base, currency) {
   const baseCurrency = base;
   const currentInputValue = currency;
   const currentTitle = document.querySelector("#current-currency");
+  const $code = document.querySelectorAll(".currency-code");
 
-  if (currentInputValue && currentInputValue.length === 3) {
-    return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
+  for (const code of $code) {
+    if (currentInputValue === code.innerText) {
+      return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
+    }
   }
   return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
 }
@@ -52,7 +55,10 @@ export function setDateTitle(present, date) {
   const currentInputDate = date;
   const currentDateTitle = document.querySelector("#current-date");
 
-  if (currentInputDate && currentInputDate !== "latest") return (currentDateTitle.innerText = `At ${currentInputDate} as date of exchange`);
+  if (currentInputDate && currentInputDate !== "latest") {
+    return (currentDateTitle.innerText = `At ${currentInputDate} as date of exchange`);
+  }
+
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
 
