@@ -1,20 +1,22 @@
-import { currenciesName } from "../utils/currency-name.js";
+import { getExistingCurrencies } from "../utils/general.js";
 
-export function createExchangeTable(rates) {
+export function createExchangeTable(currency) {
   const $exchangeTable = document.querySelector("#exchange-table-body");
-  const $rates = Object.keys(rates);
+  const currencies = Object.keys(currency);
+  const existingCurrencies = getExistingCurrencies(currencies);
 
-  $rates.forEach((rate, index) => {
+  currencies.forEach((rate, index) => {
     const $row = document.createElement("tr");
     const $currencyNumber = document.createElement("th");
     const $currencyCode = document.createElement("th");
     const $currencyFullName = document.createElement("th");
     const $rate = document.createElement("th");
 
-    $currencyNumber.innerText = `${index + 1}`;
-    $currencyCode.innerText = `${rate}`;
-    $currencyFullName.innerText = `${currenciesName[index]}`;
-    $rate.innerText = `$${rates[rate]}`;
+    $currencyNumber.innerText = index + 1;
+    $currencyCode.innerText = rate;
+    $currencyCode.className = "currency-code";
+    $currencyFullName.innerText = existingCurrencies[index];
+    $rate.innerText = `$${currency[rate]}`;
 
     $row.appendChild($currencyNumber);
     $row.appendChild($currencyCode);
