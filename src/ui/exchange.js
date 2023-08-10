@@ -25,6 +25,6 @@ export function updateExchangeUI() {
   const $date = document.querySelector("#currency-date");
 
   setupListChanges($list, $date);
-  setupCurrencyChanges($currency);
+  setupCurrencyChanges($currency, $date);
   setupDateChanges($date, $currency);
 }

@@ -13,13 +13,14 @@ export function setupListChanges(list, date) {
   };
 }
 
-export function setupCurrencyChanges(currency) {
+export function setupCurrencyChanges(currency, date) {
   currency.oninput = () => {
     const selectedCurrency = handleInputCurrency(currency);
+    const selectedDate = handleInputDate(date);
 
     clearExchangeTable();
     displayLoadingTable();
-    displayExchangeUI(selectedCurrency);
+    displayExchangeUI(selectedCurrency, selectedDate);
   };
 }
 
