@@ -1,4 +1,5 @@
 import { getExistingCurrencies } from "../utils/general.js";
+import { setElementVisibility } from "./utils.js";
 
 export function createExchangeTable(currency) {
   const $exchangeTable = document.querySelector("#exchange-table-body");
@@ -27,8 +28,9 @@ export function createExchangeTable(currency) {
 }
 
 export function displayLoadingTable() {
-  const $table = document.querySelector("#exchange-table-body");
+  setElementVisibility("#error-message", "hidden");
 
+  const $table = document.querySelector("#exchange-table-body");
   for (let i = 0; i < 8; i++) {
     const $row = document.createElement("tr");
     $row.className = "placeholder-glow";

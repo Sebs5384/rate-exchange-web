@@ -2,9 +2,12 @@ import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/excha
 import { setupCurrencyChanges, setupDateChanges, setupListChanges, setCurrencyTitle, setDateTitle } from "./utils.js";
 import { createExchangeTable, clearExchangeTable } from "./table.js";
 import { createCurrencyList } from "./list.js";
+import { setElementVisibility } from "./utils.js";
 
 export function displayExchangeUI(currency, date) {
   getExchangeRates(currency, date).then((rates) => {
+    if (rates === undefined) setElementVisibility("#error-message", "visible");
+
     clearExchangeTable();
     createExchangeTable(rates);
     createCurrencyList(rates);
