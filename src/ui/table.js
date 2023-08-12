@@ -31,26 +31,26 @@ export function displayLoadingTable() {
   setElementVisibility("#error-message", "hidden");
 
   const $table = document.querySelector("#exchange-table-body");
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 10; i++) {
     const $row = document.createElement("tr");
     $row.className = "placeholder-glow";
 
-    const $loadingCurrencyNumber = document.createElement("th");
+    const $loadingCurrencyNumber = document.createElement("td");
     const $loadingNumberPlaceholder = document.createElement("span");
     $loadingNumberPlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingCurrencyNumber.appendChild($loadingNumberPlaceholder);
 
-    const $loadingCurrencyCode = document.createElement("th");
+    const $loadingCurrencyCode = document.createElement("td");
     const $loadingCodePlaceholder = document.createElement("span");
     $loadingCodePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingCurrencyCode.appendChild($loadingCodePlaceholder);
 
-    const $loadingFullName = document.createElement("th");
+    const $loadingFullName = document.createElement("td");
     const $loadingFullNamePlaceholder = document.createElement("span");
     $loadingFullNamePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingFullName.appendChild($loadingFullNamePlaceholder);
 
-    const $loadingRate = document.createElement("th");
+    const $loadingRate = document.createElement("td");
     const $loadingRatePlaceholder = document.createElement("span");
     $loadingRatePlaceholder.className = "loading placeholder col-12 bg-primary";
     $loadingRate.appendChild($loadingRatePlaceholder);

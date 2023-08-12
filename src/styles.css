@@ -9,7 +9,7 @@
 }
 
 .table-list-scroll {
-  max-height: 465px;
+  max-height: 444px;
   overflow-y: scroll;
   display: block;
 }

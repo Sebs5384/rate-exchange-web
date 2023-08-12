@@ -1,4 +1,5 @@
 import { getExistingCurrencies } from "../utils/general.js";
+
 export function createCurrencyList(currency) {
   const $currencyList = document.querySelector("#currency-list");
   const list = Object.keys(currency);
