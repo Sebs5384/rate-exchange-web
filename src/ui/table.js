@@ -8,10 +8,10 @@ export function createExchangeTable(currency) {
 
   currencies.forEach((rate, index) => {
     const $row = document.createElement("tr");
-    const $currencyNumber = document.createElement("th");
-    const $currencyCode = document.createElement("th");
-    const $currencyFullName = document.createElement("th");
-    const $rate = document.createElement("th");
+    const $currencyNumber = document.createElement("td");
+    const $currencyCode = document.createElement("td");
+    const $currencyFullName = document.createElement("td");
+    const $rate = document.createElement("td");
 
     $currencyNumber.innerText = index + 1;
     $currencyCode.innerText = rate;
