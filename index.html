@@ -12,60 +12,65 @@
     <title>Exchange-rate-web</title>
   </head>
   <body>
-    <header class="row justify-content-center">
-      <div class="col-5 alert alert-primary gy-4 text-center" id="exchange-title">
+    <header class="row justify-content-evenly">
+      <div class="col-4 alert alert-primary gy-4 text-center" id="exchange-title">
         <h1 class="display-6">Exchange-X</h1>
         <h6>Currency converter and exchange rate lookup.</h6>
       </div>
 
-      <div class="col-6 gy-4">
-        <div class="card alert alert-primary" id="exchange-info-card">
-          <div class="card-body">
-            <div class="gy-5 text-center">
-              <h3 id="current-currency"></h3>
-              <h3 id="current-date"></h3>
-            </div>
-          </div>
+      <div class="col-5 alert alert-primary gy-4" id="exchange-info-card">
+        <div class="text-center">
+          <h2 id="current-currency"></h2>
+          <h5 id="current-date"></h5>
         </div>
       </div>
     </header>
 
     <main class="row justify-content-center">
       <section class="col-5">
-        <div class="card" id="currency-card">
+        <section class="card" id="currency-card">
           <div class="card-body">
-            <div class="text-center mb-4">
-              <label class="form-label">Browse through our list of currencies</label>
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of Currencies</button>
-                <ul class="dropdown-menu menu-scroll" id="currency-list"></ul>
-              </div>
-            </div>
+            <div class="container text-center">
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <p>Check out our exchange table feature</p>
+                  <hr class="text-primary" />
+                </div>
 
-            <div class="row text-center">
-              <div class="col-6">
-                <label for="currency-input"><small>Insert your currency code in here</small></label>
-                <input class="form-control text-center" type="text" placeholder="E.g ARS" id="currency-input" value="" />
+                <div class="dropdown-center mb-4">
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of Currencies</button>
+                  <ul class="dropdown-menu dropdown-menu-scroll" id="currency-list"></ul>
+                </div>
               </div>
-              <div class="col-6">
-                <label for="currency-date"><small>Look up exchange through date</small></label>
-                <input type="date" class="form-control text-center" id="currency-date" />
+
+              <div class="row mb-3">
+                <div class="col-6">
+                  <label for="currency-input"><small>Insert your currency code in here</small></label>
+                  <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="currency-input" value="" />
+                </div>
+                <div class="col-6">
+                  <label for="currency-date"><small>Look up exchange through date</small></label>
+                  <input type="date" class="form-control text-center mt-2" id="currency-date" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
 
       <section class="col-6" id="exchange-table">
-        <div class="card gy-4" id="exchange-table-card">
+        <div class="card" id="exchange-table-card">
           <div class="card-body">
             <table class="table list-scroll">
-              <tr class="text-center">
-                <th scope="col">#</th>
-                <th scope="col" class="w-50">Currency-Code</th>
-                <th scope="col" class="w-50">Name</th>
-                <th scope="col">Exchange</th>
-              </tr>
+              <thead>
+                <tr class="text-center">
+                  <th scope="col">#</th>
+                  <th scope="col" class="w-50">Currency-Code</th>
+                  <th scope="col" class="w-50">Name</th>
+                  <th scope="col">Exchange</th>
+                </tr>
+              </thead>
+
               <tbody id="exchange-table-body" class="text-center"></tbody>
             </table>
             <div class="text-center alert alert-danger hidden" id="error-message">
