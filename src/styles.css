@@ -8,8 +8,8 @@
   border-radius: 10px;
 }
 
-.list-scroll {
-  max-height: 380px;
+.table-list-scroll {
+  max-height: 465px;
   overflow-y: scroll;
   display: block;
 }
