@@ -12,6 +12,18 @@ function getExchanges(currency = "EUR", date = "latest") {
     });
 }
 
+export function getConvertion(from = "USD", to = "ARS", amount = "1") {
+  const URL = `${BASE_URL}/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
+
+  return fetch(URL)
+    .then((response) => {
+      return response.json();
+    })
+    .then((convertion) => {
+      return convertion;
+    });
+}
+
 export function getExchangeRates(currency, date) {
   return getExchanges(currency, date).then((exchange) => {
     return exchange.rates;
