@@ -28,7 +28,7 @@
 
     <main class="row justify-content-center">
       <section class="col-5">
-        <section class="card card-border" id="currency-card">
+        <section class="card card-border" id="exchange-table-control">
           <div class="card-body mt-3">
             <div class="container text-center">
               <div class="row justify-content-center">
@@ -39,14 +39,14 @@
 
                 <div class="dropdown-center mb-4">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">List of Currencies</button>
-                  <ul class="dropdown-menu dropdown-menu-scroll" id="currency-list"></ul>
+                  <ul class="dropdown-menu table-menu-scroll currency-list" id="table-currency-list"></ul>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-6">
                   <label for="currency-input"><small>Insert your currency code here</small></label>
-                  <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="currency-input" value="" />
+                  <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="currency-input" />
                 </div>
                 <div class="col-6">
                   <label for="currency-date"><small>Look up exchange through date</small></label>
@@ -57,47 +57,47 @@
           </div>
         </section>
 
-        <section class="mt-2" id="calculator-card">
-          <div class="card card-border">
-            <div class="card-body container">
-              <div class="row justify-content-around">
-                <div class="col-6">
-                  <div class="container">
-                    <div class="row text-center">
-                      <div class="col-12">
-                        <strong style="font-size: 13px">Calculate through our currency converter</strong>
-                        <hr class="text-primary" />
-                      </div>
-                    </div>
-                    <div class="row justify-content-center gap-1">
-                      <div class="d-grid dropend col-4">
-                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
-                        <ul class="dropdown-menu dropdown-menu-scroll"></ul>
-                      </div>
-                      <div class="col-7"><input type="number" class="form-control text-center" placeholder="E.g ARS" /></div>
-
-                      <div class="d-grid dropend col-4">
-                        <button class="btn btn-outline-primary dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
-                        <ul class="dropdown-menu dropdown-menu-scroll"></ul>
-                      </div>
-                      <div class="col-7 mt-2"><input type="number" class="form-control text-center" placeholder="E.g USD" /></div>
-
-                      <button class="btn btn-primary btn-sm col-7 mt-4 mb-2" type="button">Calculate</button>
-                      <button class="btn btn-primary btn-sm col-3 mt-4 mb-2" type="button">Reset</button>
+        <section class="card card-border mt-2" id="exchange-calculator">
+          <div class="card-body container">
+            <div class="row justify-content-around">
+              <div class="col-6">
+                <div class="container">
+                  <div class="row text-center">
+                    <div class="col-12">
+                      <strong style="font-size: 13px">Calculate through our currency converter</strong>
+                      <hr class="text-primary" />
                     </div>
                   </div>
-                </div>
 
-                <div class="card card-border col-5">
-                  <div class="container card-body">
-                    <div class="row text-center justify-content-center">
-                      <strong class="text-primary">CONVERTION</strong>
-                      <hr class="text-primary" />
-                      <strong>10000 ARS = 3000 USD</strong>
-                      <small class="mt-3">The results above are based on</small>
-                      <small>new Date();</small>
-                      <button class="btn btn-primary btn-sm mt-3 col-9" type="button">Check through time</button>
+                  <div class="row justify-content-center gap-1">
+                    <div class="d-grid dropend col-4">
+                      <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
+                      <ul class="dropdown-menu calculator-menu-scroll currency-list"></ul>
                     </div>
+                    <div class="col-7"><input type="text" class="form-control form-control-sm text-center" placeholder="e.g ARS" /></div>
+
+                    <div class="d-grid dropend col-4">
+                      <button class="btn btn-outline-primary btn-sm dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
+                      <ul class="dropdown-menu calculator-menu-scroll currency-list"></ul>
+                    </div>
+                    <div class="col-7 mt-2"><input type="text" class="form-control form-control-sm text-center" placeholder="e.g USD" /></div>
+                    <div class="col-11"><input type="number" class="form-control form-control-sm text-center" placeholder="Amount" /></div>
+
+                    <button class="btn btn-primary btn-sm col-7 mt-2 mb-2" type="button">Calculate</button>
+                    <button class="btn btn-primary btn-sm col-3 mt-2 mb-2" type="button">Reset</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-border col-5">
+                <div class="container card-body">
+                  <div class="row text-center justify-content-center">
+                    <strong class="text-secondary">CONVERTION</strong>
+                    <hr class="text-primary" />
+                    <strong id="exchange-result">10000 <small class="text-secondary">ARS</small> = 3000 <small class="text-secondary">USD</small></strong>
+                    <small class="mt-3">Results based on</small>
+                    <small id="exchange-result-date">2023/08/14 as date of Exchange</small>
+                    <button class="btn btn-secondary btn-sm mt-4 col-9 disabled" aria-disabled="true" type="button">Check through time</button>
                   </div>
                 </div>
               </div>
@@ -107,7 +107,7 @@
       </section>
 
       <section class="col-6" id="exchange-table">
-        <div class="card card-border" id="exchange-table-card">
+        <div class="card card-border">
           <div class="card-body">
             <table class="table table-list-scroll">
               <thead>
