@@ -28,12 +28,12 @@
 
     <main class="row justify-content-center">
       <section class="col-5">
-        <section class="card" id="currency-card">
-          <div class="card-body">
+        <section class="card card-border" id="currency-card">
+          <div class="card-body mt-3">
             <div class="container text-center">
               <div class="row justify-content-center">
                 <div class="col-8">
-                  <p>Check out our exchange table feature</p>
+                  <strong>Check out our exchange table feature</strong>
                   <hr class="text-primary" />
                 </div>
 
@@ -45,7 +45,7 @@
 
               <div class="row">
                 <div class="col-6">
-                  <label for="currency-input"><small>Insert your currency code in here</small></label>
+                  <label for="currency-input"><small>Insert your currency code here</small></label>
                   <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="currency-input" value="" />
                 </div>
                 <div class="col-6">
@@ -57,64 +57,48 @@
           </div>
         </section>
 
-        <section class="card mt-2" id="calculator-card">
-          <div class="card-body">
-            <div class="container text-center" id="currency-calculator">
-              <div class="row justify-content-center">
-                <div class="col-8">
-                  <p>Calculate through our 1 on 1 calculator</p>
-                  <hr class="text-primary" />
-                </div>
-              </div>
+        <section class="mt-2" id="calculator-card">
+          <div class="card card-border">
+            <div class="card-body container">
+              <div class="row justify-content-around">
+                <div class="col-6">
+                  <div class="container">
+                    <div class="row text-center">
+                      <div class="col-12">
+                        <strong style="font-size: 13px">Calculate through our currency converter</strong>
+                        <hr class="text-primary" />
+                      </div>
+                    </div>
+                    <div class="row justify-content-center gap-1">
+                      <div class="d-grid dropend col-4">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
+                        <ul class="dropdown-menu dropdown-menu-scroll"></ul>
+                      </div>
+                      <div class="col-7"><input type="number" class="form-control text-center" placeholder="E.g ARS" /></div>
 
-              <div class="row">
-                <div class="col-2">
-                  <div class="d-grid dropend">
-                    <button class="btn btn-outline-primary dropdown-toggle calculator-dropdowns" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
-                    <ul class="dropdown-menu"></ul>
+                      <div class="d-grid dropend col-4">
+                        <button class="btn btn-outline-primary dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
+                        <ul class="dropdown-menu dropdown-menu-scroll"></ul>
+                      </div>
+                      <div class="col-7 mt-2"><input type="number" class="form-control text-center" placeholder="E.g USD" /></div>
+
+                      <button class="btn btn-primary btn-sm col-7 mt-4 mb-2" type="button">Calculate</button>
+                      <button class="btn btn-primary btn-sm col-3 mt-4 mb-2" type="button">Reset</button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-3">
-                  <input type="text" class="form-control" />
-                </div>
 
-                <div class="col-7">
-                  <p>Testing</p>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-2">
-                  <div class="d-grid dropend">
-                    <button class="btn btn-outline-primary dropdown-toggle calculator-dropdowns" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
-                    <ul class="dropdown-menu"></ul>
+                <div class="card card-border col-5">
+                  <div class="container card-body">
+                    <div class="row text-center justify-content-center">
+                      <strong class="text-primary">CONVERTION</strong>
+                      <hr class="text-primary" />
+                      <strong>10000 ARS = 3000 USD</strong>
+                      <small class="mt-3">The results above are based on</small>
+                      <small>new Date();</small>
+                      <button class="btn btn-primary btn-sm mt-3 col-9" type="button">Check through time</button>
+                    </div>
                   </div>
-                </div>
-                <div class="col-3">
-                  <input type="text" class="form-control text-center" />
-                </div>
-
-                <div class="col-7">
-                  <p>Testing</p>
-                </div>
-              </div>
-
-              <div class="row mt-2">
-                <div class="col-5">
-                  <input type="number" class="form-control text-center" placeholder="e.g 15000" />
-                </div>
-                <div class="col-7">
-                  <small>The above results are based on new Date();</small>
-                </div>
-              </div>
-
-              <div class="row mt-2">
-                <div class="d-grid col-5">
-                  <button class="btn btn-primary" type="button" id="calculate-currency-button">Calculate</button>
-                </div>
-
-                <div class="col-7">
-                  <button class="btn btn-primary" type="button">Check through time</button>
                 </div>
               </div>
             </div>
@@ -123,7 +107,7 @@
       </section>
 
       <section class="col-6" id="exchange-table">
-        <div class="card" id="exchange-table-card">
+        <div class="card card-border" id="exchange-table-card">
           <div class="card-body">
             <table class="table table-list-scroll">
               <thead>

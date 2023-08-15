@@ -17,3 +17,7 @@
 .hidden {
   display: none;
 }
+
+.card-border {
+  border-color: lightblue;
+}
