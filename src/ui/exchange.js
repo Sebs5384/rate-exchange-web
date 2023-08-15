@@ -23,7 +23,7 @@ export function displayExchangeUI(currency, date) {
 }
 
 export function updateExchangeUI() {
-  const $list = document.querySelector("#currency-list");
+  const $list = document.querySelector("#table-currency-list");
   const $currency = document.querySelector("#currency-input");
   const $date = document.querySelector("#currency-date");
 

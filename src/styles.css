@@ -1,6 +1,12 @@
-.dropdown-menu-scroll {
+.table-menu-scroll {
   overflow-y: scroll;
   max-height: 250px;
+  max-width: 350px;
+}
+
+.calculator-menu-scroll {
+  overflow-y: scroll;
+  max-height: 150px;
   max-width: 350px;
 }
 
