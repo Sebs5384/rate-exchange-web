@@ -1,10 +1,9 @@
-import { getExchangeRates, getExchangeBase, getExchangeDate } from "../api/exchange.js";
-import { setupCurrencyChanges, setupDateChanges, setupListChanges, setCurrencyTitle, setDateTitle } from "./utils.js";
-import { createExchangeTable, clearExchangeTable } from "./table.js";
+import { getExchangeRates, getExchangeBase, getExchangeDate, getConvertion } from "../api/exchange.js";
+import { setupCurrencyChanges, setupDateChanges, setupListChanges, setElementVisibility } from "./utils.js";
+import { createExchangeTable, clearExchangeTable, updateTableCurrencyTitle, updateTableExchangeDate } from "./table.js";
 import { createCurrencyList } from "./list.js";
-import { setElementVisibility } from "./utils.js";
 
-export function displayExchangeUI(currency, date) {
+export function displayExchangeTable(currency, date) {
   getExchangeRates(currency, date).then((rates) => {
     if (rates === undefined) setElementVisibility("#error-message", "visible");
 
@@ -14,11 +13,11 @@ export function displayExchangeUI(currency, date) {
   });
 
   getExchangeBase().then((base) => {
-    setCurrencyTitle(base, currency);
+    updateTableCurrencyTitle(base, currency);
   });
 
   getExchangeDate().then((present) => {
-    setDateTitle(present, date);
+    updateTableExchangeDate(present, date);
   });
 }
 

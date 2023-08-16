@@ -63,6 +63,32 @@ export function displayLoadingTable() {
   }
 }
 
+export function updateTableCurrencyTitle(base, currency) {
+  const baseCurrency = base;
+  const currentInputValue = currency;
+  const currentTitle = document.querySelector("#current-currency");
+  const $code = document.querySelectorAll(".currency-code");
+
+  for (const code of $code) {
+    if (currentInputValue === code.innerText) {
+      return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
+    }
+  }
+  return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
+}
+
+export function updateTableExchangeDate(present, date) {
+  const presentDate = present;
+  const currentInputDate = date;
+  const currentDateTitle = document.querySelector("#current-date");
+
+  if (currentInputDate && currentInputDate !== "latest") {
+    return (currentDateTitle.innerText = `At ${currentInputDate} as date of exchange`);
+  }
+
+  return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
+}
+
 export function clearExchangeTable() {
   document.querySelector("#exchange-table-body").innerHTML = "";
 }
