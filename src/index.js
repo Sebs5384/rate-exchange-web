@@ -1,8 +1,7 @@
-import { displayExchangeTable, updateExchangeUI } from "./ui/exchange.js";
+import { updateExchangeTable } from "./ui/exchange.js";
 
 function initialize() {
-  displayExchangeTable();
-  updateExchangeUI();
+  updateExchangeTable();
 }
 
 initialize();

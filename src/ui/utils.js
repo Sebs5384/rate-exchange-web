@@ -1,6 +1,5 @@
 import { handleInputCurrency, handleInputDate, handleListChange } from "./handlers.js";
-import { displayLoadingTable, clearExchangeTable } from "./table.js";
-import { displayExchangeTable } from "./exchange.js";
+import { displayLoadingTable, clearExchangeTable, displayExchangeTable } from "./table.js";
 
 export function setupListChanges(list, date) {
   list.onclick = (currency) => {

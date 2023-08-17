@@ -1,7 +1,22 @@
-import { getExistingCurrencies } from "../utils/general.js";
+import { getExchangeData } from "../api/exchange.js";
+import { createCurrencyList } from "./list.js";
 import { setElementVisibility } from "./utils.js";
+import { getExistingCurrencies } from "../utils/general.js";
 
-export function createExchangeTable(currency) {
+export function displayExchangeTable(currency, date) {
+  getExchangeData(currency, date).then((exchange) => {
+    const { base, present, rates } = exchange;
+    if (rates === undefined) setElementVisibility("#error-message", "visible");
+
+    clearExchangeTable();
+    createExchangeTable(rates);
+    createCurrencyList(rates);
+    setTableCurrencyTitle(base, currency);
+    setTableExchangeDate(present, date);
+  });
+}
+
+function createExchangeTable(currency) {
   const $exchangeTable = document.querySelector("#exchange-table-body");
   const currencies = Object.keys(currency);
   const existingCurrencies = getExistingCurrencies(currencies);
@@ -63,7 +78,7 @@ export function displayLoadingTable() {
   }
 }
 
-export function updateTableCurrencyTitle(base, currency) {
+function setTableCurrencyTitle(base, currency) {
   const baseCurrency = base;
   const currentInputValue = currency;
   const currentTitle = document.querySelector("#current-currency");
@@ -77,7 +92,7 @@ export function updateTableCurrencyTitle(base, currency) {
   return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
 }
 
-export function updateTableExchangeDate(present, date) {
+function setTableExchangeDate(present, date) {
   const presentDate = present;
   const currentInputDate = date;
   const currentDateTitle = document.querySelector("#current-date");
