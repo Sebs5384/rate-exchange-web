@@ -2,6 +2,7 @@ import { getExchangeData } from "../api/exchange.js";
 import { createCurrencyList } from "./list.js";
 import { setElementVisibility } from "./utils.js";
 import { getExistingCurrencies } from "../utils/general.js";
+import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
 
 export function displayExchangeTable(currency, date) {
   getExchangeData(currency, date).then((exchange) => {
@@ -14,6 +15,41 @@ export function displayExchangeTable(currency, date) {
     setTableCurrencyTitle(base, currency);
     setTableExchangeDate(present, date);
   });
+}
+
+export function setTableListChanges(list, date) {
+  list.onclick = (currency) => {
+    const clickedCurrency = handleListChange(currency);
+    const selectedDate = handleInputDate(date);
+
+    clearExchangeTable();
+    displayLoadingTable();
+    displayExchangeTable(clickedCurrency, selectedDate);
+  };
+}
+
+export function setTableCurrencyChanges(currency, date) {
+  currency.oninput = () => {
+    const selectedCurrency = handleInputCurrency(currency);
+    const selectedDate = handleInputDate(date);
+
+    clearExchangeTable();
+    displayLoadingTable();
+    displayExchangeTable(selectedCurrency, selectedDate);
+  };
+}
+
+export function setTableDateChanges(date, currency) {
+  date.oninput = () => {
+    clearExchangeTable();
+    displayLoadingTable();
+
+    setTimeout(() => {
+      const selectedCurrency = handleInputCurrency(currency);
+      const selectedDate = handleInputDate(date);
+      displayExchangeTable(selectedCurrency, selectedDate);
+    }, 1000);
+  };
 }
 
 function createExchangeTable(currency) {
@@ -42,7 +78,7 @@ function createExchangeTable(currency) {
   });
 }
 
-export function displayLoadingTable() {
+function displayLoadingTable() {
   setElementVisibility("#error-message", "hidden");
 
   const $table = document.querySelector("#exchange-table-body");
@@ -104,6 +140,6 @@ function setTableExchangeDate(present, date) {
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
 
-export function clearExchangeTable() {
+function clearExchangeTable() {
   document.querySelector("#exchange-table-body").innerHTML = "";
 }

@@ -1,5 +1,4 @@
-import { displayExchangeTable } from "./table.js";
-import { setupCurrencyChanges, setupDateChanges, setupListChanges } from "./utils.js";
+import { displayExchangeTable, setTableListChanges, setTableCurrencyChanges, setTableDateChanges } from "./table.js";
 
 export function updateExchangeTable() {
   const $list = document.querySelector("#table-currency-list");
@@ -7,7 +6,9 @@ export function updateExchangeTable() {
   const $date = document.querySelector("#currency-date");
 
   displayExchangeTable();
-  setupListChanges($list, $date);
-  setupCurrencyChanges($currency, $date);
-  setupDateChanges($date, $currency);
+  setTableListChanges($list, $date);
+  setTableCurrencyChanges($currency, $date);
+  setTableDateChanges($date, $currency);
 }
+
+export function updateExchangeConverter() {}
