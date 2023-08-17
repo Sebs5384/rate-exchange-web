@@ -24,20 +24,24 @@ export function getConvertion(from = "USD", to = "ARS", amount = "1") {
     });
 }
 
-export function getExchangeRates(currency, date) {
+export function getExchangeData(currency, date) {
   return getExchanges(currency, date).then((exchange) => {
-    return exchange.rates;
+    return {
+      base: exchange.base,
+      present: exchange.date,
+      rates: exchange.rates,
+    };
   });
 }
 
-export function getExchangeBase() {
-  return getExchanges().then((exchange) => {
-    return exchange.base;
-  });
-}
-
-export function getExchangeDate() {
-  return getExchanges().then((exchange) => {
-    return exchange.date;
+export function getConvertionResults(from, to, amount) {
+  return getConvertions(from, to, amount).then((convertion) => {
+    return {
+      from: convertion.query.from,
+      to: convertion.query.to,
+      query: convertion.query,
+      date: convertion.date,
+      result: convertion.result,
+    };
   });
 }
