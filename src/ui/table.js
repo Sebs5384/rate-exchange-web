@@ -1,5 +1,5 @@
 import { getExchangeData } from "../api/exchange.js";
-import { createCurrencyList } from "./list.js";
+import { createTableCurrencyList } from "./list.js";
 import { setElementVisibility } from "./utils.js";
 import { getExistingCurrencies } from "../utils/general.js";
 import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
@@ -11,7 +11,7 @@ export function displayExchangeTable(currency, date) {
 
     clearExchangeTable();
     createExchangeTable(rates);
-    createCurrencyList(rates);
+    createTableCurrencyList(rates);
     setTableCurrencyTitle(base, currency);
     setTableExchangeDate(present, date);
   });
@@ -29,22 +29,30 @@ export function setTableListChanges(list, date) {
 }
 
 export function setTableCurrencyChanges(currency, date) {
-  currency.oninput = () => {
-    const selectedCurrency = handleInputCurrency(currency);
-    const selectedDate = handleInputDate(date);
+  let timeout;
 
-    clearExchangeTable();
-    displayLoadingTable();
-    displayExchangeTable(selectedCurrency, selectedDate);
+  currency.oninput = () => {
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+      const selectedCurrency = handleInputCurrency(currency);
+      const selectedDate = handleInputDate(date);
+      clearExchangeTable();
+      displayLoadingTable();
+      displayExchangeTable(selectedCurrency, selectedDate);
+    }, 500);
   };
 }
 
 export function setTableDateChanges(date, currency) {
+  let timeout;
+
   date.oninput = () => {
+    clearTimeout(timeout);
     clearExchangeTable();
     displayLoadingTable();
 
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       const selectedCurrency = handleInputCurrency(currency);
       const selectedDate = handleInputDate(date);
       displayExchangeTable(selectedCurrency, selectedDate);
@@ -125,6 +133,7 @@ function setTableCurrencyTitle(base, currency) {
       return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
     }
   }
+
   return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
 }
 
