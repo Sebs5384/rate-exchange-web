@@ -6,9 +6,9 @@ export function handleInputCurrency(currency) {
   return selectedCurrency.toUpperCase();
 }
 
-export function handleListChange(list) {
+export function handleListChange(list, input) {
   const $clickedCurrency = list.target;
-  const selectedCurrency = handleCurrencyListClick($clickedCurrency);
+  const selectedCurrency = handleCurrencyListClick($clickedCurrency, input);
 
   return selectedCurrency;
 }
@@ -21,8 +21,8 @@ export function handleInputDate(date) {
   return selectedDate;
 }
 
-function handleCurrencyListClick(clickedCurrency) {
-  const $currencyInput = document.querySelector("#currency-input");
+function handleCurrencyListClick(clickedCurrency, input) {
+  const $currencyInput = document.querySelector(input);
   const currencyCode = getCurrencyCode(clickedCurrency);
   const selectedCurrency = ($currencyInput.value = currencyCode);
 
