@@ -35,7 +35,7 @@ export function getExchangeData(currency, date) {
 }
 
 export function getConvertionResults(from, to, amount) {
-  return getConvertions(from, to, amount).then((convertion) => {
+  return getConvertion(from, to, amount).then((convertion) => {
     return {
       from: convertion.query.from,
       to: convertion.query.to,
