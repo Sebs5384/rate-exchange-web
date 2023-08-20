@@ -46,7 +46,7 @@
               <div class="row">
                 <div class="col-6">
                   <label for="currency-input"><small>Insert your currency code here</small></label>
-                  <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="currency-input" />
+                  <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="table-currency-input" />
                 </div>
                 <div class="col-6">
                   <label for="currency-date"><small>Look up exchange through date</small></label>
@@ -72,16 +72,17 @@
                   <div class="row justify-content-center gap-1">
                     <div class="d-grid dropend col-4">
                       <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
-                      <ul class="dropdown-menu converter-menu-scroll converter-currency-list"></ul>
+                      <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-from-list"></ul>
                     </div>
-                    <div class="col-7"><input type="text" class="form-control form-control-sm text-center" placeholder="USD" id="convert-from" /></div>
+                    <div class="col-7"><input type="text" class="form-control form-control-sm text-center" placeholder="USD" id="convert-from-input" /></div>
 
                     <div class="d-grid dropend col-4">
                       <button class="btn btn-outline-primary btn-sm dropdown-toggle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
-                      <ul class="dropdown-menu converter-menu-scroll converter-currency-list"></ul>
+                      <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-to-list"></ul>
                     </div>
-                    <div class="col-7 mt-2"><input type="text" class="form-control form-control-sm text-center" placeholder="ARS" id="convert-to" /></div>
-                    <div class="col-11"><input type="number" class="form-control form-control-sm text-center" placeholder="Amount" id="convert-amount" /></div>
+                    <div class="col-7 mt-2"><input type="text" class="form-control form-control-sm text-center" placeholder="ARS" id="convert-to-input" /></div>
+
+                    <div class="col-11"><input type="number" class="form-control form-control-sm text-center" placeholder="Amount" id="convert-amount-input" /></div>
 
                     <button class="btn btn-primary btn-sm col-7 mt-2 mb-2" type="button" id="convert-button">Convert</button>
                     <button class="btn btn-primary btn-sm col-3 mt-2 mb-2" type="button" id="convert-reset">Reset</button>
@@ -92,12 +93,12 @@
               <div class="card card-border col-5">
                 <div class="container card-body">
                   <div class="row text-center justify-content-center">
-                    <strong class="text-secondary">Convertion</strong>
+                    <strong class="text-secondary disabled-text" id="convertion-text">Convertion</strong>
                     <hr class="text-primary" />
-                    <div id="test"><strong id="from-exchange">1</strong><strong class="text-secondary" id="from-currency"> USD</strong><strong id="to-exchange">= 1</strong> <strong class="text-secondary" id="to-currency">ARS</strong></div>
-                    <small class="mt-3 text-secondary">Results based on</small>
-                    <div><small id="result-date" class="text-secondary">15/08/2023 as date of Exchange</small></div>
-                    <button class="btn btn-secondary btn-sm mt-4 col-9 disabled" aria-disabled="true" type="button">Check through time</button>
+                    <div id="convertion-result"><strong id="from-exchange"></strong><strong class="text-secondary disabled-text" id="from-currency"></strong><strong id="to-exchange"></strong> <strong class="text-secondary disabled-text" id="to-currency"></strong></div>
+                    <small class="mt-3 text-secondary disabled-text" id="based-on">Results based on</small>
+                    <div><small id="result-date" class="text-secondary disabled-text"></small></div>
+                    <button class="btn btn-secondary btn-sm mt-4 col-9 disabled" aria-disabled="true" type="button" id="convert-time-button">Check through time</button>
                   </div>
                 </div>
               </div>
