@@ -21,7 +21,7 @@ export function setupConversionButton() {
     const amount = document.querySelector("#convert-amount-input").value;
 
     enableConversionText();
-    enableConversionButton();
+    enableConversionCheckTimeButton();
     return displayConversionResults(from, to, amount);
   };
 }
@@ -36,15 +36,18 @@ function updateConversionResults(from, to, query, date, result) {
 
 function enableConversionText() {
   const $disabledText = document.querySelectorAll(".disabled-text");
-  const $disabledButton = document.querySelector("#convert-time-button");
-
-  $disabledButton.classList.remove("disabled", "btn-secondary");
-  $disabledButton.classList.add("btn-primary");
 
   $disabledText.forEach((element) => {
     element.classList.remove("text-secondary");
     element.classList.add("text-primary");
   });
+}
+
+function enableConversionCheckTimeButton() {
+  const $disabledCheckTimeButton = document.querySelector("#check-time-button");
+
+  $disabledButton.classList.remove("disabled", "btn-secondary");
+  $disabledButton.classList.add("btn-primary");
 }
 
 export function setupFromListChanges(list) {
