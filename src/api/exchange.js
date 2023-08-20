@@ -12,15 +12,15 @@ function getExchanges(currency = "EUR", date = "latest") {
     });
 }
 
-export function getConvertion(from = "USD", to = "ARS", amount = "1") {
+export function getConversion(from = "USD", to = "ARS", amount = "1") {
   const URL = `${BASE_URL}/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
 
   return fetch(URL)
     .then((response) => {
       return response.json();
     })
-    .then((convertion) => {
-      return convertion;
+    .then((conversion) => {
+      return conversion;
     });
 }
 
@@ -34,14 +34,14 @@ export function getExchangeData(currency, date) {
   });
 }
 
-export function getConvertionResults(from, to, amount) {
-  return getConvertion(from, to, amount).then((convertion) => {
+export function getConversionResults(from, to, amount) {
+  return getConversion(from, to, amount).then((conversion) => {
     return {
-      from: convertion.query.from,
-      to: convertion.query.to,
-      query: convertion.query,
-      date: convertion.date,
-      result: convertion.result,
+      from: conversion.query.from,
+      to: conversion.query.to,
+      query: conversion.query,
+      date: conversion.date,
+      result: conversion.result,
     };
   });
 }

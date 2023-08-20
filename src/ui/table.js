@@ -17,7 +17,7 @@ export function displayExchangeTable(currency, date) {
   });
 }
 
-export function setTableListChanges(list, date) {
+export function setupTableListChanges(list, date) {
   list.onclick = (currency) => {
     const clickedCurrency = handleListChange(currency, "#table-currency-input");
     const selectedDate = handleInputDate(date);
@@ -28,7 +28,7 @@ export function setTableListChanges(list, date) {
   };
 }
 
-export function setTableCurrencyChanges(currency, date) {
+export function setupTableCurrencyChanges(currency, date) {
   let timeout;
 
   currency.oninput = () => {
@@ -44,7 +44,7 @@ export function setTableCurrencyChanges(currency, date) {
   };
 }
 
-export function setTableDateChanges(date, currency) {
+export function setupTableDateChanges(date, currency) {
   let timeout;
 
   date.oninput = () => {
