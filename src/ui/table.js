@@ -19,7 +19,7 @@ export function displayExchangeTable(currency, date) {
 
 export function setTableListChanges(list, date) {
   list.onclick = (currency) => {
-    const clickedCurrency = handleListChange(currency);
+    const clickedCurrency = handleListChange(currency, "#table-currency-input");
     const selectedDate = handleInputDate(date);
 
     clearExchangeTable();
