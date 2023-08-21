@@ -29,5 +29,13 @@
 }
 
 .converter-text {
-  font-size: 11.5px;
+  font-size: 11px;
+}
+
+.form-tooltip {
+  font-size: 9px;
+}
+
+.horizontal-rule {
+  margin-top: 0rem;
 }

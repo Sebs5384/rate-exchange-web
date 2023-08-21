@@ -1,5 +1,4 @@
 import { getConversionResults, getExchangeData } from "../api/exchange.js";
-import { validateConverterFromInput } from "./validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
 
@@ -7,7 +6,6 @@ export function displayConversionResults($from, $to, $amount) {
   getConversionResults($from, $to, $amount).then((conversion) => {
     const { from, to, query, date, result } = conversion;
 
-    validateConverterFromInput(from);
     updateConversionResults(from, to, query, date, result);
   });
 }
@@ -15,7 +13,8 @@ export function displayConversionResults($from, $to, $amount) {
 export function setupConversionButton() {
   const $convertButton = document.querySelector("#convert-button");
 
-  $convertButton.onclick = () => {
+  $convertButton.onclick = (event) => {
+    event.preventDefault();
     const from = document.querySelector("#convert-from-input").value;
     const to = document.querySelector("#convert-to-input").value;
     const amount = document.querySelector("#convert-amount-input").value;
@@ -44,10 +43,10 @@ function enableConversionText() {
 }
 
 function enableConversionCheckTimeButton() {
-  const $disabledCheckTimeButton = document.querySelector("#check-time-button");
+  const $disabledCheckTimeButton = document.querySelector("#time-check-button");
 
-  $disabledButton.classList.remove("disabled", "btn-secondary");
-  $disabledButton.classList.add("btn-primary");
+  $disabledCheckTimeButton.classList.remove("disabled", "btn-secondary");
+  $disabledCheckTimeButton.classList.add("btn-primary");
 }
 
 export function setupFromListChanges(list) {
