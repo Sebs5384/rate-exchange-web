@@ -10,6 +10,10 @@
   max-width: 350px;
 }
 
+.converter-dropdown {
+  width: 4.2em;
+}
+
 .loading {
   border-radius: 10px;
 }
@@ -32,8 +36,8 @@
   font-size: 11px;
 }
 
-.form-tooltip {
-  font-size: 9px;
+.form-error-message {
+  font-size: 8.5px;
 }
 
 .horizontal-rule {

@@ -68,34 +68,34 @@
                     </div>
                   </div>
 
-                  <form class="row justify-content-center gap-1 needs-validation" novalidate>
-                    <div class="d-grid dropend col-4">
-                      <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
+                  <form class="row justify-content-center gap-1" id="converter-form" novalidate>
+                    <div class="dropend col-3">
+                      <button class="btn btn-outline-primary btn-sm dropdown-toggle converter-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">From</button>
                       <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-from-list"></ul>
                     </div>
 
-                    <div class="col-7 position-relative">
-                      <input type="text" class="form-control form-control-sm text-center" placeholder="USD" id="convert-from-input" name="currency-field" required />
-                      <div class="invalid-tooltip form-tooltip">This currency field can't be empty</div>
+                    <div class="col-8">
+                      <input type="text" class="form-control form-control-sm text-center converter-input" placeholder="USD" id="convert-from-input" name="currency-field" required />
+                      <div class="form-error-message"></div>
                     </div>
 
-                    <div class="d-grid dropend col-4">
-                      <button class="btn btn-outline-primary btn-sm dropdown-toggle mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
+                    <div class="dropend col-3 mt-1">
+                      <button class="btn btn-outline-primary btn-sm dropdown-toggle converter-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">To</button>
                       <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-to-list"></ul>
                     </div>
 
-                    <div class="col-7 mt-3 position-relative">
-                      <input type="text" class="form-control form-control-sm text-center" placeholder="ARS" id="convert-to-input" name="currency-field" required />
-                      <div class="invalid-tooltip form-tooltip">Looks good</div>
+                    <div class="col-8 mt-1">
+                      <input type="text" class="form-control form-control-sm text-center converter-input" placeholder="ARS" id="convert-to-input" name="currency-field" required />
+                      <div class="form-error-message"></div>
                     </div>
 
-                    <div class="col-11 position-relative mt-3">
-                      <input type="number" class="form-control form-control-sm text-center" placeholder="Amount" id="convert-amount-input" name="amount-field" required />
-                      <div class="invalid-tooltip form-tooltip text-center">The amount given has to be less than 20 characters</div>
+                    <div class="col-11 mt-2">
+                      <input type="number" class="form-control form-control-sm text-center converter-input" placeholder="Amount" id="convert-amount-input" name="amount-field" required />
+                      <div class="text-center form-error-message"></div>
                     </div>
 
-                    <button class="btn btn-primary btn-sm col-7 mt-3 mb-3" type="submit" id="convert-button">Convert</button>
-                    <button class="btn btn-primary btn-sm col-3 mt-3 mb-3" type="button" id="convert-reset">Reset</button>
+                    <button class="btn btn-primary btn-sm col-7 mt-3" type="button" id="convert-button">Convert</button>
+                    <button class="btn btn-primary btn-sm col-3 mt-3" type="button" id="convert-reset">Reset</button>
                   </form>
                 </div>
               </div>
