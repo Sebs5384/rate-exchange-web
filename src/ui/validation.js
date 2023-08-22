@@ -1,10 +1,18 @@
+import { handleCurrencyInputErrors } from "./handlers.js";
+
 function validateCurrencyField(currencies) {
   const currenciesErrors = {};
 
   currencies.forEach((currency, index) => {
-    if (/^$/.test(currency)) currenciesErrors[index] = "This currency field can't be empty";
-    if (!/^[^0-9]+$/.test(currency)) currenciesErrors[index] = "This field doesn't accept numbers";
-    if (!/^\S{3}$/.test(currency)) currenciesErrors[index] = "Invalid currency code";
+    if (/^$/.test(currency)) {
+      currenciesErrors[index] = "This currency field can't be empty";
+    } else if (!/^[^0-9]+$/.test(currency)) {
+      currenciesErrors[index] = "This field doesn't accept numbers";
+    } else if (!/^\S{3}$/.test(currency)) {
+      currenciesErrors[index] = "Invalid currency code";
+    } else {
+      currenciesErrors[index] = "";
+    }
   });
 
   return currenciesErrors;
@@ -18,12 +26,13 @@ function validateAmountField(amount) {
   return "";
 }
 
-function validateCurrencyFields(currency) {
+export function validateConverterFields(currency) {
   const validatedField = validateCurrencyField(currency);
+
   const currencyError = {
     "currency-field": validatedField,
   };
 
-  const isSuccessful = handleErrorFields(currencyError) === 0;
+  const isSuccessful = handleCurrencyInputErrors(currencyError) === 0;
   return isSuccessful;
 }
