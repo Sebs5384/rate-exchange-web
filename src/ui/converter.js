@@ -1,4 +1,5 @@
 import { getConversionResults, getExchangeData } from "../api/exchange.js";
+import { validateConverterFields } from "./validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
 
@@ -13,15 +14,18 @@ export function displayConversionResults($from, $to, $amount) {
 export function setupConversionButton() {
   const $convertButton = document.querySelector("#convert-button");
 
-  $convertButton.onclick = (event) => {
-    event.preventDefault();
+  $convertButton.onclick = () => {
     const from = document.querySelector("#convert-from-input").value;
     const to = document.querySelector("#convert-to-input").value;
     const amount = document.querySelector("#convert-amount-input").value;
 
-    enableConversionText();
-    enableConversionCheckTimeButton();
-    return displayConversionResults(from, to, amount);
+    const successfulCurrencyValidation = validateConverterFields([from, to]);
+
+    if (successfulCurrencyValidation) {
+      enableConversionText();
+      enableConversionCheckTimeButton();
+      return displayConversionResults(from, to, amount);
+    }
   };
 }
 
