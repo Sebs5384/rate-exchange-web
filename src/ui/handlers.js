@@ -21,28 +21,52 @@ export function handleInputDate(date) {
   return selectedDate;
 }
 
-export function handleCurrencyInputErrors(errors) {
-  const currencyKeys = Object.keys(errors);
+export function handleCurrencyInputError(currency) {
+  const currencyKey = Object.keys(currency);
   const $validationMessage = document.querySelectorAll(".form-validation-message");
   const $currencyInput = document.querySelectorAll(".currency-input");
   let errorCount = 0;
 
-  currencyKeys.forEach((key) => {
-    const keyValues = errors[key];
+  currencyKey.forEach((value) => {
+    const currencyError = currency[value];
 
-    for (key in keyValues) {
-      if (keyValues[key] !== "") {
+    for (value in currencyError) {
+      if (currencyError[value] !== "") {
         errorCount++;
-        $validationMessage[key].classList.add("invalid-feedback");
-        $validationMessage[key].innerText = keyValues[key];
-        $currencyInput[key].classList.add("is-invalid");
+        $validationMessage[value].classList.add("invalid-feedback");
+        $validationMessage[value].innerText = currencyError[value];
+        $currencyInput[value].classList.add("is-invalid");
       } else {
-        $validationMessage[key].classList.remove("invalid-feedback");
-        $currencyInput[key].classList.remove("is-invalid");
-        $validationMessage[key].innerText = "";
-        $validationMessage[key].classList.add("valid-feedback");
-        $currencyInput[key].classList.add("is-valid");
+        $validationMessage[value].classList.remove("invalid-feedback");
+        $currencyInput[value].classList.remove("is-invalid");
+        $validationMessage[value].innerText = "";
+        $validationMessage[value].classList.add("valid-feedback");
+        $currencyInput[value].classList.add("is-valid");
       }
+    }
+  });
+
+  return errorCount;
+}
+
+export function handleAmountInputError(amount) {
+  const amountKey = Object.keys(amount);
+  const $validationAmountMessage = document.querySelector("#amount-validation-message");
+  const $amountInput = document.querySelector("#converter-amount-input");
+  let errorCount = 0;
+
+  amountKey.forEach((value) => {
+    if (amount[value] !== "") {
+      errorCount++;
+      $validationAmountMessage.classList.add("invalid-feedback");
+      $validationAmountMessage.innerText = amount[value];
+      $amountInput.classList.add("is-invalid");
+    } else {
+      $validationAmountMessage.classList.remove("invalid-feedback");
+      $amountInput.classList.remove("is-invalid");
+      $validationAmountMessage.innerText = "";
+      $validationAmountMessage.classList.add("valid-feedback");
+      $amountInput.classList.add("is-valid");
     }
   });
 

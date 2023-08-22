@@ -1,24 +1,24 @@
-import { handleCurrencyInputErrors } from "./handlers.js";
+import { handleCurrencyInputError, handleAmountInputError } from "./handlers.js";
 
-function validateCurrencyField(currencies) {
-  const currenciesErrors = {};
+function validateCurrency(currencies) {
+  const currenciesErrors = [];
 
-  currencies.forEach((currency, index) => {
+  currencies.forEach((currency) => {
     if (/^$/.test(currency)) {
-      currenciesErrors[index] = "This currency field can't be empty";
+      currenciesErrors.push("This currency field can't be empty");
     } else if (!/^[^0-9]+$/.test(currency)) {
-      currenciesErrors[index] = "This field doesn't accept numbers";
+      currenciesErrors.push("This field doesn't accept numbers");
     } else if (!/^\S{3}$/.test(currency)) {
-      currenciesErrors[index] = "Invalid currency code";
+      currenciesErrors.push("Invalid currency code");
     } else {
-      currenciesErrors[index] = "";
+      currenciesErrors.push("");
     }
   });
 
   return currenciesErrors;
 }
 
-function validateAmountField(amount) {
+function validateAmount(amount) {
   if (/^$/.test(amount)) return "The amount field can't be empty";
   if (!/^\S{1,20}$/.test(amount)) return "The amount given has to be less than 20 characters";
   if (!/^[^A-Z-a-z]+$/.test(amount)) return "This field doesn't accept letters";
@@ -26,13 +26,24 @@ function validateAmountField(amount) {
   return "";
 }
 
-export function validateConverterFields(currency) {
-  const validatedField = validateCurrencyField(currency);
+export function validateCurrencyInputs(currency) {
+  const validatedCurrencyInputs = validateCurrency(currency);
 
-  const currencyError = {
-    "currency-field": validatedField,
+  const currencyInputs = {
+    "currency-field": validatedCurrencyInputs,
   };
 
-  const isSuccessful = handleCurrencyInputErrors(currencyError) === 0;
+  const isSuccessful = handleCurrencyInputError(currencyInputs) === 0;
+  return isSuccessful;
+}
+
+export function validateAmountInput(amount) {
+  const validatedInput = validateAmount(amount);
+
+  const amountInput = {
+    "amount-field": validatedInput,
+  };
+
+  const isSuccessful = handleAmountInputError(amountInput) === 0;
   return isSuccessful;
 }
