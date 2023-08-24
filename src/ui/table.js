@@ -74,7 +74,7 @@ function createExchangeTable(currency) {
 
     $currencyNumber.innerText = index + 1;
     $currencyCode.innerText = rate;
-    $currencyCode.className = "currency-code";
+    $currencyCode.className = "table-currency-code";
     $currencyFullName.innerText = existingCurrencies[index];
     $rate.innerText = `$${currency[rate]}`;
 
@@ -126,9 +126,9 @@ function setTableCurrencyTitle(base, currency) {
   const baseCurrency = base;
   const currentInputValue = currency;
   const currentTitle = document.querySelector("#current-currency");
-  const $code = document.querySelectorAll(".currency-code");
+  const $codes = document.querySelectorAll(".table-currency-code");
 
-  for (const code of $code) {
+  for (const code of $codes) {
     if (currentInputValue === code.innerText) {
       return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
     }
