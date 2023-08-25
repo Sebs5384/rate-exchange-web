@@ -44,6 +44,7 @@ function updateConversionResults(from, to, query, date, result) {
   document.querySelector("#to-exchange").innerText = ` = ${result}`;
   document.querySelector("#to-currency").innerText = ` ${to}`;
   document.querySelector("#result-date").innerText = `${date} as date of Exchange`;
+  resizeConversionResults();
 }
 
 function enableConversionText() {
@@ -76,6 +77,18 @@ function cleanConverterInputs() {
     message.classList.remove("valid-feedback", "invalid-feedback");
     message.innerText = "";
   });
+}
+
+function resizeConversionResults() {
+  const $conversionResult = document.querySelector("#conversion-result");
+
+  if ($conversionResult.innerText.length >= 34) {
+    $conversionResult.style = "font-size: 0.5rem";
+  } else if ($conversionResult.innerText.length >= 22) {
+    $conversionResult.style = "font-size: 0.7rem";
+  } else if ($conversionResult.innerText.length < 22) {
+    $conversionResult.style = "font-size: 1rem";
+  }
 }
 
 export function setupFromListChanges(list) {
