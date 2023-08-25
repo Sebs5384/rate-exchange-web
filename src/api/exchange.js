@@ -12,7 +12,7 @@ function getExchanges(currency = "EUR", date = "latest") {
     });
 }
 
-export function getConversion(from = "USD", to = "ARS", amount = "1") {
+function getConversion(from = "USD", to = "ARS", amount = "1") {
   const URL = `${BASE_URL}/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
 
   return fetch(URL)
@@ -21,6 +21,18 @@ export function getConversion(from = "USD", to = "ARS", amount = "1") {
     })
     .then((conversion) => {
       return conversion;
+    });
+}
+
+function getCurrencyFluctuation(start, end, from, to) {
+  const URL = `${BASE_URL}/fluctuation?start_date=${start}&end_date=${end}&symbols=${from},${to}`;
+
+  return fetch(URL)
+    .then((response) => {
+      return response.json();
+    })
+    .then((fluctation) => {
+      return fluctation;
     });
 }
 
@@ -42,6 +54,16 @@ export function getConversionResults(from, to, amount) {
       query: conversion.query,
       date: conversion.date,
       result: conversion.result,
+    };
+  });
+}
+
+export function getFluctuationData(start, end, from, to) {
+  return getCurrencyFluctuation(start, end, from, to).then((fluctation) => {
+    return {
+      rates: fluctation.rates,
+      start: fluctation.start_date,
+      end: fluctation.end_date,
     };
   });
 }
