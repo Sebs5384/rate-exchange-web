@@ -1,7 +1,10 @@
 import { handleCurrencyInputError, handleAmountInputError } from "./handlers.js";
+import { getCurrencyCode } from "./utils.js";
 
 function validateCurrency(currencies) {
   const currenciesErrors = [];
+  const $codes = document.querySelectorAll("#convert-from-list li");
+  const codes = getCurrencyCode($codes);
 
   currencies.forEach((currency) => {
     if (/^$/.test(currency)) {
@@ -10,6 +13,8 @@ function validateCurrency(currencies) {
       currenciesErrors.push("This field doesn't accept numbers");
     } else if (!/^\S{3}$/.test(currency)) {
       currenciesErrors.push("Invalid currency code");
+    } else if (!codes.includes(currency)) {
+      currenciesErrors.push("This currency code does not exist");
     } else {
       currenciesErrors.push("");
     }
