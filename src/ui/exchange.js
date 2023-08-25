@@ -1,5 +1,5 @@
 import { displayExchangeTable, setupTableListChanges, setupTableCurrencyChanges, setupTableDateChanges } from "./table.js";
-import { displayConversionResults, setupFromListChanges, setupToListChanges, setupConversionButton, setupConverterCurrencyList } from "./converter.js";
+import { displayConversionResults, setupFromListChanges, setupToListChanges, setupConversionButton, setupConverterCurrencyList, setupConversionResetButton } from "./converter.js";
 
 export function updateExchangeTable() {
   const $list = document.querySelector("#table-currency-list");
@@ -19,6 +19,7 @@ export function updateExchangeConverter() {
   setupFromListChanges($fromList);
   setupToListChanges($toList);
   setupConverterCurrencyList();
+  setupConversionResetButton();
   setupConversionButton();
   displayConversionResults();
 }

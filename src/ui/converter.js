@@ -30,6 +30,14 @@ export function setupConversionButton() {
   };
 }
 
+export function setupConversionResetButton() {
+  const $resetButton = document.querySelector("#convert-reset");
+
+  $resetButton.onclick = () => {
+    cleanConverterInputs();
+  };
+}
+
 function updateConversionResults(from, to, query, date, result) {
   document.querySelector("#from-exchange").innerText = query.amount;
   document.querySelector("#from-currency").innerText = ` ${from}`;
@@ -54,15 +62,31 @@ function enableConversionCheckTimeButton() {
   $disabledCheckTimeButton.classList.add("btn-primary");
 }
 
+function cleanConverterInputs() {
+  const inputs = ["#converter-from-input", "#converter-to-input", "#converter-amount-input"];
+  const $validationMessages = document.querySelectorAll(".form-validation-message");
+
+  inputs.forEach((input) => {
+    const $input = document.querySelector(input);
+    $input.classList.remove("is-valid", "is-invalid");
+    $input.value = "";
+  });
+
+  $validationMessages.forEach((message) => {
+    message.classList.remove("valid-feedback", "invalid-feedback");
+    message.innerText = "";
+  });
+}
+
 export function setupFromListChanges(list) {
   list.onclick = (currency) => {
-    handleListChange(currency, "#convert-from-input");
+    handleListChange(currency, "#converter-from-input");
   };
 }
 
 export function setupToListChanges(list) {
   list.onclick = (currency) => {
-    handleListChange(currency, "#convert-to-input");
+    handleListChange(currency, "#converter-to-input");
   };
 }
 
