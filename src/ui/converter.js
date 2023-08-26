@@ -1,4 +1,4 @@
-import { getConversionResults, getExchangeData } from "../api/exchange.js";
+import { getConversionResults, getExchangeData, getFluctuationData } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "./validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
@@ -24,7 +24,7 @@ export function setupConversionButton() {
 
     if (successfulCurrencyValidation && successfulAmountValidation) {
       enableConversionText();
-      enableConversionCheckTimeButton();
+      enableFluctuationButton();
       return displayConversionResults(from, to, amount);
     }
   };
@@ -35,6 +35,20 @@ export function setupConversionResetButton() {
 
   $resetButton.onclick = () => {
     cleanConverterInputs();
+  };
+}
+
+export function setUpFluctuationButton() {
+  const $fluctuationButton = document.querySelector("#fluctuation-button");
+
+  $fluctuationButton.onclick = () => {
+    const from = document.querySelector("#converter-from-input").value;
+    const to = document.querySelector("#converter-to-input").value;
+
+    getFluctuationData("2023-01-01", "2023-08-25", from, to).then((fluctuation) => {
+      const { rates, start, end } = fluctuation;
+      console.log(fluctuation);
+    });
   };
 }
 
@@ -56,11 +70,11 @@ function enableConversionText() {
   });
 }
 
-function enableConversionCheckTimeButton() {
-  const $disabledCheckTimeButton = document.querySelector("#time-check-button");
+function enableFluctuationButton() {
+  const $disabledFluctuationButton = document.querySelector("#fluctuation-button");
 
-  $disabledCheckTimeButton.classList.remove("disabled", "btn-secondary");
-  $disabledCheckTimeButton.classList.add("btn-primary");
+  $disabledFluctuationButton.classList.remove("disabled", "btn-secondary");
+  $disabledFluctuationButton.classList.add("btn-primary");
 }
 
 function cleanConverterInputs() {
