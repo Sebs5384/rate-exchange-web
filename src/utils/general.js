@@ -13,3 +13,15 @@ export function getExistingCurrencies(currency) {
   }
   return existingCurrencies;
 }
+
+export function getMonthlyDates(startDate, endDate) {
+  let current = new Date(startDate);
+
+  const monthlyDates = [];
+  while (current <= endDate) {
+    monthlyDates.push(current.toISOString().split("T")[0]);
+    current.setMonth(current.getMonth() + 1);
+  }
+
+  return { startDate: startDate.toISOString().split("T")[0], endDate: endDate.toISOString().split("T")[0], monthlyDates };
+}
