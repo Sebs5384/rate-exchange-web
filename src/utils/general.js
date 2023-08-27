@@ -25,3 +25,8 @@ export function getMonthlyDates(startDate, endDate) {
 
   return { startDate: startDate.toISOString().split("T")[0], endDate: endDate.toISOString().split("T")[0], monthlyDates };
 }
+
+export function getMonths(startMonthIndex) {
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return months.slice(startMonthIndex);
+}
