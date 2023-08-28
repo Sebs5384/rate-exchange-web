@@ -1,7 +1,9 @@
 import { getConversionResults, getExchangeData, getFluctuationData } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "./validation.js";
+import { displayFluctuationTables, displayTotalFluctuationTable } from "./table.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
+import { getMonthlyDates, getMonths } from "../utils/general.js";
 
 export function displayConversionResults($from, $to, $amount) {
   getConversionResults($from, $to, $amount).then((conversion) => {
@@ -38,18 +40,33 @@ export function setupConversionResetButton() {
   };
 }
 
-export function setUpFluctuationButton() {
+export function setUpFluctuationButton($from, $to) {
   const $fluctuationButton = document.querySelector("#fluctuation-button");
 
   $fluctuationButton.onclick = () => {
-    const from = document.querySelector("#converter-from-input").value;
-    const to = document.querySelector("#converter-to-input").value;
+    const from = $from.value;
+    const to = $to.value;
+    const { startDate, endDate, monthlyDates } = getMonthlyDates();
 
-    getFluctuationData("2023-01-01", "2023-08-25", from, to).then((fluctuation) => {
-      const { rates, start, end } = fluctuation;
-      console.log(fluctuation);
-    });
+    displayMonthlyFluctuations(monthlyDates, endDate, from, to);
+    displayTotalFluctuation(startDate, endDate, from, to);
   };
+}
+
+function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
+  monthlyDates.forEach((firstDay, index) => {
+    const currentMonthFirstDay = firstDay;
+    let nextMonthFirstDay = monthlyDates[index + 1];
+
+    if (nextMonthFirstDay === undefined) nextMonthFirstDay = endDate;
+
+    getFluctuationData(currentMonthFirstDay, nextMonthFirstDay, from, to).then((fluctuation) => {
+      const { rates } = fluctuation;
+      const months = getMonths();
+
+      displayFluctuationTables(rates, from, to, months[index]);
+    });
+  });
 }
 
 function updateConversionResults(from, to, query, date, result) {
