@@ -28,7 +28,7 @@
   display: none;
 }
 
-.card-border {
+.lightblue-border {
   border-color: lightblue;
 }
 
@@ -42,4 +42,13 @@
 
 .horizontal-rule {
   margin-top: 0rem;
+}
+
+.converter-table {
+  font-size: 12px;
+  width: 100%;
+}
+
+.fluctuation-header-text {
+  font-size: 13px;
 }
