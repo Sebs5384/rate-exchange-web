@@ -25,7 +25,7 @@ function getConversion(from = "USD", to = "ARS", amount = "1") {
 }
 
 function getCurrencyFluctuation(start, end, from, to) {
-  const URL = `${BASE_URL}/fluctuation?start_date=${start}&end_date=${end}&symbols=${from},${to}`;
+  const URL = `${BASE_URL}/fluctuation?start_date=${start}&end_date=${end}&symbols=${from},${to}&places=3`;
 
   return fetch(URL)
     .then((response) => {
