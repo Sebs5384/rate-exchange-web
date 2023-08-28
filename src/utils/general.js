@@ -14,16 +14,19 @@ export function getExistingCurrencies(currency) {
   return existingCurrencies;
 }
 
-export function getMonthlyDates(startDate, endDate) {
-  let current = new Date(startDate);
-
+export function getMonthlyDates() {
   const monthlyDates = [];
-  while (current <= endDate) {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  const firstDayYear = new Date(currentYear, 0, 1);
+  let current = new Date(firstDayYear);
+
+  while (current <= currentDate) {
     monthlyDates.push(current.toISOString().split("T")[0]);
     current.setMonth(current.getMonth() + 1);
   }
 
-  return { startDate: startDate.toISOString().split("T")[0], endDate: endDate.toISOString().split("T")[0], monthlyDates };
+  return { startDate: firstDayYear.toISOString().split("T")[0], endDate: currentDate.toISOString().split("T")[0], monthlyDates };
 }
 
 export function getMonths(startMonthIndex) {
