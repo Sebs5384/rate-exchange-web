@@ -72,6 +72,7 @@ function createExchangeTable(currency) {
     const $currencyFullName = document.createElement("td");
     const $rate = document.createElement("td");
 
+    $row.className = "lightblue-border";
     $currencyNumber.innerText = index + 1;
     $currencyCode.innerText = rate;
     $currencyCode.className = "table-currency-code";
@@ -90,37 +91,46 @@ function displayLoadingTable() {
   setElementVisibility("#error-message", "hidden");
 
   const $table = document.querySelector("#exchange-table-body");
+
   for (let i = 0; i < 10; i++) {
     const $row = document.createElement("tr");
     $row.className = "placeholder-glow";
 
-    const $loadingCurrencyNumber = document.createElement("td");
-    const $loadingNumberPlaceholder = document.createElement("span");
-    $loadingNumberPlaceholder.className = "loading placeholder col-12 bg-primary";
-    $loadingCurrencyNumber.appendChild($loadingNumberPlaceholder);
+    for (let i = 0; i < 4; i++) {
+      const $cell = document.createElement("td");
+      const $placeHolder = document.createElement("span");
+      $placeHolder.className = "loading placeholder col-12 bg-primary";
+      $cell.appendChild($placeHolder);
+      $row.appendChild($cell);
+    }
 
-    const $loadingCurrencyCode = document.createElement("td");
-    const $loadingCodePlaceholder = document.createElement("span");
-    $loadingCodePlaceholder.className = "loading placeholder col-12 bg-primary";
-    $loadingCurrencyCode.appendChild($loadingCodePlaceholder);
-
-    const $loadingFullName = document.createElement("td");
-    const $loadingFullNamePlaceholder = document.createElement("span");
-    $loadingFullNamePlaceholder.className = "loading placeholder col-12 bg-primary";
-    $loadingFullName.appendChild($loadingFullNamePlaceholder);
-
-    const $loadingRate = document.createElement("td");
-    const $loadingRatePlaceholder = document.createElement("span");
-    $loadingRatePlaceholder.className = "loading placeholder col-12 bg-primary";
-    $loadingRate.appendChild($loadingRatePlaceholder);
-
-    $row.appendChild($loadingCurrencyNumber);
-    $row.appendChild($loadingCurrencyCode);
-    $row.appendChild($loadingFullName);
-    $row.appendChild($loadingRate);
     $table.appendChild($row);
   }
 }
+
+export function displayFluctuationTables(rates, from, to, month) {
+  const fromFluctuation = Object.values(rates[from]);
+  const toFluctuation = Object.values(rates[to]);
+
+  const $fluctuationFromTable = document.querySelector("#fluctuation-from-table-body");
+  const $fluctuationToTable = document.querySelector("#fluctuation-to-table-body");
+
+  const createTableRow = (tableBody, values) => {
+    const $row = document.createElement("tr");
+    values.forEach((value) => {
+      const $cell = document.createElement("td");
+      $row.className = "border-primary";
+      $cell.innerText = value;
+      $row.appendChild($cell);
+    });
+    tableBody.appendChild($row);
+  };
+
+  createTableRow($fluctuationFromTable, [month, ...fromFluctuation]);
+  createTableRow($fluctuationToTable, [month, ...toFluctuation]);
+}
+
+export function displayTotalFluctuationTable(from, to, rates, currentYear) {}
 
 function setTableCurrencyTitle(base, currency) {
   const baseCurrency = base;
