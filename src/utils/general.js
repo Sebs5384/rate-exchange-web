@@ -35,5 +35,5 @@ export function getMonths(startMonthIndex) {
 }
 
 export function convertToPercentage(number) {
-  return `${number * 100} %`;
+  return `${(number * 100).toFixed(2)} %`;
 }

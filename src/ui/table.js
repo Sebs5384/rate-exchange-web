@@ -1,7 +1,7 @@
 import { getExchangeData } from "../api/exchange.js";
 import { createTableCurrencyList } from "./list.js";
 import { setElementVisibility } from "./utils.js";
-import { getExistingCurrencies } from "../utils/general.js";
+import { convertToPercentage, getExistingCurrencies } from "../utils/general.js";
 import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
 
 export function displayExchangeTable(currency, date) {
@@ -9,7 +9,7 @@ export function displayExchangeTable(currency, date) {
     const { base, present, rates } = exchange;
     if (rates === undefined) setElementVisibility("#error-message", "visible");
 
-    clearExchangeTable();
+    clearTable("#exchange-table-body");
     createExchangeTable(rates);
     createTableCurrencyList(rates);
     setTableCurrencyTitle(base, currency);
@@ -22,7 +22,7 @@ export function setupTableListChanges(list, date) {
     const clickedCurrency = handleListChange(currency, "#table-currency-input");
     const selectedDate = handleInputDate(date);
 
-    clearExchangeTable();
+    clearTable("#exchange-table-body");
     displayLoadingTable();
     displayExchangeTable(clickedCurrency, selectedDate);
   };
@@ -37,7 +37,7 @@ export function setupTableCurrencyChanges(currency, date) {
     timeout = setTimeout(() => {
       const selectedCurrency = handleInputCurrency(currency);
       const selectedDate = handleInputDate(date);
-      clearExchangeTable();
+      clearTable("#exchange-table-body");
       displayLoadingTable();
       displayExchangeTable(selectedCurrency, selectedDate);
     }, 500);
@@ -49,7 +49,7 @@ export function setupTableDateChanges(date, currency) {
 
   date.oninput = () => {
     clearTimeout(timeout);
-    clearExchangeTable();
+    clearTable("#exchange-table-body");
     displayLoadingTable();
 
     timeout = setTimeout(() => {
@@ -117,10 +117,14 @@ export function displayFluctuationTables(rates, from, to, month) {
 
   const createTableRow = (tableBody, values) => {
     const $row = document.createElement("tr");
-    values.forEach((value) => {
+    values.forEach((value, index) => {
       const $cell = document.createElement("td");
       $row.className = "border-primary";
-      $cell.innerText = value;
+      if (index === values.length - 1) {
+        $cell.innerText = convertToPercentage(value);
+      } else {
+        $cell.innerText = value;
+      }
       $row.appendChild($cell);
     });
     tableBody.appendChild($row);
@@ -130,7 +134,32 @@ export function displayFluctuationTables(rates, from, to, month) {
   createTableRow($fluctuationToTable, [month, ...toFluctuation]);
 }
 
-export function displayTotalFluctuationTable(from, to, rates, currentYear) {}
+export function displayTotalFluctuationTable(rates, from, to) {
+  const fromTotalFluctuation = Object.values(rates[from]);
+  const toTotalFluctuation = Object.values(rates[to]);
+
+  const $totalFluctuationFromTable = document.querySelector("#total-from-fluctuation");
+  const $totalFluctuationToTable = document.querySelector("#total-to-fluctuation");
+
+  const createTableRow = (tableBody, values) => {
+    const $row = document.createElement("tr");
+    values.forEach((value, index) => {
+      const $cell = document.createElement("td");
+
+      if (index === values.length - 1) {
+        $cell.innerText = convertToPercentage(value);
+      } else {
+        $cell.innerText = value;
+      }
+
+      $row.appendChild($cell);
+    });
+    tableBody.appendChild($row);
+  };
+
+  createTableRow($totalFluctuationFromTable, [from, ...fromTotalFluctuation]);
+  createTableRow($totalFluctuationToTable, [to, ...toTotalFluctuation]);
+}
 
 function setTableCurrencyTitle(base, currency) {
   const baseCurrency = base;
@@ -159,6 +188,12 @@ function setTableExchangeDate(present, date) {
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
 
-function clearExchangeTable() {
-  document.querySelector("#exchange-table-body").innerHTML = "";
+export function clearTable(tables) {
+  if (Array.isArray(tables)) {
+    tables.forEach((table) => {
+      document.querySelector(table).innerHTML = "";
+    });
+  } else {
+    document.querySelector(tables).innerHTML = "";
+  }
 }
