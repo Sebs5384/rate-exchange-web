@@ -33,3 +33,7 @@ export function getMonths(startMonthIndex) {
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return months.slice(startMonthIndex);
 }
+
+export function convertToPercentage(number) {
+  return `${number * 100} %`;
+}
