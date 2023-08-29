@@ -13,13 +13,13 @@ export function displayConversionResults($from, $to, $amount) {
   });
 }
 
-export function setupConversionButton() {
+export function setupConversionButton($from, $to, $amount) {
   const $convertButton = document.querySelector("#convert-button");
 
   $convertButton.onclick = () => {
-    const from = document.querySelector("#converter-from-input").value;
-    const to = document.querySelector("#converter-to-input").value;
-    const amount = document.querySelector("#converter-amount-input").value;
+    const from = $from.value;
+    const to = $to.value;
+    const amount = $amount.value;
 
     const successfulCurrencyValidation = validateCurrencyInputs([from, to]);
     const successfulAmountValidation = validateAmountInput(amount);

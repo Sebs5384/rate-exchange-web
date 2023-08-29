@@ -115,21 +115,6 @@ export function displayFluctuationTables(rates, from, to, month) {
   const $fluctuationFromTable = document.querySelector("#fluctuation-from-table-body");
   const $fluctuationToTable = document.querySelector("#fluctuation-to-table-body");
 
-  const createTableRow = (tableBody, values) => {
-    const $row = document.createElement("tr");
-    values.forEach((value, index) => {
-      const $cell = document.createElement("td");
-      $row.className = "border-primary";
-      if (index === values.length - 1) {
-        $cell.innerText = convertToPercentage(value);
-      } else {
-        $cell.innerText = value;
-      }
-      $row.appendChild($cell);
-    });
-    tableBody.appendChild($row);
-  };
-
   createTableRow($fluctuationFromTable, [month, ...fromFluctuation]);
   createTableRow($fluctuationToTable, [month, ...toFluctuation]);
 }
@@ -140,22 +125,6 @@ export function displayTotalFluctuationTable(rates, from, to) {
 
   const $totalFluctuationFromTable = document.querySelector("#total-from-fluctuation");
   const $totalFluctuationToTable = document.querySelector("#total-to-fluctuation");
-
-  const createTableRow = (tableBody, values) => {
-    const $row = document.createElement("tr");
-    values.forEach((value, index) => {
-      const $cell = document.createElement("td");
-
-      if (index === values.length - 1) {
-        $cell.innerText = convertToPercentage(value);
-      } else {
-        $cell.innerText = value;
-      }
-
-      $row.appendChild($cell);
-    });
-    tableBody.appendChild($row);
-  };
 
   createTableRow($totalFluctuationFromTable, [from, ...fromTotalFluctuation]);
   createTableRow($totalFluctuationToTable, [to, ...toTotalFluctuation]);
@@ -186,6 +155,21 @@ function setTableExchangeDate(present, date) {
   }
 
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
+}
+
+function createTableRow(tableBody, values) {
+  const $row = document.createElement("tr");
+  values.forEach((value, index) => {
+    const $cell = document.createElement("td");
+    $row.className = "border-primary";
+    if (index === values.length - 1) {
+      $cell.innerText = convertToPercentage(value);
+    } else {
+      $cell.innerText = value;
+    }
+    $row.appendChild($cell);
+  });
+  tableBody.appendChild($row);
 }
 
 export function clearTable(tables) {

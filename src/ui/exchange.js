@@ -17,12 +17,13 @@ export function updateExchangeConverter() {
   const $toList = document.querySelector("#convert-to-list");
   const $from = document.querySelector("#converter-from-input");
   const $to = document.querySelector("#converter-to-input");
+  const $amount = document.querySelector("#converter-amount-input");
 
   setupFromListChanges($fromList);
   setupToListChanges($toList);
-  setupConverterCurrencyList();
-  setupConversionButton();
-  setupConversionResetButton();
+  setupConversionButton($from, $to, $amount);
   setUpFluctuationButton($from, $to);
+  setupConversionResetButton();
+  setupConverterCurrencyList();
   displayConversionResults();
 }
