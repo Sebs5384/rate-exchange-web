@@ -14,6 +14,19 @@ export function getExistingCurrencies(currency) {
   return existingCurrencies;
 }
 
+export function getCurrencyFullName(currencies) {
+  const currencyFullName = [];
+
+  currencies.forEach((currency) => {
+    currenciesName.forEach((currencyName) => {
+      if (currency === currencyName[0]) {
+        currencyFullName.push(currencyName[1]);
+      }
+    });
+  });
+  return currencyFullName;
+}
+
 export function getMonthlyDates() {
   const monthlyDates = [];
   const currentDate = new Date();
