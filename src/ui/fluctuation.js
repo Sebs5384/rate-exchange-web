@@ -10,6 +10,7 @@ export function setUpFluctuationButton($from, $to) {
     const to = $to.value;
     const { startDate, endDate, monthlyDates } = getMonthlyDates();
 
+    displayFluctuationYear();
     displayFluctuationCurrencyText(from, to);
     displayMonthlyFluctuations(monthlyDates, endDate, from, to);
     displayTotalFluctuation(startDate, endDate, from, to);
@@ -73,4 +74,10 @@ function displayFluctuationCurrencyText(from, to) {
   $currenciesText.forEach((currencyText, index) => {
     currencyText.innerText = `${currencies[index]} - (${currencyFullName[index]})`;
   });
+}
+
+function displayFluctuationYear() {
+  const currentYear = new Date().getFullYear();
+  const $fluctuationDate = document.querySelector("#fluctuation-year");
+  $fluctuationDate.innerText = currentYear;
 }
