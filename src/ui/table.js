@@ -108,28 +108,6 @@ function displayLoadingTable() {
   }
 }
 
-export function displayFluctuationTables(rates, from, to, month) {
-  const fromFluctuation = Object.values(rates[from]);
-  const toFluctuation = Object.values(rates[to]);
-
-  const $fluctuationFromTable = document.querySelector("#fluctuation-from-table-body");
-  const $fluctuationToTable = document.querySelector("#fluctuation-to-table-body");
-
-  createTableRow($fluctuationFromTable, [month, ...fromFluctuation]);
-  createTableRow($fluctuationToTable, [month, ...toFluctuation]);
-}
-
-export function displayTotalFluctuationTable(rates, from, to) {
-  const fromTotalFluctuation = Object.values(rates[from]);
-  const toTotalFluctuation = Object.values(rates[to]);
-
-  const $totalFluctuationFromTable = document.querySelector("#total-from-fluctuation");
-  const $totalFluctuationToTable = document.querySelector("#total-to-fluctuation");
-
-  createTableRow($totalFluctuationFromTable, [from, ...fromTotalFluctuation]);
-  createTableRow($totalFluctuationToTable, [to, ...toTotalFluctuation]);
-}
-
 function setTableCurrencyTitle(base, currency) {
   const baseCurrency = base;
   const currentInputValue = currency;
@@ -157,7 +135,7 @@ function setTableExchangeDate(present, date) {
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
 
-function createTableRow(tableBody, values) {
+export function createTableRow(tableBody, values) {
   const $row = document.createElement("tr");
   values.forEach((value, index) => {
     const $cell = document.createElement("td");

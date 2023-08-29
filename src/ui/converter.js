@@ -1,9 +1,7 @@
-import { getConversionResults, getExchangeData, getFluctuationData } from "../api/exchange.js";
+import { getConversionResults, getExchangeData } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "./validation.js";
-import { displayFluctuationTables, displayTotalFluctuationTable, clearTable } from "./table.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
-import { getMonthlyDates, getMonths } from "../utils/general.js";
 
 export function displayConversionResults($from, $to, $amount) {
   getConversionResults($from, $to, $amount).then((conversion) => {
@@ -32,58 +30,16 @@ export function setupConversionButton($from, $to, $amount) {
   };
 }
 
-export function setupConversionResetButton() {
+export function setupConversionResetButton($from, $to, $amount) {
   const $resetButton = document.querySelector("#convert-reset");
 
   $resetButton.onclick = () => {
-    cleanConverterInputs();
+    cleanConverterInputs($from, $to, $amount);
   };
-}
-
-export function setUpFluctuationButton($from, $to) {
-  const $fluctuationButton = document.querySelector("#fluctuation-button");
-
-  $fluctuationButton.onclick = () => {
-    const from = $from.value;
-    const to = $to.value;
-    const { startDate, endDate, monthlyDates } = getMonthlyDates();
-
-    clearTable(["#fluctuation-from-table-body", "#fluctuation-to-table-body", "#total-from-fluctuation", "#total-to-fluctuation"]);
-    displayMonthlyFluctuations(monthlyDates, endDate, from, to);
-    displayTotalFluctuation(startDate, endDate, from, to);
-  };
-}
-
-function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
-  monthlyDates.forEach((firstDay, index) => {
-    const currentMonthFirstDay = firstDay;
-    let nextMonthFirstDay = monthlyDates[index + 1];
-
-    if (nextMonthFirstDay === undefined) nextMonthFirstDay = endDate;
-
-    getFluctuationData(currentMonthFirstDay, nextMonthFirstDay, from, to).then((fluctuation) => {
-      const { rates } = fluctuation;
-      const months = getMonths();
-
-      displayFluctuationTables(rates, from, to, months[index]);
-    });
-  });
-}
-
-function displayTotalFluctuation(startDate, endDate, from, to) {
-  getFluctuationData(startDate, endDate, from, to).then((fluctuation) => {
-    const { rates } = fluctuation;
-
-    displayTotalFluctuationTable(rates, from, to);
-  });
 }
 
 function updateConversionResults(from, to, query, date, result) {
-  document.querySelector("#from-exchange").innerText = query.amount;
-  document.querySelector("#from-currency").innerText = ` ${from}`;
-  document.querySelector("#to-exchange").innerText = ` = ${result}`;
-  document.querySelector("#to-currency").innerText = ` ${to}`;
-  document.querySelector("#result-date").innerText = `${date} as date of Exchange`;
+  setConversionResults(from, to, query, date, result);
   resizeConversionResults();
 }
 
@@ -103,20 +59,27 @@ function enableFluctuationButton() {
   $disabledFluctuationButton.classList.add("btn-primary");
 }
 
-function cleanConverterInputs() {
-  const inputs = ["#converter-from-input", "#converter-to-input", "#converter-amount-input"];
+function cleanConverterInputs($from, $to, $amount) {
+  const inputs = [$from, $to, $amount];
   const $validationMessages = document.querySelectorAll(".form-validation-message");
 
   inputs.forEach((input) => {
-    const $input = document.querySelector(input);
-    $input.classList.remove("is-valid", "is-invalid");
-    $input.value = "";
+    input.classList.remove("is-valid", "is-invalid");
+    input.value = "";
   });
 
   $validationMessages.forEach((message) => {
     message.classList.remove("valid-feedback", "invalid-feedback");
     message.innerText = "";
   });
+}
+
+function setConversionResults(from, to, query, date, result) {
+  document.querySelector("#from-exchange").innerText = query.amount;
+  document.querySelector("#from-currency").innerText = ` ${from}`;
+  document.querySelector("#to-exchange").innerText = ` = ${result}`;
+  document.querySelector("#to-currency").innerText = ` ${to}`;
+  document.querySelector("#result-date").innerText = `${date} as date of Exchange`;
 }
 
 function resizeConversionResults() {
