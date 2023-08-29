@@ -1,6 +1,6 @@
 import { getConversionResults, getExchangeData, getFluctuationData } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "./validation.js";
-import { displayFluctuationTables, displayTotalFluctuationTable } from "./table.js";
+import { displayFluctuationTables, displayTotalFluctuationTable, clearTable } from "./table.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
 import { getMonthlyDates, getMonths } from "../utils/general.js";
@@ -48,6 +48,7 @@ export function setUpFluctuationButton($from, $to) {
     const to = $to.value;
     const { startDate, endDate, monthlyDates } = getMonthlyDates();
 
+    clearTable(["#fluctuation-from-table-body", "#fluctuation-to-table-body", "#total-from-fluctuation", "#total-to-fluctuation"]);
     displayMonthlyFluctuations(monthlyDates, endDate, from, to);
     displayTotalFluctuation(startDate, endDate, from, to);
   };
@@ -66,6 +67,14 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
 
       displayFluctuationTables(rates, from, to, months[index]);
     });
+  });
+}
+
+function displayTotalFluctuation(startDate, endDate, from, to) {
+  getFluctuationData(startDate, endDate, from, to).then((fluctuation) => {
+    const { rates } = fluctuation;
+
+    displayTotalFluctuationTable(rates, from, to);
   });
 }
 
