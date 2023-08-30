@@ -1,7 +1,7 @@
 import { getExchangeData } from "../api/exchange.js";
 import { createTableCurrencyList } from "./list.js";
 import { setElementVisibility } from "./general.js";
-import { convertToPercentage, getCurrenciesFullName } from "../utils/general.js";
+import { getCurrenciesFullName } from "../utils/general.js";
 import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
 
 export function displayExchangeTable(currency, date) {

@@ -1,5 +1,5 @@
 import { getFluctuationData } from "../api/exchange.js";
-import { getMonthlyDates, getMonths, getCurrenciesFullName } from "../utils/general.js";
+import { getMonthlyDates, getMonths, getCurrenciesFullName, convertToPercentage } from "../utils/general.js";
 
 export function setUpFluctuationButton($from, $to) {
   const $fluctuationButton = document.querySelector("#fluctuation-button");
@@ -10,6 +10,7 @@ export function setUpFluctuationButton($from, $to) {
     const { startDate, endDate, monthlyDates } = getMonthlyDates();
 
     displayFluctuationYear();
+    clearFluctuationTables(["#fluctuation-from-table-body", "#fluctuation-to-table-body", "#total-from-fluctuation", "#total-to-fluctuation"]);
     displayFluctuationCurrencyText(from, to);
     displayMonthlyFluctuations(monthlyDates, endDate, from, to);
     displayTotalFluctuation(startDate, endDate, from, to);
@@ -17,8 +18,6 @@ export function setUpFluctuationButton($from, $to) {
 }
 
 function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
-  clearFluctuationTables(["#fluctuation-from-table-body", "#fluctuation-to-table-body"]);
-
   monthlyDates.forEach((FIRST_DAY, index) => {
     const CURRENT_MONTH_FIRST_DAY = FIRST_DAY;
     let NEXT_MONTH_FIRST_DAY = monthlyDates[index + 1];
@@ -35,7 +34,6 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
 }
 
 function displayTotalFluctuation(startDate, endDate, from, to) {
-  clearFluctuationTables(["#total-from-fluctuation", "#total-to-fluctuation"]);
   getFluctuationData(startDate, endDate, from, to).then((fluctuation) => {
     const { rates } = fluctuation;
 
@@ -98,6 +96,6 @@ function createFluctuationRow(tableBody, values) {
 
 function clearFluctuationTables(tables) {
   tables.forEach((table) => {
-    table.innerHTML = "";
+    document.querySelector(table).innerHTML = "";
   });
 }
