@@ -1,6 +1,6 @@
 import { getFluctuationData } from "../api/exchange.js";
 import { createTableRow, clearTable } from "./table.js";
-import { getMonthlyDates, getMonths, getCurrencyFullName } from "../utils/general.js";
+import { getMonthlyDates, getMonths, getCurrenciesFullName } from "../utils/general.js";
 
 export function setUpFluctuationButton($from, $to) {
   const $fluctuationButton = document.querySelector("#fluctuation-button");

@@ -1,7 +1,7 @@
 import { getExchangeData } from "../api/exchange.js";
 import { createTableCurrencyList } from "./list.js";
-import { setElementVisibility } from "./utils.js";
-import { convertToPercentage, getExistingCurrencies } from "../utils/general.js";
+import { setElementVisibility } from "./general.js";
+import { convertToPercentage, getCurrenciesFullName } from "../utils/general.js";
 import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
 
 export function displayExchangeTable(currency, date) {
@@ -63,7 +63,7 @@ export function setupTableDateChanges(date, currency) {
 function createExchangeTable(currency) {
   const $exchangeTable = document.querySelector("#exchange-table-body");
   const currencies = Object.keys(currency);
-  const existingCurrencies = getExistingCurrencies(currencies);
+  const existingCurrencies = getCurrenciesFullName(currencies);
 
   currencies.forEach((rate, index) => {
     const $row = document.createElement("tr");

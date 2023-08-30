@@ -1,5 +1,3 @@
-import { getCurrencyCode } from "./utils.js";
-
 export function handleInputCurrency(currency) {
   const selectedCurrency = currency.value;
 
@@ -75,7 +73,7 @@ export function handleAmountInputError(amount) {
 
 function handleCurrencyListClick(clickedCurrency, input) {
   const $currencyInput = document.querySelector(input);
-  const currencyCode = getCurrencyCode(clickedCurrency);
+  const currencyCode = clickedCurrency.innerText.substring(0, 3);
   const selectedCurrency = ($currencyInput.value = currencyCode);
 
   return selectedCurrency;

@@ -1,17 +1,17 @@
-import { getExistingCurrencies } from "../utils/general.js";
+import { getCurrenciesFullName } from "../utils/general.js";
 
-export function createTableCurrencyList(currency) {
+export function createTableCurrencyList(currencyCode) {
   const $currencyList = document.querySelector("#table-currency-list");
-  const list = Object.keys(currency);
-  const existingCurrencies = getExistingCurrencies(list);
+  const currenciesCode = Object.keys(currencyCode);
+  const existingCurrenciesFullName = getCurrenciesFullName(currenciesCode);
 
   $currencyList.innerText = "";
-  list.forEach((currency, index) => {
+  currenciesCode.forEach((currencyCode, index) => {
     const $list = document.createElement("li");
     const $item = document.createElement("a");
     $item.className = "dropdown-item text-start";
     $item.href = "#";
-    $item.innerText = `${currency} - ${existingCurrencies[index]}`;
+    $item.innerText = `${currencyCode} - ${existingCurrenciesFullName[index]}`;
 
     $list.appendChild($item);
     $currencyList.appendChild($list);
@@ -20,17 +20,17 @@ export function createTableCurrencyList(currency) {
 
 export function createConverterCurrencyList(currency) {
   const $currencyLists = document.querySelectorAll(".converter-currency-list");
-  const list = Object.keys(currency);
-  const existingCurrencies = getExistingCurrencies(list);
+  const currenciesCode = Object.keys(currency);
+  const currenciesFullName = getCurrenciesFullName(currenciesCode);
 
   $currencyLists.forEach((currencyList) => {
-    list.forEach((currency, index) => {
+    currenciesCode.forEach((currency, index) => {
       const $list = document.createElement("li");
       const $item = document.createElement("a");
 
       $item.className = "dropdown-item text-start";
       $item.href = "#";
-      $item.innerText = `${currency} - ${existingCurrencies[index]}`;
+      $item.innerText = `${currency} - ${currenciesFullName[index]}`;
 
       $list.appendChild($item);
       currencyList.appendChild($list);
