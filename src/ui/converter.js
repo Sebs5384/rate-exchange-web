@@ -6,7 +6,6 @@ import { createConverterCurrencyList } from "./list.js";
 export function displayConversionResults($from, $to, $amount) {
   getConversionResults($from, $to, $amount).then((conversion) => {
     const { from, to, query, date, result } = conversion;
-
     updateConversionResults(from, to, query, date, result);
   });
 }
@@ -24,8 +23,8 @@ export function setupConversionButton($from, $to, $amount) {
     const successfulAmountValidation = validateAmountInput(amount);
 
     if (successfulCurrencyValidation && successfulAmountValidation) {
-      enableConversionText();
-      enableFluctuationButton();
+      updateConversionText("enabled");
+      updateFluctuationButton("enabled");
       return displayConversionResults(from, to, amount);
     }
   };
@@ -44,20 +43,36 @@ function updateConversionResults(from, to, query, date, result) {
   resizeConversionResults();
 }
 
-function enableConversionText() {
+function updateConversionText(status) {
   const $disabledText = document.querySelectorAll(".disabled-text");
 
-  $disabledText.forEach((element) => {
-    element.classList.remove("text-secondary");
-    element.classList.add("text-primary");
-  });
+  if (status === "disabled") {
+    $disabledText.forEach((element) => {
+      element.classList.remove("text-primary");
+      element.classList.add("text-secondary");
+    });
+  }
+
+  if (status === "enabled") {
+    $disabledText.forEach((element) => {
+      element.classList.remove("text-secondary");
+      element.classList.add("text-primary");
+    });
+  }
 }
 
-function enableFluctuationButton() {
+function updateFluctuationButton(status) {
   const $disabledFluctuationButton = document.querySelector("#fluctuation-button");
 
-  $disabledFluctuationButton.classList.remove("disabled", "btn-secondary");
-  $disabledFluctuationButton.classList.add("btn-primary");
+  if (status === "disabled") {
+    $disabledFluctuationButton.classList.remove("btn-primary");
+    $disabledFluctuationButton.classList.add("disabled", "btn-secondary");
+  }
+
+  if (status === "enabled") {
+    $disabledFluctuationButton.classList.remove("disabled", "btn-secondary");
+    $disabledFluctuationButton.classList.add("btn-primary");
+  }
 }
 
 function cleanConverterInputs($from, $to, $amount) {
@@ -80,7 +95,7 @@ function setConversionResults(from, to, query, date, result) {
   document.querySelector("#from-currency").innerText = ` ${from}`;
   document.querySelector("#to-exchange").innerText = ` = ${result}`;
   document.querySelector("#to-currency").innerText = ` ${to}`;
-  document.querySelector("#result-date").innerText = `${date} as date of Exchange`;
+  document.querySelector("#result-date").innerText = `Results based on ${date} as date of Exchange`;
 }
 
 function resizeConversionResults() {
