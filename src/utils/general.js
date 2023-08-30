@@ -1,30 +1,37 @@
 import { currenciesName } from "./currency-name.js";
 
-export function getExistingCurrencies(currency) {
-  const existingCurrencies = [];
+export function getCurrenciesFullName(currencies) {
+  const currenciesFullName = [];
 
-  for (const i in currency) {
-    for (const j in currenciesName) {
-      if (currency[i] === currenciesName[j][0]) {
-        existingCurrencies.push(currenciesName[j][1]);
+  for (const code in currencies) {
+    for (const fullName in currenciesName) {
+      if (currencies[code] === currenciesName[fullName][0]) {
+        currenciesFullName.push(currenciesName[fullName][1]);
         break;
       }
     }
   }
-  return existingCurrencies;
+  return currenciesFullName;
 }
 
-export function getCurrencyFullName(currencies) {
-  const currencyFullName = [];
+export function getCurrenciesCode(currencies) {
+  const currenciesCode = [];
 
-  currencies.forEach((currency) => {
-    currenciesName.forEach((currencyName) => {
-      if (currency === currencyName[0]) {
-        currencyFullName.push(currencyName[1]);
+  if (currencies === undefined) {
+    for (const code in currenciesName) {
+      currenciesCode.push(currenciesName[code][0]);
+    }
+  }
+
+  for (const code in currencies) {
+    for (const code in currenciesName) {
+      if (currencies[code] === currenciesName[code][0]) {
+        currenciesCode.push(currenciesName[code][0]);
+        break;
       }
-    });
-  });
-  return currencyFullName;
+    }
+  }
+  return currenciesCode;
 }
 
 export function getMonthlyDates() {
