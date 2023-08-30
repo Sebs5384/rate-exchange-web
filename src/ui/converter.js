@@ -34,6 +34,8 @@ export function setupConversionResetButton($from, $to, $amount) {
   const $resetButton = document.querySelector("#convert-reset");
 
   $resetButton.onclick = () => {
+    updateConversionText("disabled");
+    updateFluctuationButton("disabled");
     cleanConverterInputs($from, $to, $amount);
   };
 }
