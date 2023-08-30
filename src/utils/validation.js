@@ -1,10 +1,8 @@
-import { handleCurrencyInputError, handleAmountInputError } from "./handlers.js";
-import { getCurrencyCode } from "./utils.js";
+import { handleCurrencyInputError, handleAmountInputError } from "../ui/handlers.js";
+import { getCurrenciesCode } from "./general.js";
 
-function validateCurrency(currencies) {
+function validateCurrency(currencies, codes) {
   const currenciesErrors = [];
-  const $codes = document.querySelectorAll("#convert-from-list li");
-  const codes = getCurrencyCode($codes);
 
   currencies.forEach((currency) => {
     if (/^$/.test(currency)) {
@@ -32,7 +30,8 @@ function validateAmount(amount) {
 }
 
 export function validateCurrencyInputs(currency) {
-  const validatedCurrencyInputs = validateCurrency(currency);
+  const codes = getCurrenciesCode();
+  const validatedCurrencyInputs = validateCurrency(currency, codes);
 
   const currencyInputs = {
     "currency-field": validatedCurrencyInputs,

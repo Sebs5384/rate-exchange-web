@@ -1,5 +1,5 @@
 import { getConversionResults, getExchangeData } from "../api/exchange.js";
-import { validateCurrencyInputs, validateAmountInput } from "./validation.js";
+import { validateCurrencyInputs, validateAmountInput } from "../utils/validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
 
@@ -18,8 +18,9 @@ export function setupConversionButton($from, $to, $amount) {
     const from = $from.value;
     const to = $to.value;
     const amount = $amount.value;
+    const currencies = [from, to];
 
-    const successfulCurrencyValidation = validateCurrencyInputs([from, to]);
+    const successfulCurrencyValidation = validateCurrencyInputs(currencies);
     const successfulAmountValidation = validateAmountInput(amount);
 
     if (successfulCurrencyValidation && successfulAmountValidation) {
