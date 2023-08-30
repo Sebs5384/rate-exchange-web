@@ -25,6 +25,7 @@ function validateAmount(amount) {
   if (/^$/.test(amount)) return "The amount field can't be empty";
   if (!/^\S{1,20}$/.test(amount)) return "The amount given has to be less than 20 characters";
   if (!/^[^A-Z-a-z]+$/.test(amount)) return "This field doesn't accept letters";
+  if (!/^(0|[1-9][0-9]*)$/.test(amount)) return "The amount field can't start with 0";
 
   return "";
 }
