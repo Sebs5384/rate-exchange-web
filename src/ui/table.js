@@ -9,7 +9,7 @@ export function displayExchangeTable(currency, date) {
     const { base, present, rates } = exchange;
     if (rates === undefined) setElementVisibility("#error-message", "visible");
 
-    clearTable("#exchange-table-body");
+    clearExchangeTable();
     createExchangeTable(rates);
     createTableCurrencyList(rates);
     setTableCurrencyTitle(base, currency);
@@ -22,7 +22,7 @@ export function setupTableListChanges(list, date) {
     const clickedCurrency = handleListChange(currency, "#table-currency-input");
     const selectedDate = handleInputDate(date);
 
-    clearTable("#exchange-table-body");
+    clearExchangeTable();
     displayLoadingTable();
     displayExchangeTable(clickedCurrency, selectedDate);
   };
@@ -37,7 +37,7 @@ export function setupTableCurrencyChanges(currency, date) {
     timeout = setTimeout(() => {
       const selectedCurrency = handleInputCurrency(currency);
       const selectedDate = handleInputDate(date);
-      clearTable("#exchange-table-body");
+      clearExchangeTable();
       displayLoadingTable();
       displayExchangeTable(selectedCurrency, selectedDate);
     }, 500);
@@ -49,7 +49,7 @@ export function setupTableDateChanges(date, currency) {
 
   date.oninput = () => {
     clearTimeout(timeout);
-    clearTable("#exchange-table-body");
+    clearExchangeTable();
     displayLoadingTable();
 
     timeout = setTimeout(() => {
@@ -135,27 +135,6 @@ function setTableExchangeDate(present, date) {
   return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
 }
 
-export function createTableRow(tableBody, values) {
-  const $row = document.createElement("tr");
-  values.forEach((value, index) => {
-    const $cell = document.createElement("td");
-    $row.className = "border-primary";
-    if (index === values.length - 1) {
-      $cell.innerText = convertToPercentage(value);
-    } else {
-      $cell.innerText = value;
-    }
-    $row.appendChild($cell);
-  });
-  tableBody.appendChild($row);
-}
-
-export function clearTable(tables) {
-  if (Array.isArray(tables)) {
-    tables.forEach((table) => {
-      document.querySelector(table).innerHTML = "";
-    });
-  } else {
-    document.querySelector(tables).innerHTML = "";
-  }
+export function clearExchangeTable() {
+  document.querySelector("#exchange-table-body").innerHTML = "";
 }
