@@ -42,4 +42,57 @@ describe("Currency converter testing", () => {
     cy.get("[data-cy='converter-fluctuation-button']").should("have.text", "Check Fluctuation");
     cy.get("[data-cy='converter-fluctuation-button']").should("have.class", "disabled");
   });
+
+  it("Should display the selected currency from the list on the input values", () => {
+    cy.get("[data-cy='from-currency-button']").click();
+    cy.get("[data-cy='from-list']").contains("ARS - Argentine Peso").click();
+    cy.get("[data-cy='from-input']").should("have.value", "ARS");
+
+    cy.get("[data-cy='to-currency-button']").click();
+    cy.get("[data-cy='to-list']").contains("USD - United States Dollar").click();
+    cy.get("[data-cy='to-input']").should("have.value", "USD");
+
+    cy.get("[data-cy='from-currency-button']").click();
+    cy.get("[data-cy='from-list']").contains("EUR - Euro").click();
+    cy.get("[data-cy='from-input']").should("have.value", "EUR");
+
+    cy.get("[data-cy='to-currency-button']").click();
+    cy.get("[data-cy='to-list']").contains("ARS - Argentine Peso").click();
+    cy.get("[data-cy='to-input']").should("have.value", "ARS");
+  });
+
+  it("Should convert one currency to another correctly", () => {
+    const API_CALL = "https://api.exchangerate.host/convert?from=ARS&to=USD&amount=5&places=3";
+
+    cy.get("[data-cy='from-input']").type("ARS");
+    cy.get("[data-cy='to-input']").type("USD");
+    cy.get("[data-cy='amount-input']").type("5");
+
+    cy.intercept(API_CALL).as("conversion");
+    cy.get("[data-cy='currency-convert-button']").click();
+    cy.get("[data-cy='conversion-title']").should("not.have.class", "disabled");
+
+    cy.wait("@conversion").then(({ response }) => {
+      const conversion = response.body;
+      const from = conversion.query.from;
+      const to = conversion.query.to;
+      const amount = conversion.query.amount;
+      const conversionDate = conversion.date;
+      const conversionResult = conversion.result;
+
+      cy.get("[data-cy='from-exchange-text']").should("have.text", amount);
+      cy.get("[data-cy='from-currency-text']").should("have.text", ` ${from}`);
+      cy.get("[data-cy='from-currency-text']").should("not.have.class", "disabled");
+
+      cy.get("[data-cy='to-exchange-text']").should("have.text", ` = ${conversionResult}`);
+      cy.get("[data-cy='to-currency-text']").should("have.text", ` ${to}`);
+      cy.get("[data-cy='to-currency-text']").should("not.have.class", "disabled");
+
+      cy.get("[data-cy='conversion-date']").should("have.text", `Results based on ${conversionDate} as date of Exchange`);
+      cy.get("[data-cy='conversion-date']").should("have.class", "text-primary");
+
+      cy.get("[data-cy='converter-fluctuation-button']").should("have.text", "Check Fluctuation");
+      cy.get("[data-cy='converter-fluctuation-button']").should("not.have.class", "disabled");
+    });
+  });
 });
