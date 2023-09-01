@@ -135,4 +135,32 @@ describe("Exchange table testing", () => {
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
   });
+
+  it("Should display an error message if the typed date is invalid", () => {
+    cy.visit(URL);
+
+    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+    cy.get("#error-message").should("not.be.visible");
+    cy.get("#error-message").should("have.class", "hidden");
+
+    cy.get("#currency-date").click();
+    cy.get("#currency-date").type("1111-01-01");
+
+    cy.on("uncaught:exception", () => false);
+
+    cy.get("#error-message").should("be.visible");
+    cy.get("#error-message").should("not.have.class", "hidden");
+
+    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+
+    cy.get("#currency-date").clear();
+
+    cy.get("#error-message").should("not.be.visible");
+    cy.get("#error-message").should("have.class", "hidden");
+
+    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+  });
 });
