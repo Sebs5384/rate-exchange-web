@@ -163,4 +163,25 @@ describe("Exchange table testing", () => {
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
   });
+
+  it("Should display a loading table everytime a new currency is looked up", () => {
+    cy.visit(URL);
+
+    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+
+    cy.get("#table-currency-input").type("ARS");
+
+    cy.get("#exchange-table-body").find("tr").should("have.length", 10);
+    cy.get("#exchange-table-body").find("tr").should("have.class", "placeholder-glow");
+
+    cy.get("#current-currency").should("have.text", "Currently displaying ARS");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+
+    cy.get("#table-currency-input").clear();
+    cy.get("#exchange-table-body").find("tr").should("have.length", 169);
+
+    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
+    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+  });
 });
