@@ -76,7 +76,7 @@
 
                     <div class="col-8">
                       <input type="text" class="form-control form-control-sm text-center currency-input" placeholder="USD" id="converter-from-input" name="currency-field" data-cy="from-input" required />
-                      <div class="form-validation-message"></div>
+                      <div class="form-validation-message" data-cy="from-validation-message"></div>
                     </div>
 
                     <div class="dropend col-3 mt-1">
@@ -86,12 +86,12 @@
 
                     <div class="col-8 mt-1">
                       <input type="text" class="form-control form-control-sm text-center currency-input" placeholder="ARS" id="converter-to-input" name="currency-field" data-cy="to-input" required />
-                      <div class="form-validation-message"></div>
+                      <div class="form-validation-message" data-cy="to-validation-message"></div>
                     </div>
 
                     <div class="col-11 mt-2">
                       <input type="number" class="form-control form-control-sm text-center" placeholder="Amount" id="converter-amount-input" name="amount-field" data-cy="amount-input" required />
-                      <div class="text-center form-validation-message" id="amount-validation-message"></div>
+                      <div class="text-center form-validation-message" id="amount-validation-message" data-cy="amount-validation-message"></div>
                     </div>
 
                     <button class="btn btn-primary btn-sm col-7 mt-2" type="button" id="convert-button" data-cy="currency-convert-button">Convert</button>
