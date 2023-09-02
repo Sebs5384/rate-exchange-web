@@ -2,64 +2,66 @@ describe("Exchange table testing", () => {
   const URL = "http://127.0.0.1:8080/#";
   const currentDate = new Date().toISOString().split("T")[0];
 
-  it("Should display the main title correctly ", () => {
+  beforeEach(() => {
     cy.visit(URL);
+  });
 
-    cy.get("#exchange-title h3").should("have.text", "Exchange-X");
-    cy.get("#exchange-title h6").should("have.text", "Currency converter and exchange rate lookup.");
+  it("Should display the main title correctly ", () => {
+    cy.get("[data-cy='exchange-upper-title']").should("have.text", "Exchange-X");
+    cy.get("[data-cy='exchange-lower-title").should("have.text", "Currency converter and exchange rate lookup.");
   });
 
   it("Should display EUR as default currency and today as latest date", () => {
-    cy.visit(URL);
-
-    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
-    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
+    cy.get("[data-cy='current-currency-title']").should("have.text", "Currently displaying EUR");
+    cy.get("[data-cy='current-date-title").should("have.text", `At ${currentDate} as date of exchange`);
   });
 
   it("Should display the table controls correctly", () => {
-    cy.visit(URL);
+    cy.get("[data-cy='table-control-title").should("have.text", "Check out our exchange table feature");
 
-    cy.get("#table-control-title").should("have.text", "Check out our exchange table feature");
-    cy.get("#table-currency-button").should("have.text", "List of Currencies");
-    cy.get("#table-currency-list").find("li").should("have.length", 169);
-    cy.get("#currency-input-label").should("have.text", "Insert your currency code here");
-    cy.get("#currency-date-label").should("have.text", "Look up exchange through date");
-    cy.get("#table-currency-input").should("have.attr", "placeholder", "E.g ARS");
-    cy.get("#currency-date").should("have.attr", "type", "date");
+    cy.get("[data-cy='table-currency-list-button']").should("have.text", "List of Currencies");
+    cy.get("[data-cy='table-list-dropdown").find("li").should("have.length", 169);
+
+    cy.get("[data-cy='currency-code-text']").should("have.text", "Insert your currency code here");
+    cy.get("[data-cy='currency-date-label").should("have.text", "Look up exchange through date");
+    cy.get("[data-cy='table-code-input']").should("have.attr", "placeholder", "E.g ARS");
+    cy.get("[data-cy='table-date-input").should("have.attr", "type", "date");
   });
 
-  it("Should display the table correctly", () => {
-    cy.visit(URL);
+  it("Should display the table on default correctly", () => {
+    cy.get("[data-cy='main-table-row'] th").should("have.length", 4);
+    cy.get("[data-cy='number-column']").should("have.text", "#");
+    cy.get("[data-cy='code-column']").should("have.text", "Currency-Code");
+    cy.get("[data-cy='name-column']").should("have.text", "Name");
+    cy.get("[data-cy='exchange-column']").should("have.text", "Exchange");
 
-    cy.get("#exchange-table-header tr th").should("have.length", 4);
-    cy.get("#exchange-table-header tr th:nth-child(1)").should("have.text", "#");
-    cy.get("#exchange-table-header tr th:nth-child(2)").should("have.text", "Currency-Code");
-    cy.get("#exchange-table-header tr th:nth-child(3)").should("have.text", "Name");
-    cy.get("#exchange-table-header tr th:nth-child(4)").should("have.text", "Exchange");
-    cy.get("#exchange-table-body").find("tr").should("have.length", 169);
+    const API_CALL = "https://api.exchangerate.host/latest?base=EUR&places=2";
+
+    cy.intercept(API_CALL).as("exchange");
+    cy.wait("@exchange").then(({ response }) => {
+      const rates = Object.keys(response.body.rates);
+
+      cy.get("[data-cy='table-body']").find("tr").should("have.length", rates.length);
+    });
   });
 
   it("Should display the selected currency from the list correctly on the table", () => {
-    cy.visit(URL);
-
-    cy.get("#table-currency-button").click();
+    cy.get("[data-cy='table-currency-list-button").click();
     cy.contains("ARS - Argentine Peso").click();
-    cy.get("#table-currency-input").should("have.value", "ARS");
+    cy.get("[data-cy='table-code-input']").should("have.value", "ARS");
 
-    cy.get("#current-currency").should("have.text", "Currently displaying ARS");
-    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
-    cy.get("#exchange-table-body tr:nth-child(7) td:nth-child(4)").should("have.text", "$1");
+    cy.get("[data-cy='current-currency-title']").should("have.text", "Currently displaying ARS");
+    cy.get("[data-cy='current-date-title']").should("have.text", `At ${currentDate} as date of exchange`);
+    cy.get("[data-cy='ARS-exchange']").should("have.text", "$1");
   });
 
   it("Should display the selected currency from the list correctly on the table with a selected date", () => {
-    cy.visit(URL);
+    cy.get("[data-cy='current-currency-title']").should("have.text", "Currently displaying EUR");
+    cy.get("[data-cy='current-date-title").should("have.text", `At ${currentDate} as date of exchange`);
 
-    cy.get("#current-currency").should("have.text", "Currently displaying EUR");
-    cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
-
-    cy.get("#table-currency-button").click();
+    cy.get("[data-cy='table-currency-list-button").click();
     cy.contains("ARS - Argentine Peso").click();
-    cy.get("#table-currency-input").should("have.value", "ARS");
+    cy.get("[data-cy='table-code-input']").should("have.value", "ARS");
 
     cy.get("#currency-date").click();
     cy.get("#currency-date").type("2022-01-01");
@@ -69,8 +71,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display the typed currency and date correctly", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
 
@@ -82,8 +82,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display the typed currency and date exchanges correctly ", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
 
@@ -103,8 +101,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display different currencies depending on the date given by the user", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
 
@@ -116,8 +112,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display Euro as default currency if no currency has match the typed one", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
 
@@ -137,8 +131,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display an error message if the typed date is invalid", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
     cy.get("#error-message").should("not.be.visible");
@@ -165,8 +157,6 @@ describe("Exchange table testing", () => {
   });
 
   it("Should display a loading table everytime a new currency is looked up", () => {
-    cy.visit(URL);
-
     cy.get("#current-currency").should("have.text", "Currently displaying EUR");
     cy.get("#current-date").should("have.text", `At ${currentDate} as date of exchange`);
 

@@ -74,10 +74,14 @@ function createExchangeTable(currency) {
 
     $row.className = "lightblue-border";
     $currencyNumber.innerText = index + 1;
+
     $currencyCode.innerText = rate;
     $currencyCode.className = "table-currency-code";
+    $currencyCode.setAttribute("data-cy", `${rate}`);
+
     $currencyFullName.innerText = existingCurrencies[index];
     $rate.innerText = `$${currency[rate]}`;
+    $rate.setAttribute("data-cy", `${rate}-exchange`);
 
     $row.appendChild($currencyNumber);
     $row.appendChild($currencyCode);
