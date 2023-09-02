@@ -157,4 +157,20 @@ describe("Currency converter testing", () => {
     cy.get("[data-cy='amount-input']").should("have.text", "");
     cy.get("[data-cy='amount-input']").should("not.have.class", "is-invalid");
   });
+
+  it("Should display a modal upon clicking the fluctuation button", () => {
+    cy.get("[data-cy='from-input']").type("ARS");
+    cy.get("[data-cy='to-input']").type("USD");
+    cy.get("[data-cy='amount-input']").type("5");
+
+    cy.get("[data-cy='currency-convert-button']").click();
+
+    cy.get("[data-cy='converter-fluctuation-button']").click();
+    cy.get("[data-cy='fluctuation-modal']").should("be.visible");
+
+    cy.wait(1000);
+    cy.get("[data-cy='close-modal-button']").click();
+
+    cy.get("[data-cy='fluctuation-modal']").should("not.be.visible");
+  });
 });
