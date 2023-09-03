@@ -99,6 +99,7 @@ function displayLoadingTable() {
   for (let i = 0; i < 10; i++) {
     const $row = document.createElement("tr");
     $row.className = "placeholder-glow";
+    $row.setAttribute("data-cy", "loading-table");
 
     for (let i = 0; i < 4; i++) {
       const $cell = document.createElement("td");
