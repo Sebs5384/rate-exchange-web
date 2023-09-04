@@ -2,8 +2,7 @@ describe("Exchange table testing", () => {
   const URL = "http://127.0.0.1:8080/#";
   const currentDate = new Date().toISOString().split("T")[0];
   function getExchanges(base = "EUR", date = "latest") {
-    const API_CALL = `https://api.exchangerate.host/${date}?base=${base}&places=2`;
-    return API_CALL;
+    return `https://api.exchangerate.host/${date}?base=${base}&places=2`;
   }
 
   beforeEach(() => {

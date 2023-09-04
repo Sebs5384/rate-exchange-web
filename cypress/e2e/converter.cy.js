@@ -1,13 +1,15 @@
 describe("Currency converter testing", () => {
   const URL = "http://127.0.0.1:8080/#";
 
+  function getConversion(from, to, amount) {
+    return `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
+  }
+
   beforeEach(() => {
     cy.visit(URL);
   });
 
   it("Should display all the default elements in the converter correctly", () => {
-    const API_CALL = "https://api.exchangerate.host/convert?from=USD&to=ARS&amount=1&places=3";
-
     cy.get("[data-cy='converter-title']").should("have.text", "Calculate through our currency converter");
 
     cy.get("[data-cy='from-currency-button']").should("have.text", "From");
@@ -22,7 +24,7 @@ describe("Currency converter testing", () => {
 
     cy.get("[data-cy='conversion-title']").should("have.text", "Conversion");
 
-    cy.intercept(API_CALL).as("conversion");
+    cy.intercept(getConversion("USD", "ARS", "1")).as("conversion");
     cy.wait("@conversion").then(({ response }) => {
       const conversion = response.body;
       const usdToArsConversion = conversion.info.rate;
@@ -62,13 +64,11 @@ describe("Currency converter testing", () => {
   });
 
   it("Should convert one currency to another correctly and then click reset making the conversion results card disabled", () => {
-    const API_CALL = "https://api.exchangerate.host/convert?from=ARS&to=USD&amount=5&places=3";
-
     cy.get("[data-cy='from-input']").type("ARS");
     cy.get("[data-cy='to-input']").type("USD");
     cy.get("[data-cy='amount-input']").type("5");
 
-    cy.intercept(API_CALL).as("conversion");
+    cy.intercept(getConversion("ARS", "USD", "5")).as("conversion");
     cy.get("[data-cy='currency-convert-button']").click();
     cy.get("[data-cy='conversion-title']").should("have.class", "text-primary");
     cy.get("[data-cy='from-input']").should("have.class", "is-valid");
