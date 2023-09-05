@@ -40,7 +40,7 @@ export function getExchangeData(currency, date) {
   return getExchanges(currency, date).then((exchange) => {
     return {
       base: exchange.base,
-      present: exchange.date,
+      date: exchange.date,
       rates: exchange.rates,
     };
   });

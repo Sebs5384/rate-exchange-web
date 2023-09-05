@@ -1,7 +1,14 @@
 export function handleInputCurrency(currency) {
   const selectedCurrency = currency.value;
-
   return selectedCurrency.toUpperCase();
+}
+
+export function handleInputDate(date) {
+  const currentDate = new Date().toISOString().split("T")[0];
+  const selectedDate = date.value;
+  if (!selectedDate) return currentDate;
+
+  return selectedDate;
 }
 
 export function handleListChange(list, input) {
@@ -11,12 +18,12 @@ export function handleListChange(list, input) {
   return selectedCurrency;
 }
 
-export function handleInputDate(date) {
-  const selectedDate = date.value;
+function handleCurrencyListClick(clickedCurrency, input) {
+  const $currencyInput = document.querySelector(input);
+  const currencyCode = clickedCurrency.innerText.substring(0, 3);
+  const selectedCurrency = ($currencyInput.value = currencyCode);
 
-  if (!selectedDate) return "latest";
-
-  return selectedDate;
+  return selectedCurrency;
 }
 
 export function handleCurrencyInputError(currency) {
@@ -69,12 +76,4 @@ export function handleAmountInputError(amount) {
   });
 
   return errorCount;
-}
-
-function handleCurrencyListClick(clickedCurrency, input) {
-  const $currencyInput = document.querySelector(input);
-  const currencyCode = clickedCurrency.innerText.substring(0, 3);
-  const selectedCurrency = ($currencyInput.value = currencyCode);
-
-  return selectedCurrency;
 }

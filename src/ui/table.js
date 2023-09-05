@@ -6,14 +6,14 @@ import { handleListChange, handleInputDate, handleInputCurrency } from "./handle
 
 export function displayExchangeTable(currency, date) {
   getExchangeData(currency, date).then((exchange) => {
-    const { base, present, rates } = exchange;
+    const { base, date, rates } = exchange;
     if (rates === undefined) setElementVisibility("#error-message", "visible");
 
     clearExchangeTable();
     createExchangeTable(rates);
     createTableCurrencyList(rates);
-    setTableCurrencyTitle(base, currency);
-    setTableExchangeDate(present, date);
+    setTableCurrencyTitle(base);
+    setTableExchangeDate(date);
   });
 }
 
@@ -33,12 +33,12 @@ export function setupTableCurrencyChanges(currency, date) {
 
   currency.oninput = () => {
     clearTimeout(timeout);
+    clearExchangeTable();
+    displayLoadingTable();
 
     timeout = setTimeout(() => {
       const selectedCurrency = handleInputCurrency(currency);
       const selectedDate = handleInputDate(date);
-      clearExchangeTable();
-      displayLoadingTable();
       displayExchangeTable(selectedCurrency, selectedDate);
     }, 500);
   };
@@ -113,31 +113,14 @@ function displayLoadingTable() {
   }
 }
 
-function setTableCurrencyTitle(base, currency) {
-  const baseCurrency = base;
-  const currentInputValue = currency;
+function setTableCurrencyTitle(base) {
   const currentTitle = document.querySelector("#current-currency");
-  const $codes = document.querySelectorAll(".table-currency-code");
-
-  for (const code of $codes) {
-    if (currentInputValue === code.innerText) {
-      return (currentTitle.innerText = `Currently displaying ${currentInputValue}`);
-    }
-  }
-
-  return (currentTitle.innerText = `Currently displaying ${baseCurrency}`);
+  currentTitle.innerText = `Currently displaying ${base}`;
 }
 
-function setTableExchangeDate(present, date) {
-  const presentDate = present;
-  const currentInputDate = date;
+function setTableExchangeDate(date) {
   const currentDateTitle = document.querySelector("#current-date");
-
-  if (currentInputDate && currentInputDate !== "latest") {
-    return (currentDateTitle.innerText = `At ${currentInputDate} as date of exchange`);
-  }
-
-  return (currentDateTitle.innerText = `At ${presentDate} as date of exchange`);
+  currentDateTitle.innerText = `At ${date} as date of exchange`;
 }
 
 export function clearExchangeTable() {
