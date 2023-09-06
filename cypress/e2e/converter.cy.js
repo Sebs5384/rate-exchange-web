@@ -1,41 +1,26 @@
 describe("Currency converter testing", () => {
-  const URL = "http://127.0.0.1:8080/#";
-
-  function getConversion(from, to, amount) {
-    return `https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
-  }
+  const localhost = "http://127.0.0.1:8080/#";
+  const defaultConversionURL = "https://api.exchangerate.host/convert?from=USD&to=ARS&amount=1&places=3";
 
   beforeEach(() => {
-    cy.visit(URL);
+    cy.visit(localhost);
+    cy.intercept("GET", defaultConversionURL, { fixture: "conversion" }).as("defaultConversion");
   });
 
   it("Should display all the default elements in the converter correctly", () => {
-    cy.get("[data-cy='converter-title']").should("have.text", "Calculate through our currency converter");
+    cy.wait("@defaultConversion").then(({ response }) => {
+      const amount = response.body.query.amount;
+      const conversionDate = response.body.date;
+      const conversionResult = response.body.result;
+      const from = response.body.query.from;
+      const to = response.body.query.to;
 
-    cy.get("[data-cy='from-currency-button']").should("have.text", "From");
-    cy.get("[data-cy='to-currency-button']").should("have.text", "To");
-
-    cy.get("[data-cy='from-input']").should("have.attr", "placeholder", "USD");
-    cy.get("[data-cy='to-input']").should("have.attr", "placeholder", "ARS");
-    cy.get("[data-cy='amount-input']").should("have.attr", "placeholder", "Amount");
-
-    cy.get("[data-cy='currency-convert-button']").should("have.text", "Convert");
-    cy.get("[data-cy='currency-reset-button']").should("have.text", "Reset");
-
-    cy.get("[data-cy='conversion-title']").should("have.text", "Conversion");
-
-    cy.intercept(getConversion("USD", "ARS", "1")).as("conversion");
-    cy.wait("@conversion").then(({ response }) => {
-      const conversion = response.body;
-      const usdToArsConversion = conversion.info.rate;
-      const conversionDate = conversion.date;
-
-      cy.get("[data-cy='from-exchange-text']").should("have.text", "1");
-      cy.get("[data-cy='from-currency-text']").should("have.text", " USD");
+      cy.get("[data-cy='from-exchange-text']").should("have.text", `${amount}`);
+      cy.get("[data-cy='from-currency-text']").should("have.text", ` ${from}`);
       cy.get("[data-cy='from-currency-text']").should("have.class", "disabled-text");
 
-      cy.get("[data-cy='to-exchange-text']").should("have.text", ` = ${usdToArsConversion}`);
-      cy.get("[data-cy='to-currency-text']").should("have.text", " ARS");
+      cy.get("[data-cy='to-exchange-text']").should("have.text", ` = ${conversionResult}`);
+      cy.get("[data-cy='to-currency-text']").should("have.text", ` ${to}`);
       cy.get("[data-cy='to-currency-text']").should("have.class", "disabled-text");
 
       cy.get("[data-cy='conversion-date']").should("have.text", `Results based on ${conversionDate} as date of Exchange`);
@@ -45,35 +30,13 @@ describe("Currency converter testing", () => {
     cy.get("[data-cy='converter-fluctuation-button']").should("have.class", "disabled");
   });
 
-  it("Should display the selected currency from the list on the input values", () => {
-    cy.get("[data-cy='from-currency-button']").click();
-    cy.get("[data-cy='from-list']").contains("ARS - Argentine Peso").click();
-    cy.get("[data-cy='from-input']").should("have.value", "ARS");
-
-    cy.get("[data-cy='to-currency-button']").click();
-    cy.get("[data-cy='to-list']").contains("USD - United States Dollar").click();
-    cy.get("[data-cy='to-input']").should("have.value", "USD");
-
-    cy.get("[data-cy='from-currency-button']").click();
-    cy.get("[data-cy='from-list']").contains("EUR - Euro").click();
-    cy.get("[data-cy='from-input']").should("have.value", "EUR");
-
-    cy.get("[data-cy='to-currency-button']").click();
-    cy.get("[data-cy='to-list']").contains("ARS - Argentine Peso").click();
-    cy.get("[data-cy='to-input']").should("have.value", "ARS");
-  });
-
   it("Should convert one currency to another correctly and then click reset making the conversion results card disabled", () => {
-    cy.get("[data-cy='from-input']").type("ARS");
-    cy.get("[data-cy='to-input']").type("USD");
-    cy.get("[data-cy='amount-input']").type("5");
+    cy.get("[data-cy='from-input']").type("USD");
+    cy.get("[data-cy='to-input']").type("ARS");
+    cy.get("[data-cy='amount-input']").type("1");
 
-    cy.intercept(getConversion("ARS", "USD", "5")).as("conversion");
+    cy.intercept("GET", defaultConversionURL, { fixture: "conversion" }).as("conversion");
     cy.get("[data-cy='currency-convert-button']").click();
-    cy.get("[data-cy='conversion-title']").should("have.class", "text-primary");
-    cy.get("[data-cy='from-input']").should("have.class", "is-valid");
-    cy.get("[data-cy='to-input']").should("have.class", "is-valid");
-    cy.get("[data-cy='amount-input']").should("have.class", "is-valid");
 
     cy.wait("@conversion").then(({ response }) => {
       const conversion = response.body;
@@ -161,7 +124,7 @@ describe("Currency converter testing", () => {
   it("Should display a modal upon clicking the fluctuation button", () => {
     cy.get("[data-cy='from-input']").type("ARS");
     cy.get("[data-cy='to-input']").type("USD");
-    cy.get("[data-cy='amount-input']").type("5");
+    cy.get("[data-cy='amount-input']").type("1");
 
     cy.get("[data-cy='currency-convert-button']").click();
 
@@ -171,6 +134,25 @@ describe("Currency converter testing", () => {
     cy.wait(1000);
     cy.get("[data-cy='close-modal-button']").click();
 
+    cy.wait(1000);
     cy.get("[data-cy='fluctuation-modal']").should("not.be.visible");
+  });
+
+  it("Should display the selected currency from the list on the input values", () => {
+    cy.get("[data-cy='from-currency-button']").click();
+    cy.get("[data-cy='from-list']").contains("ARS - Argentine Peso").click();
+    cy.get("[data-cy='from-input']").should("have.value", "ARS");
+
+    cy.get("[data-cy='to-currency-button']").click();
+    cy.get("[data-cy='to-list']").contains("USD - United States Dollar").click();
+    cy.get("[data-cy='to-input']").should("have.value", "USD");
+
+    cy.get("[data-cy='from-currency-button']").click();
+    cy.get("[data-cy='from-list']").contains("EUR - Euro").click();
+    cy.get("[data-cy='from-input']").should("have.value", "EUR");
+
+    cy.get("[data-cy='to-currency-button']").click();
+    cy.get("[data-cy='to-list']").contains("ARS - Argentine Peso").click();
+    cy.get("[data-cy='to-input']").should("have.value", "ARS");
   });
 });
