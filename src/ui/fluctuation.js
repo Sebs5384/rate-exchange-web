@@ -28,7 +28,9 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
       const { rates } = fluctuation;
       const MONTHS = getMonths();
 
-      createFluctuationTables(rates, from, to, MONTHS[index]);
+      setTimeout(() => {
+        createFluctuationTables(rates, from, to, MONTHS[index]);
+      }, 500);
     });
   });
 }

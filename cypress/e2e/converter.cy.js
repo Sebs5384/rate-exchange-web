@@ -31,11 +31,12 @@ describe("Currency converter testing", () => {
   });
 
   it("Should convert one currency to another correctly and then click reset making the conversion results card disabled", () => {
+    cy.intercept("GET", defaultConversionURL, { fixture: "conversion" }).as("conversion");
+
     cy.get("[data-cy='from-input']").type("USD");
     cy.get("[data-cy='to-input']").type("ARS");
     cy.get("[data-cy='amount-input']").type("1");
 
-    cy.intercept("GET", defaultConversionURL, { fixture: "conversion" }).as("conversion");
     cy.get("[data-cy='currency-convert-button']").click();
 
     cy.wait("@conversion").then(({ response }) => {
