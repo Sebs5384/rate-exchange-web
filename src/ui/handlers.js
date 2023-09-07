@@ -1,14 +1,11 @@
 export function handleInputCurrency(currency) {
   const selectedCurrency = currency.value;
-  return selectedCurrency.toUpperCase();
+  return selectedCurrency ? selectedCurrency.toUpperCase() : "EUR";
 }
 
 export function handleInputDate(date) {
-  const currentDate = new Date().toISOString().split("T")[0];
   const selectedDate = date.value;
-  if (!selectedDate) return currentDate;
-
-  return selectedDate;
+  return selectedDate ? selectedDate : "latest";
 }
 
 export function handleListChange(list, input) {

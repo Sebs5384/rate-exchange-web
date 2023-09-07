@@ -83,8 +83,5 @@ describe("Exchange table testing", () => {
 
     cy.get("[data-cy='loading-table']").should("have.length", 10);
     cy.get("[data-cy='table-body']").find("tr").should("have.class", "placeholder-glow");
-
-    cy.get("[data-cy='current-currency-title']").should("have.text", "Currently displaying ARS");
-    cy.get("[data-cy='current-date-title").should("have.text", `At ${currentDate} as date of exchange`);
   });
 });
