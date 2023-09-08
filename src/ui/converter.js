@@ -25,7 +25,7 @@ export function setupConversionButton($from, $to, $amount) {
     if (successfulCurrencyValidation && successfulAmountValidation) {
       updateConversionText("enabled");
       updateFluctuationButton("enabled");
-      return displayConversionResults(from, to, amount);
+      displayConversionResults(from, to, amount);
     }
   };
 }

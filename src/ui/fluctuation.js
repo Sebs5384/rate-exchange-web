@@ -18,20 +18,20 @@ export function setUpFluctuationButton($from, $to) {
 }
 
 function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
-  monthlyDates.forEach((FIRST_DAY, index) => {
-    const CURRENT_MONTH_FIRST_DAY = FIRST_DAY;
+  monthlyDates.forEach((MONTH_FIRST_DAY, index) => {
+    const CURRENT_MONTH_FIRST_DAY = MONTH_FIRST_DAY;
     let NEXT_MONTH_FIRST_DAY = monthlyDates[index + 1];
 
     if (NEXT_MONTH_FIRST_DAY === undefined) NEXT_MONTH_FIRST_DAY = endDate;
 
-    getFluctuationData(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
-      const { rates } = fluctuation;
-      const MONTHS = getMonths();
+    setTimeout(() => {
+      getFluctuationData(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
+        const { rates } = fluctuation;
+        const MONTHS = getMonths();
 
-      setTimeout(() => {
         createFluctuationTables(rates, from, to, MONTHS[index]);
-      }, 500);
-    });
+      });
+    }, index * 50);
   });
 }
 
