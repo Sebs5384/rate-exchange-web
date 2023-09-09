@@ -55,11 +55,11 @@
 
 @media screen and (max-width: 470px) {
   * {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   h6 {
@@ -79,7 +79,7 @@
   }
 
   .converter-text {
-    font-size: 10px;
+    font-size: 8px;
   }
 
   #exchange-table-body tr td {
@@ -103,7 +103,7 @@
   }
 
   h3 {
-    font-size: 15px;
+    font-size: 10px;
   }
 
   label {
@@ -119,11 +119,11 @@
   }
 
   #exchange-table-body tr td {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   #conversion-result * {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   .form-validation-message {
