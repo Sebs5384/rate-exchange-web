@@ -24,14 +24,12 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
 
     if (NEXT_MONTH_FIRST_DAY === undefined) NEXT_MONTH_FIRST_DAY = endDate;
 
-    setTimeout(() => {
-      getFluctuationData(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
-        const { rates } = fluctuation;
-        const MONTHS = getMonths();
+    getFluctuationData(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
+      const { rates } = fluctuation;
+      const MONTHS = getMonths();
 
-        createFluctuationTables(rates, from, to, MONTHS[index]);
-      });
-    }, index * 50);
+      createFluctuationTables(rates, from, to, MONTHS[index]);
+    });
   });
 }
 

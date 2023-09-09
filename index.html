@@ -12,26 +12,24 @@
   </head>
   <body>
     <header class="row justify-content-evenly">
-      <div class="col-4 alert alert-primary gy-2 text-center" id="exchange-title">
+      <div class="col-10 col-md-4 alert alert-primary gy-2 text-center" id="exchange-title">
         <h3 data-cy="exchange-upper-title">Exchange-X</h3>
         <h6 data-cy="exchange-lower-title">Currency converter and exchange rate lookup.</h6>
       </div>
 
-      <div class="col-5 alert alert-primary gy-2" id="exchange-info-card">
-        <div class="text-center">
-          <h3 id="current-currency" data-cy="current-currency-title"></h3>
-          <h6 id="current-date" data-cy="current-date-title"></h6>
-        </div>
+      <div class="col-11 col-md-5 alert alert-primary gy-2 text-center" id="exchange-info-card">
+        <h3 id="current-currency" data-cy="current-currency-title"></h3>
+        <h6 id="current-date" data-cy="current-date-title"></h6>
       </div>
     </header>
 
     <main class="row justify-content-center">
-      <section class="col-5">
+      <section class="col-11 col-md-5">
         <section class="card lightblue-border" id="exchange-table-control">
           <div class="card-body">
             <div class="container text-center">
               <div class="row justify-content-center">
-                <div class="col-8">
+                <div class="col-9 col-md-8">
                   <strong data-cy="table-control-title">Check out our exchange table feature</strong>
                   <hr class="text-primary horizontal-rule" />
                 </div>
@@ -39,15 +37,16 @@
                 <div class="dropdown-center mb-4">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-cy="table-currency-list-button">List of Currencies</button>
                   <ul class="dropdown-menu table-menu-scroll" id="table-currency-list" data-cy="table-list-dropdown"></ul>
+                  <button class="btn btn-primary hidden" type="button" id="display-exchange-table-button">Check Exchange Table</button>
                 </div>
               </div>
 
               <div class="row">
-                <div class="col-6">
+                <div class="col-6 col-md-6">
                   <label for="currency-input" data-cy="currency-code-text"><small>Insert your currency code here</small></label>
                   <input class="form-control text-center mt-2" type="text" placeholder="E.g ARS" id="table-currency-input" data-cy="table-code-input" />
                 </div>
-                <div class="col-6">
+                <div class="col-6 col-md-6">
                   <label for="currency-date" data-cy="currency-date-label"><small>Look up exchange through date</small></label>
                   <input type="date" class="form-control text-center mt-2" id="currency-date" data-cy="table-date-input" />
                 </div>
@@ -56,7 +55,7 @@
           </div>
         </section>
 
-        <section class="card lightblue-border mt-2" id="exchange-converter">
+        <section class="card lightblue-border mt-4 mt-md-2" id="exchange-converter">
           <div class="card-body container">
             <div class="row justify-content-around">
               <div class="col-6">
@@ -100,7 +99,7 @@
                 </div>
               </div>
 
-              <div class="card lightblue-border col-5">
+              <div class="card lightblue-border col-6 col-md-5">
                 <div class="container card-body">
                   <div class="row text-center justify-content-center">
                     <strong class="text-secondary disabled-text" data-cy="conversion-title">Conversion</strong>
@@ -111,8 +110,10 @@
                       <strong id="to-exchange" data-cy="to-exchange-text"> </strong>
                       <strong class="text-secondary disabled-text" id="to-currency" data-cy="to-currency-text"></strong>
                     </div>
-                    <div><small id="result-date" class="text-secondary disabled-text converter-text" data-cy="conversion-date"></small></div>
-                    <button class="btn btn-secondary btn-sm mt-4 col-9 disabled" data-bs-toggle="modal" data-bs-target="#converter-modal" aria-disabled="true" type="button" id="fluctuation-button" data-cy="converter-fluctuation-button">Check Fluctuation</button>
+                    <div>
+                      <small id="result-date" class="text-secondary disabled-text converter-text" data-cy="conversion-date"></small>
+                    </div>
+                    <button class="btn btn-secondary btn-sm mt-3 mt-md-4 col-9 disabled" data-bs-toggle="modal" data-bs-target="#converter-modal" aria-disabled="true" type="button" id="fluctuation-button" data-cy="converter-fluctuation-button">Check Fluctuation</button>
                   </div>
                 </div>
               </div>
@@ -127,7 +128,7 @@
 
                     <div class="modal-body">
                       <div class="row text-center">
-                        <section class="container-fluid col-6">
+                        <section class="container-fluid col-12 col-md-6">
                           <div class="card lightblue-border">
                             <div class="card-body">
                               <div class="card lightblue-border mb-1">
@@ -162,7 +163,7 @@
                           </div>
                         </section>
 
-                        <section class="container-fluid col-6">
+                        <section class="container-fluid col-12 col-md-6">
                           <div class="card lightblue-border">
                             <div class="card-body">
                               <div class="card lightblue-border mb-1">
