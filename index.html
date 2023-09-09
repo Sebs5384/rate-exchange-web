@@ -4,7 +4,7 @@
     <base href="." />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
     <!--<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="src/styles.css" />
@@ -13,12 +13,12 @@
   </head>
   <body>
     <header class="row justify-content-evenly">
-      <div class="col-10 col-md-4 alert alert-primary gy-2 text-center" id="exchange-title">
+      <div class="col-10 col-md-4 alert alert-primary gy-1 gy-md-2 text-center" id="exchange-title">
         <h3 data-cy="exchange-upper-title">Exchange-X</h3>
         <h6 data-cy="exchange-lower-title">Currency converter and exchange rate lookup.</h6>
       </div>
 
-      <div class="col-11 col-md-5 alert alert-primary gy-2 text-center" id="exchange-info-card">
+      <div class="col-10 col-md-5 alert alert-primary gy-md-2 text-center" id="exchange-info-card">
         <h3 id="current-currency" data-cy="current-currency-title"></h3>
         <h6 id="current-date" data-cy="current-date-title"></h6>
       </div>
@@ -38,7 +38,6 @@
                 <div class="dropdown-center mb-4">
                   <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-cy="table-currency-list-button">List of Currencies</button>
                   <ul class="dropdown-menu table-menu-scroll" id="table-currency-list" data-cy="table-list-dropdown"></ul>
-                  <button class="btn btn-primary hidden" type="button" id="display-exchange-table-button">Check Exchange Table</button>
                 </div>
               </div>
 
@@ -56,7 +55,7 @@
           </div>
         </section>
 
-        <section class="card lightblue-border mt-4 mt-md-2" id="exchange-converter">
+        <section class="card lightblue-border mt-2" id="exchange-converter">
           <div class="card-body container">
             <div class="row justify-content-around">
               <div class="col-6">
@@ -68,23 +67,23 @@
                     </div>
                   </div>
 
-                  <form class="row justify-content-center gap-1" id="converter-form" novalidate>
-                    <div class="dropend col-3">
+                  <form class="row justify-content-center gap-md-1" id="converter-form" novalidate>
+                    <div class="dropend col-4 col-md-3">
                       <button class="btn btn-outline-primary btn-sm dropdown-toggle converter-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-cy="from-currency-button">From</button>
                       <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-from-list" data-cy="from-list"></ul>
                     </div>
 
-                    <div class="col-8">
+                    <div class="col-8 col-md-8">
                       <input type="text" class="form-control form-control-sm text-center currency-input" placeholder="USD" id="converter-from-input" name="currency-field" data-cy="from-input" required />
                       <div class="form-validation-message" data-cy="from-validation-message"></div>
                     </div>
 
-                    <div class="dropend col-3 mt-1">
+                    <div class="dropend col-4 col-md-3 mt-1">
                       <button class="btn btn-outline-primary btn-sm dropdown-toggle converter-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false" data-cy="to-currency-button">To</button>
                       <ul class="dropdown-menu converter-menu-scroll converter-currency-list" id="convert-to-list" data-cy="to-list"></ul>
                     </div>
 
-                    <div class="col-8 mt-1">
+                    <div class="col-8 col-md-8 mt-1">
                       <input type="text" class="form-control form-control-sm text-center currency-input" placeholder="ARS" id="converter-to-input" name="currency-field" data-cy="to-input" required />
                       <div class="form-validation-message" data-cy="to-validation-message"></div>
                     </div>
@@ -94,8 +93,8 @@
                       <div class="text-center form-validation-message" id="amount-validation-message" data-cy="amount-validation-message"></div>
                     </div>
 
-                    <button class="btn btn-primary btn-sm col-7 mt-2" type="button" id="convert-button" data-cy="currency-convert-button">Convert</button>
-                    <button class="btn btn-primary btn-sm col-3 mt-2" type="button" id="convert-reset" data-cy="currency-reset-button">Reset</button>
+                    <button class="btn btn-primary btn-sm col-10 col-md-7 mt-2" type="button" id="convert-button" data-cy="currency-convert-button">Convert</button>
+                    <button class="btn btn-primary btn-sm col-10 col-md-3 mt-2" type="button" id="convert-reset" data-cy="currency-reset-button">Reset</button>
                   </form>
                 </div>
               </div>
@@ -111,7 +110,7 @@
                       <strong id="to-exchange" data-cy="to-exchange-text"> </strong>
                       <strong class="text-secondary disabled-text" id="to-currency" data-cy="to-currency-text"></strong>
                     </div>
-                    <div>
+                    <div class="gy-3">
                       <small id="result-date" class="text-secondary disabled-text converter-text" data-cy="conversion-date"></small>
                     </div>
                     <button class="btn btn-secondary btn-sm mt-3 mt-md-4 col-9 disabled" data-bs-toggle="modal" data-bs-target="#converter-modal" aria-disabled="true" type="button" id="fluctuation-button" data-cy="converter-fluctuation-button">Check Fluctuation</button>
@@ -208,7 +207,7 @@
         </section>
       </section>
 
-      <section class="col-6" id="exchange-table">
+      <section class="col-11 col-md-6 gy-2 gy-md-0" id="exchange-table">
         <div class="card lightblue-border" id="exchange-table-card">
           <div class="card-body">
             <table class="table table-list-scroll">

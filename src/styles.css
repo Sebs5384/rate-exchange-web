@@ -33,7 +33,7 @@
 }
 
 .converter-text {
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .form-validation-message {
@@ -58,20 +58,34 @@
     font-size: 12px;
   }
 
-  #exchange-table,
-  #exchange-info-card {
-    display: none;
-  }
-
   #display-exchange-table-button {
     display: inline;
   }
 
   #result-date {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   #converter-modal * {
     font-size: 10px;
+  }
+
+  .converter-text {
+    font-size: 7px;
+  }
+
+  #exchange-table-body tr td {
+    font-size: 10px;
+  }
+
+  .table-list-scroll {
+    max-height: 280px;
+    overflow-y: scroll;
+    display: block;
+  }
+
+  .form-validation-message,
+  #amount-validation-message {
+    font-size: 5.5px;
   }
 }
