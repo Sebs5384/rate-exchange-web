@@ -33,7 +33,7 @@
 }
 
 .converter-text {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .form-validation-message {
@@ -55,11 +55,11 @@
 
 @media screen and (max-width: 470px) {
   * {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   h3 {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   h6 {
@@ -68,10 +68,6 @@
 
   label {
     font-size: 11px;
-  }
-
-  #display-exchange-table-button {
-    display: inline;
   }
 
   #result-date {
@@ -83,7 +79,7 @@
   }
 
   .converter-text {
-    font-size: 11px;
+    font-size: 8px;
   }
 
   #exchange-table-body tr td {
@@ -96,8 +92,51 @@
     display: block;
   }
 
-  .form-validation-message,
-  #amount-validation-message {
+  .form-validation-message {
     font-size: 5.5px;
+  }
+}
+
+@media screen and (min-width: 450px) and (max-width: 920px) {
+  * {
+    font-size: 10px;
+  }
+
+  h3 {
+    font-size: 10px;
+  }
+
+  label {
+    font-size: 11px;
+  }
+
+  .converter-text {
+    font-size: 6px;
+  }
+
+  #result-date {
+    font-size: 8px;
+  }
+
+  #exchange-table-body tr td {
+    font-size: 10px;
+  }
+
+  #conversion-result * {
+    font-size: 10px;
+  }
+
+  .form-validation-message {
+    font-size: 5.5px;
+  }
+
+  .table-list-scroll {
+    max-height: 275px;
+    overflow-y: scroll;
+    display: block;
+  }
+
+  #converter-modal * {
+    font-size: 6px;
   }
 }
