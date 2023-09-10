@@ -1,4 +1,4 @@
-import { getFluctuationData } from "../api/exchange.js";
+import { getFluctuationRates } from "../api/exchange.js";
 import { getMonthlyDates, getMonths, getCurrenciesFullName, convertToPercentage } from "../utils/general.js";
 
 export function setUpFluctuationButton($from, $to) {
@@ -24,7 +24,7 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
 
     if (NEXT_MONTH_FIRST_DAY === undefined) NEXT_MONTH_FIRST_DAY = endDate;
 
-    getFluctuationData(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
+    getFluctuationRates(CURRENT_MONTH_FIRST_DAY, NEXT_MONTH_FIRST_DAY, from, to).then((fluctuation) => {
       const { rates } = fluctuation;
       const MONTHS = getMonths();
 

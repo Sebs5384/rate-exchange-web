@@ -1,6 +1,6 @@
 const BASE_URL = "https://api.exchangerate.host";
 
-function getExchanges(currency = "EUR", date = "latest") {
+export function getExchanges(currency = "EUR", date = "latest") {
   const URL = `${BASE_URL}/${date}?base=${currency}&places=2`;
 
   return fetch(URL)
@@ -24,7 +24,7 @@ function getConversion(from = "USD", to = "ARS", amount = "1") {
     });
 }
 
-function getCurrencyFluctuation(start, end, from, to) {
+export function getFluctuation(start, end, from, to) {
   const URL = `${BASE_URL}/fluctuation?start_date=${start}&end_date=${end}&symbols=${from},${to}&places=3`;
 
   return fetch(URL)
@@ -36,7 +36,7 @@ function getCurrencyFluctuation(start, end, from, to) {
     });
 }
 
-export function getExchangeData(currency, date) {
+export function getExchangeRates(currency, date) {
   return getExchanges(currency, date).then((exchange) => {
     return {
       base: exchange.base,
@@ -58,8 +58,8 @@ export function getConversionResults(from, to, amount) {
   });
 }
 
-export function getFluctuationData(start, end, from, to) {
-  return getCurrencyFluctuation(start, end, from, to).then((fluctation) => {
+export function getFluctuationRates(start, end, from, to) {
+  return getFluctuation(start, end, from, to).then((fluctation) => {
     return {
       rates: fluctation.rates,
       start: fluctation.start_date,

@@ -1,11 +1,11 @@
-import { getExchangeData } from "../api/exchange.js";
+import { getExchangeRates } from "../api/exchange.js";
 import { createTableCurrencyList } from "./list.js";
 import { setElementVisibility } from "./general.js";
 import { getCurrenciesFullName } from "../utils/general.js";
 import { handleListChange, handleInputDate, handleInputCurrency } from "./handlers.js";
 
 export function displayExchangeTable(currency, date) {
-  getExchangeData(currency, date).then((exchange) => {
+  getExchangeRates(currency, date).then((exchange) => {
     const { base, date, rates } = exchange;
     if (rates === undefined) setElementVisibility("#error-message", "visible");
 

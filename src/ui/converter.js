@@ -1,4 +1,4 @@
-import { getConversionResults, getExchangeData } from "../api/exchange.js";
+import { getConversionResults, getExchangeRates } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "../utils/validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
@@ -125,7 +125,7 @@ export function setupToListChanges(list) {
 }
 
 export function setupConverterCurrencyList() {
-  getExchangeData().then((exchange) => {
+  getExchangeRates().then((exchange) => {
     const { rates } = exchange;
     createConverterCurrencyList(rates);
   });
