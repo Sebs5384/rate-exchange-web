@@ -1,4 +1,4 @@
-import { getConversionResults, getExchangeRates } from "../api/exchange.js";
+import { getConversionResults } from "../api/exchange.js";
 import { validateCurrencyInputs, validateAmountInput } from "../utils/validation.js";
 import { handleListChange } from "./handlers.js";
 import { createConverterCurrencyList } from "./list.js";
@@ -17,9 +17,8 @@ export function setupConversionButton($from, $to, $amount) {
     const from = $from.value;
     const to = $to.value;
     const amount = $amount.value;
-    const currencies = [from, to];
 
-    const successfulCurrencyValidation = validateCurrencyInputs(currencies);
+    const successfulCurrencyValidation = validateCurrencyInputs([from, to]);
     const successfulAmountValidation = validateAmountInput(amount);
 
     if (successfulCurrencyValidation && successfulAmountValidation) {
@@ -112,14 +111,12 @@ function resizeConversionResults() {
   }
 }
 
-export function setupFromListChanges(list) {
-  list.onclick = (currency) => {
+export function setupListChanges(fromList, toList) {
+  fromList.onclick = (currency) => {
     handleListChange(currency, "#converter-from-input");
   };
-}
 
-export function setupToListChanges(list) {
-  list.onclick = (currency) => {
+  toList.onclick = (currency) => {
     handleListChange(currency, "#converter-to-input");
   };
 }
@@ -133,5 +130,5 @@ export function setupConverterCurrencyList() {
     });
 
     createConverterCurrencyList(currencyCodes);
-  }, 1000);
+  }, 2000);
 }

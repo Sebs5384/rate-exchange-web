@@ -1,5 +1,5 @@
 import { displayExchangeTable, setupTableListChanges, setupTableCurrencyChanges, setupTableDateChanges } from "./table.js";
-import { displayConversionResults, setupFromListChanges, setupToListChanges, setupConversionButton, setupConverterCurrencyList, setupConversionResetButton } from "./converter.js";
+import { displayConversionResults, setupListChanges, setupConversionButton, setupConverterCurrencyList, setupConversionResetButton } from "./converter.js";
 import { setUpFluctuationButton } from "./fluctuation.js";
 
 export function updateExchangeTable() {
@@ -20,8 +20,7 @@ export function updateExchangeConverter() {
   const $to = document.querySelector("#converter-to-input");
   const $amount = document.querySelector("#converter-amount-input");
 
-  setupFromListChanges($fromList);
-  setupToListChanges($toList);
+  setupListChanges($fromList, $toList);
   setupConversionButton($from, $to, $amount);
   setupConversionResetButton($from, $to, $amount);
   setupConverterCurrencyList();
