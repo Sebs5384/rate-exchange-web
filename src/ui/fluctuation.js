@@ -34,7 +34,7 @@ function displayMonthlyFluctuations(monthlyDates, endDate, from, to) {
 }
 
 function displayTotalFluctuation(startDate, endDate, from, to) {
-  getFluctuationData(startDate, endDate, from, to).then((fluctuation) => {
+  getFluctuationRates(startDate, endDate, from, to).then((fluctuation) => {
     const { rates } = fluctuation;
 
     createTotalFluctuationTable(rates, from, to);

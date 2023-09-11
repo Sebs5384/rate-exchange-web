@@ -125,8 +125,13 @@ export function setupToListChanges(list) {
 }
 
 export function setupConverterCurrencyList() {
-  getExchangeRates().then((exchange) => {
-    const { rates } = exchange;
-    createConverterCurrencyList(rates);
-  });
+  setTimeout(() => {
+    const $codes = document.querySelectorAll("[data-code]");
+    const currencyCodes = [];
+    $codes.forEach((code) => {
+      currencyCodes.push(code.innerText);
+    });
+
+    createConverterCurrencyList(currencyCodes);
+  }, 1000);
 }

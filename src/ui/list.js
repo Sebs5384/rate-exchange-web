@@ -18,13 +18,12 @@ export function createTableCurrencyList(currencyCode) {
   });
 }
 
-export function createConverterCurrencyList(currency) {
+export function createConverterCurrencyList(currencies) {
   const $currencyLists = document.querySelectorAll(".converter-currency-list");
-  const currenciesCode = Object.keys(currency);
-  const currenciesFullName = getCurrenciesFullName(currenciesCode);
+  const currenciesFullName = getCurrenciesFullName(currencies);
 
-  $currencyLists.forEach((currencyList) => {
-    currenciesCode.forEach((currency, index) => {
+  $currencyLists.forEach((currencyList, index) => {
+    currencies.forEach((currency, index) => {
       const $list = document.createElement("li");
       const $item = document.createElement("a");
 
