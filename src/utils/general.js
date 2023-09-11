@@ -34,19 +34,20 @@ export function getCurrenciesCode(currencies) {
   return currenciesCode;
 }
 
-export function getMonthlyDates() {
-  const monthlyDates = [];
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear();
-  const firstDayYear = new Date(currentYear, 0, 1);
-  let current = new Date(firstDayYear);
+export function getDates() {
+  const MONTHS_FIRST_DAY = [];
 
-  while (current <= currentDate) {
-    monthlyDates.push(current.toISOString().split("T")[0]);
-    current.setMonth(current.getMonth() + 1);
+  const TODAY = new Date();
+  const CURRENT_YEAR = TODAY.getFullYear();
+  const FIRST_DAY_YEAR = new Date(CURRENT_YEAR, 0, 1);
+  let CURRENT_MONTH_FIRST_DAY = new Date(FIRST_DAY_YEAR);
+
+  while (CURRENT_MONTH_FIRST_DAY <= TODAY) {
+    MONTHS_FIRST_DAY.push(CURRENT_MONTH_FIRST_DAY.toISOString().split("T")[0]);
+    CURRENT_MONTH_FIRST_DAY.setMonth(CURRENT_MONTH_FIRST_DAY.getMonth() + 1);
   }
 
-  return { startDate: firstDayYear.toISOString().split("T")[0], endDate: currentDate.toISOString().split("T")[0], monthlyDates };
+  return { FIRST_DAY_YEAR: FIRST_DAY_YEAR.toISOString().split("T")[0], TODAY: TODAY.toISOString().split("T")[0], MONTHS_FIRST_DAY };
 }
 
 export function getMonths(startMonthIndex) {
