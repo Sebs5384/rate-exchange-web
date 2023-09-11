@@ -11,7 +11,7 @@ function validateCurrency(currencies, codes) {
       currenciesErrors.push("This field doesn't accept numbers");
     } else if (!/^\S{3}$/.test(currency)) {
       currenciesErrors.push("Invalid currency code");
-    } else if (!codes.includes(currency)) {
+    } else if (!codes.includes(currency.toUpperCase())) {
       currenciesErrors.push("This currency code does not exist");
     } else {
       currenciesErrors.push("");
