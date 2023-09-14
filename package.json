@@ -1,0 +1,32 @@
+{
+  "name": "currency-exchange-web",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "This is a small web that make requests to exchangeratesapi.io to bring back information about currency rates.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server",
+    "cypress-dev": "cypress open",
+    "cypress-run": "cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sebs5384/currency-exchange-web.git"
+  },
+  "author": "5384",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sebs5384/currency-exchange-web/issues"
+  },
+  "homepage": "https://github.com/Sebs5384/currency-exchange-web#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "@babel/preset-env": "^7.22.9",
+    "cypress": "^12.17.4"
+  }
+}
