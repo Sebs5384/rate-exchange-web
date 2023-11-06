@@ -1,6 +1,17 @@
-const BASE_URL = "https://api.exchangerate.host";
+require('dotevn').config();
 
-export function getExchanges(currency = "EUR", date = "latest") {
+const exchangeApiHeaders = new Headers();
+exchangeApiHeaders.append('exchangeApiKey', process.env.API_KEY);
+
+const requestBody = {
+  method: 'GET',
+  redirect: 'follow',
+  headers: exchangeApiHeaders,
+};
+
+const BASE_URL = 'https://api.exchangerate.host';
+
+export function getExchanges(currency = 'EUR', date = 'latest') {
   const URL = `${BASE_URL}/${date}?base=${currency}&places=2`;
 
   return fetch(URL)
@@ -12,10 +23,10 @@ export function getExchanges(currency = "EUR", date = "latest") {
     });
 }
 
-function getConversion(from = "USD", to = "ARS", amount = "1") {
+function getConversion(from = 'USD', to = 'ARS', amount = '1') {
   const URL = `${BASE_URL}/convert?from=${from}&to=${to}&amount=${amount}&places=3`;
 
-  return fetch(URL)
+  return fetch(URL, requestBody)
     .then((response) => {
       return response.json();
     })
