@@ -1,16 +1,3 @@
-require('dotevn').config();
-
-const exchangeApiHeaders = new Headers();
-exchangeApiHeaders.append('exchangeApiKey', process.env.API_KEY);
-
-const requestBody = {
-  method: 'GET',
-  redirect: 'follow',
-  headers: exchangeApiHeaders,
-};
-
-const BASE_URL = 'https://api.exchangerate.host';
-
 export function getExchanges(currency = 'EUR', date = 'latest') {
   const URL = `${BASE_URL}/${date}?base=${currency}&places=2`;
 
